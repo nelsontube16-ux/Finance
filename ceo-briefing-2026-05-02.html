@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CEO Intelligence Briefing | May 2, 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  :root {
+    --bg-primary: #0a0e1a;
+    --bg-secondary: #111827;
+    --bg-card: #1a2235;
+    --bg-card-hover: #1e2a42;
+    --border: #2a3553;
+    --text-primary: #f0f4fc;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    --accent-red: #ef4444;
+    --accent-red-glow: rgba(239,68,68,0.15);
+    --accent-orange: #f59e0b;
+    --accent-orange-glow: rgba(245,158,11,0.15);
+    --accent-green: #22c55e;
+    --accent-green-glow: rgba(34,197,94,0.15);
+    --accent-blue: #3b82f6;
+    --accent-blue-glow: rgba(59,130,246,0.15);
+    --accent-purple: #a855f7;
+    --accent-purple-glow: rgba(168,85,247,0.15);
+    --accent-cyan: #06b6d4;
+    --accent-cyan-glow: rgba(6,182,212,0.15);
+    --accent-gold: #eab308;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  .top-bar {
+    background: linear-gradient(90deg, #1a1a2e 0%, #16213e 50%, #1a1a2e 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 10px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(20px);
+  }
+
+  .top-bar .live-dot {
+    width: 8px; height: 8px;
+    background: var(--accent-green);
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 6px;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(34,197,94,0.7); }
+    50% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(34,197,94,0); }
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+
+  .hero {
+    background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 40%, #172554 100%);
+    padding: 60px 40px 50px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(ellipse at 30% 50%, rgba(59,130,246,0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 50%, rgba(168,85,247,0.06) 0%, transparent 50%);
+    animation: fadeIn 2s ease-out;
+  }
+
+  .hero h1 {
+    font-size: 2.4rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+    position: relative;
+    background: linear-gradient(135deg, #f0f4fc, #94a3b8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .hero .subtitle {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin-top: 8px;
+    position: relative;
+  }
+
+  .hero .date-badge {
+    display: inline-block;
+    background: rgba(59,130,246,0.15);
+    border: 1px solid rgba(59,130,246,0.3);
+    padding: 6px 18px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--accent-blue);
+    margin-top: 16px;
+    position: relative;
+  }
+
+  .reading-time {
+    display: inline-block;
+    background: rgba(34,197,94,0.12);
+    border: 1px solid rgba(34,197,94,0.25);
+    padding: 4px 14px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--accent-green);
+    margin-left: 10px;
+    position: relative;
+  }
+
+  .container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 30px 24px;
+  }
+
+  /* Market Pulse Banner */
+  .market-pulse {
+    background: linear-gradient(135deg, rgba(34,197,94,0.1), rgba(59,130,246,0.08));
+    border: 1px solid rgba(34,197,94,0.3);
+    border-radius: 16px;
+    padding: 20px 30px;
+    margin-bottom: 24px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    animation: slideUp 0.4s ease-out;
+  }
+
+  .pulse-item {
+    text-align: center;
+  }
+
+  .pulse-item .label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+  }
+
+  .pulse-item .value {
+    font-size: 1.5rem;
+    font-weight: 800;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .pulse-item .change {
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-top: 2px;
+  }
+
+  .up { color: var(--accent-green); }
+  .down { color: var(--accent-red); }
+  .neutral { color: var(--accent-orange); }
+
+  /* Threat Level Banner */
+  .threat-banner {
+    border-radius: 16px;
+    padding: 24px 30px;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    animation: slideUp 0.5s ease-out;
+  }
+
+  .threat-banner.elevated {
+    background: linear-gradient(135deg, rgba(245,158,11,0.12), rgba(239,68,68,0.06));
+    border: 1px solid rgba(245,158,11,0.35);
+  }
+
+  .threat-icon {
+    font-size: 2.2rem;
+    flex-shrink: 0;
+  }
+
+  .threat-content h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--accent-orange);
+    margin-bottom: 4px;
+  }
+
+  .threat-content p {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  /* Correlation Banner */
+  .correlation-banner {
+    background: linear-gradient(135deg, rgba(168,85,247,0.1), rgba(6,182,212,0.06));
+    border: 1px solid rgba(168,85,247,0.3);
+    border-radius: 16px;
+    padding: 20px 28px;
+    margin-bottom: 30px;
+    animation: slideUp 0.5s ease-out;
+  }
+
+  .correlation-banner h3 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--accent-purple);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .correlation-banner ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .correlation-banner li {
+    font-size: 0.84rem;
+    color: var(--text-secondary);
+    padding: 5px 0;
+    padding-left: 18px;
+    position: relative;
+  }
+
+  .correlation-banner li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent-cyan);
+    font-weight: 700;
+  }
+
+  /* Section Styles */
+  .section {
+    margin-bottom: 36px;
+    animation: slideUp 0.6s ease-out;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-icon {
+    font-size: 1.5rem;
+  }
+
+  .section-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+  }
+
+  .section-badge {
+    margin-left: auto;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 4px 12px;
+    border-radius: 8px;
+  }
+
+  .badge-critical {
+    background: var(--accent-red-glow);
+    color: var(--accent-red);
+    border: 1px solid rgba(239,68,68,0.3);
+  }
+
+  .badge-high {
+    background: var(--accent-orange-glow);
+    color: var(--accent-orange);
+    border: 1px solid rgba(245,158,11,0.3);
+  }
+
+  .badge-moderate {
+    background: var(--accent-blue-glow);
+    color: var(--accent-blue);
+    border: 1px solid rgba(59,130,246,0.3);
+  }
+
+  .badge-positive {
+    background: var(--accent-green-glow);
+    color: var(--accent-green);
+    border: 1px solid rgba(34,197,94,0.3);
+  }
+
+  /* Card Grid */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    gap: 18px;
+  }
+
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px 24px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card:hover {
+    background: var(--bg-card-hover);
+    border-color: rgba(59,130,246,0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+  }
+
+  .card-priority {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+  }
+
+  .priority-critical { background: linear-gradient(90deg, var(--accent-red), var(--accent-orange)); }
+  .priority-high { background: linear-gradient(90deg, var(--accent-orange), var(--accent-gold)); }
+  .priority-moderate { background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan)); }
+  .priority-positive { background: linear-gradient(90deg, var(--accent-green), var(--accent-cyan)); }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 10px;
+  }
+
+  .card h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.4;
+    flex: 1;
+  }
+
+  .card-tag {
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    padding: 3px 9px;
+    border-radius: 6px;
+    white-space: nowrap;
+    margin-left: 12px;
+  }
+
+  .tag-bearish {
+    background: rgba(239,68,68,0.15);
+    color: var(--accent-red);
+  }
+
+  .tag-bullish {
+    background: rgba(34,197,94,0.15);
+    color: var(--accent-green);
+  }
+
+  .tag-neutral {
+    background: rgba(245,158,11,0.15);
+    color: var(--accent-orange);
+  }
+
+  .tag-watch {
+    background: rgba(168,85,247,0.15);
+    color: var(--accent-purple);
+  }
+
+  .card p {
+    font-size: 0.84rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .card .impact {
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px solid var(--border);
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .card .impact strong {
+    color: var(--text-secondary);
+  }
+
+  .card .source {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    margin-top: 8px;
+    font-style: italic;
+  }
+
+  /* Full Width Card */
+  .card-full {
+    grid-column: 1 / -1;
+  }
+
+  /* Data Table */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.82rem;
+    margin-top: 12px;
+  }
+
+  .data-table th {
+    text-align: left;
+    padding: 10px 14px;
+    background: rgba(59,130,246,0.08);
+    border-bottom: 1px solid var(--border);
+    color: var(--text-muted);
+    font-weight: 600;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+  }
+
+  .data-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid rgba(42,53,83,0.5);
+    color: var(--text-secondary);
+  }
+
+  .data-table tr:hover td {
+    background: rgba(59,130,246,0.04);
+  }
+
+  /* Questions Section */
+  .questions-section {
+    background: linear-gradient(135deg, rgba(6,182,212,0.08), rgba(59,130,246,0.06));
+    border: 1px solid rgba(6,182,212,0.25);
+    border-radius: 16px;
+    padding: 28px 30px;
+    margin-top: 40px;
+    animation: slideUp 0.7s ease-out;
+  }
+
+  .questions-section h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--accent-cyan);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .questions-section ol {
+    padding-left: 20px;
+  }
+
+  .questions-section li {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    padding: 7px 0;
+    line-height: 1.5;
+  }
+
+  .questions-section li strong {
+    color: var(--text-primary);
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 30px 20px;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+  }
+
+  .footer p {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  .footer .disclaimer {
+    margin-top: 8px;
+    font-size: 0.68rem;
+    color: rgba(100,116,139,0.7);
+  }
+
+  /* Key Metrics Bar */
+  .key-metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+
+  .metric-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 18px;
+    text-align: center;
+    transition: all 0.2s ease;
+  }
+
+  .metric-box:hover {
+    border-color: rgba(59,130,246,0.3);
+    transform: translateY(-1px);
+  }
+
+  .metric-box .metric-label {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+
+  .metric-box .metric-value {
+    font-size: 1.3rem;
+    font-weight: 800;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .metric-box .metric-delta {
+    font-size: 0.72rem;
+    font-weight: 600;
+    margin-top: 3px;
+  }
+
+  /* Timeline */
+  .timeline {
+    position: relative;
+    padding-left: 28px;
+    margin-top: 16px;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, var(--accent-blue), var(--accent-purple), var(--accent-cyan));
+    border-radius: 2px;
+  }
+
+  .timeline-item {
+    position: relative;
+    padding: 12px 0;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -24px;
+    top: 18px;
+    width: 10px;
+    height: 10px;
+    background: var(--accent-blue);
+    border-radius: 50%;
+    border: 2px solid var(--bg-primary);
+  }
+
+  .timeline-item .time {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .timeline-item .event {
+    font-size: 0.84rem;
+    color: var(--text-secondary);
+    margin-top: 3px;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .hero h1 { font-size: 1.8rem; }
+    .card-grid { grid-template-columns: 1fr; }
+    .market-pulse { grid-template-columns: repeat(2, 1fr); }
+    .container { padding: 20px 16px; }
+    .top-bar { padding: 10px 16px; font-size: 0.7rem; }
+    .key-metrics { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: var(--bg-primary); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: #3a4a6b; }
+</style>
+</head>
+<body>
+
+<!-- Top Bar -->
+<div class="top-bar">
+  <div><span class="live-dot"></span> LIVE INTELLIGENCE FEED | CLASSIFIED: C-SUITE ONLY</div>
+  <div>Last Updated: May 2, 2026 08:00 UTC | Next Update: May 3, 2026</div>
+</div>
+
+<!-- Hero -->
+<div class="hero">
+  <h1>CEO Intelligence Briefing</h1>
+  <p class="subtitle">Private Equity & Investment Banking Command Center</p>
+  <div class="date-badge">Friday, May 2, 2026</div>
+  <span class="reading-time">~12 min read</span>
+</div>
+
+<!-- Main Content -->
+<div class="container">
+
+  <!-- Market Pulse -->
+  <div class="market-pulse">
+    <div class="pulse-item">
+      <div class="label">S&P 500</div>
+      <div class="value up">7,230</div>
+      <div class="change up">+0.29% | All-Time High</div>
+    </div>
+    <div class="pulse-item">
+      <div class="label">Nasdaq</div>
+      <div class="value up">25,114</div>
+      <div class="change up">+0.89% | Record Close</div>
+    </div>
+    <div class="pulse-item">
+      <div class="label">Brent Crude</div>
+      <div class="value neutral">$96.40</div>
+      <div class="change down">-3.2% (peace talks)</div>
+    </div>
+    <div class="pulse-item">
+      <div class="label">JCI (IHSG)</div>
+      <div class="value down">6,969</div>
+      <div class="change down">-1.86% session</div>
+    </div>
+    <div class="pulse-item">
+      <div class="label">Fed Rate</div>
+      <div class="value neutral">3.50-3.75%</div>
+      <div class="change neutral">HOLD (Apr 29)</div>
+    </div>
+    <div class="pulse-item">
+      <div class="label">ECB Rate</div>
+      <div class="value neutral">2.00%</div>
+      <div class="change neutral">HOLD | Hike June?</div>
+    </div>
+  </div>
+
+  <!-- Threat Level -->
+  <div class="threat-banner elevated">
+    <div class="threat-icon">&#9888;&#65039;</div>
+    <div class="threat-content">
+      <h3>MARKET RISK LEVEL: ELEVATED (ORANGE)</h3>
+      <p>Iran ceasefire holding but fragile. Oil volatility compressing but Hormuz closure tail-risk persists. Fed on extended pause amid inflation resurgence from energy shock. S&P at all-time highs driven by Mag-7 AI capex supercycle &mdash; concentration risk at extreme levels. <strong>Key watch: Powell exits mid-May; ECB June hike decision; Iran peace talks outcome.</strong></p>
+    </div>
+  </div>
+
+  <!-- Correlation Update from Previous Briefing -->
+  <div class="correlation-banner">
+    <h3>&#128279; CORRELATION UPDATE FROM APR 26 BRIEFING</h3>
+    <ul>
+      <li><strong>Iran ceasefire (Apr 8) has held</strong> &mdash; Oil dropped from ~$110 to ~$96, validating our "watch for peace dividend" call. Exxon still warning of 750K bpd loss if Hormuz stays closed.</li>
+      <li><strong>Mag-7 earnings delivered as anticipated</strong> &mdash; All 4 reporters beat EPS. Combined 2026 capex now $649B (+58% YoY). AI spending supercycle confirmed.</li>
+      <li><strong>S&P broke above 7,200 resistance</strong> &mdash; Best monthly gain since 2020. Our April call on "tech earnings as catalyst" played out exactly.</li>
+      <li><strong>Indonesia JCI weakened as predicted</strong> &mdash; Fuel price inflation weighing on sentiment. 4th consecutive monthly decline. MSCI rebalancing risk in May still unresolved.</li>
+      <li><strong>US-China trade truce stable</strong> &mdash; Chip tariffs delayed to June 2027. Tariffs at 31% but rare earth export controls suspended. Window for deal-making open.</li>
+    </ul>
+  </div>
+
+  <!-- ============ SECTION 1: GEOPOLITICAL ============ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">&#127758;</span>
+      <span class="section-title">Geopolitical Risk Monitor</span>
+      <span class="section-badge badge-critical">CRITICAL</span>
+    </div>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-priority priority-critical"></div>
+        <div class="card-header">
+          <h4>Iran War: Fragile Ceasefire, Oil Still Elevated</h4>
+          <span class="card-tag tag-bearish">HIGH RISK</span>
+        </div>
+        <p>The US-Iran ceasefire (Apr 8) continues to hold but with zero guarantee of permanence. Oil has retreated from peak $120 to ~$96 but remains 37% above pre-war ($70). Exxon CEO warned May 1 that Middle East production is down 750K bpd and will remain so if the Strait of Hormuz stays contested. Analysts flagging $200/bbl tail risk if hostilities resume.</p>
+        <div class="impact"><strong>CEO Action:</strong> Stress-test portfolio companies for $130+ oil scenario. Review energy hedging across PE portfolio. Shipping/logistics exposure needs immediate attention.</div>
+        <p class="source">Sources: CNBC, Bloomberg Graphics</p>
+      </div>
+      <div class="card">
+        <div class="card-priority priority-high"></div>
+        <div class="card-header">
+          <h4>US-China: Tariff Truce Stable, Green Tech Probe Escalating</h4>
+          <span class="card-tag tag-neutral">WATCH</span>
+        </div>
+        <p>Tariffs stabilized at 31%. Chip tariffs on Chinese semiconductors delayed to June 2027 in a clear de-escalation signal. However, China launched a sweeping investigation into US "green product trade barriers" ahead of expected Trump visit to Beijing in May. Rare earth export controls suspended for another year &mdash; positive for US tech manufacturing.</p>
+        <div class="impact"><strong>CEO Action:</strong> The 18-month chip tariff delay opens a window for cross-border tech deals. Monitor green tech probe for impact on EV/clean energy portfolio companies.</div>
+        <p class="source">Sources: Bloomberg, Yahoo Finance, CNBC</p>
+      </div>
+      <div class="card">
+        <div class="card-priority priority-moderate"></div>
+        <div class="card-header">
+          <h4>India & Switzerland Near US Trade Deals</h4>
+          <span class="card-tag tag-bullish">OPPORTUNITY</span>
+        </div>
+        <p>Both India and Switzerland are approaching bilateral trade agreements with the Trump administration. If finalized, this opens new corridors for cross-border M&A and capital flows. India deal would particularly benefit tech outsourcing, pharma, and infrastructure plays.</p>
+        <div class="impact"><strong>CEO Action:</strong> Flag India deal pipeline for acceleration. Swiss financial services corridor could benefit fund structures.</div>
+        <p class="source">Source: Yahoo Finance</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ SECTION 2: GLOBAL MACRO ============ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">&#127975;</span>
+      <span class="section-title">Global Macroeconomics</span>
+      <span class="section-badge badge-high">HIGH IMPACT</span>
+    </div>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-priority priority-critical"></div>
+        <div class="card-header">
+          <h4>Fed Holds at 3.50-3.75% | Powell Exits Mid-May</h4>
+          <span class="card-tag tag-neutral">INFLECTION</span>
+        </div>
+        <p>The FOMC held rates steady on Apr 29, citing "elevated inflation, in part reflecting the recent increase in global energy prices." Markets now pricing NO cuts through 2027. Powell steps down as Chair mid-May (remains as Governor until Jan 2028). Transition uncertainty adds a new variable to rate expectations.</p>
+        <div class="impact"><strong>CEO Action:</strong> LBO financing costs locked at current levels for 12+ months. Refinancing windows for existing portfolio should be evaluated NOW before any leadership-driven uncertainty.</div>
+        <p class="source">Source: CNBC (Apr 29, 2026)</p>
+      </div>
+      <div class="card">
+        <div class="card-priority priority-high"></div>
+        <div class="card-header">
+          <h4>ECB Holds at 2% | June Hike Expected (to 2.25%)</h4>
+          <span class="card-tag tag-bearish">HAWKISH</span>
+        </div>
+        <p>ECB kept rates at 2% on Apr 30 despite euro zone inflation jumping to 3% (energy-driven). Lagarde signaled a potential June hike. Banks now pricing THREE rate hikes in 2026. The Iran conflict is creating a "layer cake of shocks" &mdash; energy prices fueling inflation while simultaneously suppressing growth (stagflation risk).</p>
+        <div class="impact"><strong>CEO Action:</strong> European portfolio companies face tightening credit conditions. Review EUR-denominated debt covenants. Delay non-essential European acquisitions until post-June clarity.</div>
+        <p class="source">Sources: CNBC, Investing.com</p>
+      </div>
+      <div class="card">
+        <div class="card-priority priority-moderate"></div>
+        <div class="card-header">
+          <h4>Stagflation Watch: Europe's Dual Squeeze</h4>
+          <span class="card-tag tag-bearish">RISK</span>
+        </div>
+        <p>March data from the euro zone and UK shows the Iran conflict is actively weighing on economies. The toxic combination: slowing growth + rising inflation + energy shock = classic stagflation setup. Former ECB Governor says "no stagflation yet" but the pattern is forming. Tariff drag shaving ~1% off US GDP growth in 2026 (Moody's Zandi).</p>
+        <div class="impact"><strong>CEO Action:</strong> Defensive positioning for European PE portfolio. Prioritize companies with pricing power and low energy intensity. Build cash reserves for distressed opportunities.</div>
+        <p class="source">Sources: CNBC, Yahoo Finance</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ SECTION 3: GLOBAL MARKETS ============ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">&#128200;</span>
+      <span class="section-title">Global Stock Markets & Mag-7 Earnings</span>
+      <span class="section-badge badge-positive">RECORD HIGHS</span>
+    </div>
+
+    <div class="key-metrics">
+      <div class="metric-box">
+        <div class="metric-label">S&P 500</div>
+        <div class="metric-value up">7,230.12</div>
+        <div class="metric-delta up">Best month since 2020</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-label">Nasdaq</div>
+        <div class="metric-value up">25,114.44</div>
+        <div class="metric-delta up">First close above 25K</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-label">Dow Jones</div>
+        <div class="metric-value up">+789 pts</div>
+        <div class="metric-delta up">Apr 29 surge</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-label">Mag-7 Capex '26</div>
+        <div class="metric-value neutral">$649B</div>
+        <div class="metric-delta up">+58% YoY</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-label">Apple (AAPL)</div>
+        <div class="metric-value up">+3%</div>
+        <div class="metric-delta up">Q1 beat</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-label">Alphabet</div>
+        <div class="metric-value up">+6% AH</div>
+        <div class="metric-delta up">$5.11 EPS vs $2.62 est</div>
+      </div>
+    </div>
+
+    <div class="card-grid">
+      <div class="card card-full">
+        <div class="card-priority priority-positive"></div>
+        <div class="card-header">
+          <h4>Magnificent Seven: AI Capex Supercycle Confirmed | $649B Combined 2026 Spend</h4>
+          <span class="card-tag tag-bullish">MEGA TREND</span>
+        </div>
+        <p>All 4 Mag-7 companies that reported beat EPS estimates. The headline number: combined MSFT + GOOG + META + AMZN capex projected at <strong>$649 billion in 2026</strong>, up from $411B in 2025. Microsoft alone guided $190B capex for CY2026. Meta raised AI spending to $125-145B. This is the largest corporate capital spending cycle in history, concentrated in AI infrastructure.</p>
+        <table class="data-table">
+          <tr><th>Company</th><th>Q1 EPS</th><th>vs Estimate</th><th>Stock Reaction</th><th>Key Signal</th></tr>
+          <tr><td><strong>Alphabet</strong></td><td>$5.11</td><td class="up">Beat (+95%)</td><td class="up">+6% AH</td><td>Gemini AI + Cloud strength</td></tr>
+          <tr><td><strong>Apple</strong></td><td>Beat</td><td class="up">Beat</td><td class="up">+3%</td><td>iPhone resilience</td></tr>
+          <tr><td><strong>Microsoft</strong></td><td>Beat</td><td class="up">Beat</td><td class="down">-2% AH</td><td>$190B capex spooked some</td></tr>
+          <tr><td><strong>Meta</strong></td><td>Beat</td><td class="up">Beat</td><td class="down">-6% AH</td><td>$125-145B AI spend concern</td></tr>
+        </table>
+        <div class="impact"><strong>CEO Action:</strong> AI infrastructure is THE trade of 2026. Data center REITs, semiconductor equipment, power/cooling companies = immediate pipeline. PE firms should be aggressive in AI infrastructure roll-ups. But watch the "spending too much" narrative hitting Meta/MSFT stocks.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ SECTION 4: M&A ============ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">&#129309;</span>
+      <span class="section-title">M&A Deal Flow & PE Activity</span>
+      <span class="section-badge badge-positive">SURGING</span>
+    </div>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-priority priority-positive"></div>
+        <div class="card-header">
+          <h4>Q1 2026: Record Mega-Deal Quarter ($10B+ Transactions)</h4>
+          <span class="card-tag tag-bullish">BOOM</span>
+        </div>
+        <p><strong>12 mega-deals</strong> ($10B+) closed in Q1 2026 &mdash; the most for any quarter since 2008 and a record for first quarters. AI-driven consolidation, portfolio rationalization, and $2T+ in undeployed PE dry powder are fueling activity. Debt markets becoming more accommodating.</p>
+        <div class="impact"><strong>CEO Action:</strong> This is our cycle. Deploy capital aggressively in AI-adjacent industrials and tech infrastructure. Competition for quality assets is intensifying &mdash; speed of execution is the differentiator.</div>
+        <p class="source">Source: CNBC, Yahoo Finance</p>
+      </div>
+      <div class="card">
+        <div class="card-priority priority-moderate"></div>
+        <div class="card-header">
+          <h4>Goldman Sachs: Australia M&A Rebound Beginning</h4>
+          <span class="card-tag tag-bullish">EARLY</span>
+        </div>
+        <p>Goldman's local M&A head (Freund) sees "early signs of recovery" in Australia after it lagged Asia and US. This signals an underexploited market with less competition. Key sectors: mining, infrastructure, financial services.</p>
+        <div class="impact"><strong>CEO Action:</strong> Australia represents an uncrowded opportunity. Evaluate mining/resources plays where war-driven commodity prices create favorable exits. Consider APAC allocation increase.</div>
+        <p class="source">Source: Bloomberg (Apr 30, 2026)</p>
+      </div>
+      <div class="card">
+        <div class="card-priority priority-high"></div>
+        <div class="card-header">
+          <h4>Sector Rotation: Industrials EPS Growth 4% &rarr; 15% in 2026</h4>
+          <span class="card-tag tag-bullish">CATALYST</span>
+        </div>
+        <p>Goldman forecasts Industrials EPS growth surging from 4% (2025) to 15% (2026). Materials and Consumer Discretionary also flagged as positioned for outsized gains. The AI capex supercycle creates a multiplier effect across the industrial value chain (power, construction, logistics).</p>
+        <div class="impact"><strong>CEO Action:</strong> Build pipeline in industrial automation, power infrastructure, and AI-adjacent materials. These are the "picks and shovels" of the AI revolution with better valuations than pure tech.</div>
+        <p class="source">Source: Goldman Sachs Research via CNBC</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ SECTION 5: INDONESIA ============ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">&#127470;&#127465;</span>
+      <span class="section-title">Indonesia (IDX/IHSG) & IPO Pipeline</span>
+      <span class="section-badge badge-high">UNDER PRESSURE</span>
+    </div>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-priority priority-high"></div>
+        <div class="card-header">
+          <h4>JCI at 6,969 &mdash; 4th Consecutive Monthly Decline</h4>
+          <span class="card-tag tag-bearish">WEAK</span>
+        </div>
+        <p>The Jakarta Composite fell 1.86% in the latest session (Apr 30) and is heading for its 4th straight monthly loss. Drivers: non-subsidized fuel price increases driving domestic inflation, foreign outflows, and Iran war uncertainty. Brief rally to 7,655 on Apr 14 (ceasefire optimism) faded quickly. Still +2.25% YoY but momentum is negative.</p>
+        <div class="impact"><strong>CEO Action:</strong> Indonesian exits should be delayed if possible. Valuations compressing. However, if you're a BUYER, this is an entry opportunity &mdash; especially in consumption-driven sectors post MSCI rebalancing in May.</div>
+        <p class="source">Sources: Trading Economics, Databoks, HeyGoTrade</p>
+      </div>
+      <div class="card">
+        <div class="card-priority priority-moderate"></div>
+        <div class="card-header">
+          <h4>IDX IPO Pipeline: 12 Companies | Large-Caps Missing</h4>
+          <span class="card-tag tag-neutral">CAUTIOUS</span>
+        </div>
+        <p>IDX targets 50 IPOs for 2026 (ambitious after 26 in 2025 raising Rp18.11T). As of late March, 12 companies in pipeline for H1 2026 but NO "lighthouse" large-cap names confirmed. New regulation: 20% minimum free float for companies with market cap below Rp5T. Two jumbo IPOs from infrastructure and mining sectors were planned for Q1 but timeline unclear.</p>
+        <div class="impact"><strong>CEO Action:</strong> IPO window is not favorable for Indonesian exits right now. The new 20% free float rule improves liquidity long-term but may deter some private companies from listing near-term. Monitor for H2 recovery if Iran situation resolves.</div>
+        <p class="source">Sources: Jakarta Post, Investing.com (ID), Bloomberg</p>
+      </div>
+      <div class="card">
+        <div class="card-priority priority-moderate"></div>
+        <div class="card-header">
+          <h4>IHSG "Heading to 10,000" Narrative vs Reality Check</h4>
+          <span class="card-tag tag-watch">ANALYSIS</span>
+        </div>
+        <p>Some local analysts project IHSG reaching 10,000 but Investing.com analysis warns of a potential "fake bull market trap" in 2026. The divergence between foreign outflows (net selling) and domestic retail inflows creates an unstable foundation. MSCI rebalancing decision expected May 2026 &mdash; potential major catalyst either direction.</p>
+        <div class="impact"><strong>CEO Action:</strong> Do NOT chase the "10,000" narrative. Focus on fundamentals: banking sector earnings, commodity exporters (nickel, palm oil), and domestic consumption plays with inflation protection.</div>
+        <p class="source">Source: Investing.com Indonesia</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ SECTION 6: ANALYST RECOMMENDATIONS ============ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">&#127919;</span>
+      <span class="section-title">Wall Street Analyst Recommendations</span>
+      <span class="section-badge badge-moderate">ACTIONABLE</span>
+    </div>
+    <div class="card-grid">
+      <div class="card card-full">
+        <div class="card-priority priority-positive"></div>
+        <h4 style="margin-bottom: 14px;">Top Conviction Picks from Major Banks (2026)</h4>
+        <table class="data-table">
+          <tr><th>Bank</th><th>Stock</th><th>Rating</th><th>Target</th><th>Upside</th><th>Thesis</th></tr>
+          <tr><td><strong>Goldman Sachs</strong></td><td>Houlihan Lokey (HLI)</td><td class="up">Buy</td><td>$237</td><td class="up">+36%</td><td>Under-the-radar M&A advisory beneficiary</td></tr>
+          <tr><td><strong>Goldman Sachs</strong></td><td>Coinbase (COIN)</td><td class="up">Buy</td><td>&mdash;</td><td class="up">High</td><td>Crypto infrastructure + regulatory clarity</td></tr>
+          <tr><td><strong>Goldman Sachs</strong></td><td>MongoDB (MDB)</td><td class="up">Buy</td><td>&mdash;</td><td class="up">High</td><td>AI data layer play</td></tr>
+          <tr><td><strong>Goldman Sachs</strong></td><td>Mastercard/Visa</td><td class="up">Buy</td><td>&mdash;</td><td class="up">Steady</td><td>Consumer spending resilience</td></tr>
+          <tr><td><strong>Morgan Stanley</strong></td><td>Roblox (RBLX)</td><td class="up">OW</td><td>$170</td><td class="up">+110%</td><td>Platform monetization inflection</td></tr>
+          <tr><td><strong>Goldman Sachs</strong></td><td>Intuitive Surgical (ISRG)</td><td class="up">Buy Call</td><td>&mdash;</td><td class="up">Options play</td><td>Pre-earnings call opportunity</td></tr>
+          <tr><td><strong>Multiple Banks</strong></td><td>Choice Hotels (CHH)</td><td class="up">Buy</td><td>Raised</td><td class="up">Raised</td><td>Travel + pricing power</td></tr>
+        </table>
+      </div>
+      <div class="card">
+        <div class="card-priority priority-positive"></div>
+        <div class="card-header">
+          <h4>Goldman's Sector Call: Industrials Are the Trade</h4>
+          <span class="card-tag tag-bullish">HIGH CONVICTION</span>
+        </div>
+        <p>Goldman's most emphatic sector call: <strong>Industrials, Materials, and Consumer Discretionary</strong> positioned for maximum EPS growth acceleration in 2026. The logic: AI capex spending flows downhill through the industrial value chain (power generation, cooling infrastructure, construction, logistics). 15% EPS growth vs 4% in 2025.</p>
+        <div class="impact"><strong>CEO Action:</strong> This aligns perfectly with our M&A thesis. Industrial roll-ups serving AI infrastructure build-out are the highest-conviction PE trade of 2026. Houlihan Lokey pick signals Goldman expects M&A fee pools to expand significantly.</div>
+      </div>
+      <div class="card">
+        <div class="card-priority priority-moderate"></div>
+        <div class="card-header">
+          <h4>Goldman's "Fallen Angels" in Tech: Buy the Dip</h4>
+          <span class="card-tag tag-watch">CONTRARIAN</span>
+        </div>
+        <p>Goldman traders identified select tech names that underperformed in 2025 but have structural catalysts for 2026 recovery. The "fallen angel" thesis: beaten-down names with intact fundamentals benefit from AI tailwinds and earnings revisions. These are the stocks the market forgot about while chasing the Mag-7.</p>
+        <div class="impact"><strong>CEO Action:</strong> Consider take-private opportunities in undervalued mid-cap tech with AI applications. Public market dislocation = PE entry point.</div>
+        <p class="source">Source: CNBC (Dec 24, 2025)</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ SECTION 7: KEY EVENTS TIMELINE ============ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">&#128197;</span>
+      <span class="section-title">Critical Events Next 14 Days</span>
+      <span class="section-badge badge-moderate">CALENDAR</span>
+    </div>
+    <div class="card">
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="time">May 2-5</div>
+          <div class="event"><strong>Remaining Mag-7 earnings</strong> (Amazon, Nvidia expected). Will complete the AI capex picture.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="time">Mid-May</div>
+          <div class="event"><strong>Powell exits as Fed Chair.</strong> Transition to new leadership. Watch for hawkish/dovish signals from successor.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="time">May (TBD)</div>
+          <div class="event"><strong>Trump visit to Beijing.</strong> Potential for trade deal escalation or de-escalation. Green tech probe resolution possible.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="time">May (TBD)</div>
+          <div class="event"><strong>MSCI Rebalancing decision</strong> &mdash; critical for Indonesia (IHSG) direction. Addition/removal of names drives billions in passive flows.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="time">May-June</div>
+          <div class="event"><strong>Iran peace talks continuation.</strong> Success = oil to $80s; failure = oil to $130+. Binary outcome for global markets.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="time">June 5</div>
+          <div class="event"><strong>ECB rate decision.</strong> Likely first hike to 2.25%. Watch for forward guidance on pace of further hikes.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ QUESTIONS FOR YOU ============ -->
+  <div class="questions-section">
+    <h3>&#128172; Strategic Questions for Your Decision</h3>
+    <ol>
+      <li><strong>Iran Exposure:</strong> What's our portfolio's aggregate sensitivity to oil above $100/bbl? Do we have any direct Gulf shipping or energy production exposure that needs hedging or exit?</li>
+      <li><strong>AI Infrastructure Allocation:</strong> Given $649B in hyperscaler capex confirmed, are we moving fast enough on data center, power infrastructure, and cooling plays? Should we raise a dedicated AI infra fund?</li>
+      <li><strong>Indonesia Timing:</strong> With JCI at 4-month lows and IPO window closed, should we be accumulating positions for an H2 recovery, or reducing Indonesia allocation further pending MSCI rebalancing?</li>
+      <li><strong>European Exposure:</strong> ECB hiking into a potential stagflation &mdash; should we pause European deal-making until Q3, or is this the distressed opportunity window we want?</li>
+      <li><strong>Powell Transition:</strong> With the Fed Chair transition mid-May, do we accelerate any pending refinancings or debt raises before potential policy uncertainty?</li>
+      <li><strong>M&A Pipeline Priority:</strong> With record mega-deal activity and Goldman calling Industrials as the sector trade, are our current deal pipelines correctly weighted toward AI-adjacent industrials?</li>
+    </ol>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Prepared by AI Intelligence Desk | Sources: CNBC, Bloomberg, Yahoo Finance, Investing.com, Jakarta Post, Trading Economics</p>
+    <p class="disclaimer">This briefing synthesizes publicly available information for executive decision-making. Not investment advice. Verify all data points with your research team before executing trades or deals.</p>
+  </div>
+
+</div>
+</body>
+</html>
