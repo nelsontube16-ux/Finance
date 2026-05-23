@@ -1,0 +1,1520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CEO Intelligence Briefing | May 23, 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  :root {
+    --bg-primary: #0a0e1a;
+    --bg-secondary: #111827;
+    --bg-card: #1a2235;
+    --bg-card-hover: #1e2a42;
+    --border: #2a3553;
+    --text-primary: #f0f4fc;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    --accent-red: #ef4444;
+    --accent-red-glow: rgba(239,68,68,0.15);
+    --accent-orange: #f59e0b;
+    --accent-orange-glow: rgba(245,158,11,0.15);
+    --accent-green: #22c55e;
+    --accent-green-glow: rgba(34,197,94,0.15);
+    --accent-blue: #3b82f6;
+    --accent-blue-glow: rgba(59,130,246,0.15);
+    --accent-purple: #a855f7;
+    --accent-purple-glow: rgba(168,85,247,0.15);
+    --accent-cyan: #06b6d4;
+    --accent-cyan-glow: rgba(6,182,212,0.15);
+    --accent-gold: #eab308;
+    --accent-gold-glow: rgba(234,179,8,0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  .top-bar {
+    background: linear-gradient(90deg, #1a1a2e 0%, #16213e 50%, #1a1a2e 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 10px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(20px);
+  }
+
+  .top-bar .live-dot {
+    width: 8px; height: 8px;
+    background: var(--accent-red);
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 6px;
+    animation: pulse 1.5s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(239,68,68,0.7); }
+    50% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(239,68,68,0); }
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+
+  .hero {
+    background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 40%, #172554 100%);
+    padding: 60px 40px 50px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(ellipse at 30% 50%, rgba(239,68,68,0.06) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 50%, rgba(168,85,247,0.06) 0%, transparent 50%);
+    animation: fadeIn 2s ease-out;
+  }
+
+  .hero h1 {
+    font-size: 2.4rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+    position: relative;
+    background: linear-gradient(135deg, #f0f4fc, #94a3b8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .hero .subtitle {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin-top: 8px;
+    position: relative;
+  }
+
+  .hero .date-badge {
+    display: inline-block;
+    background: rgba(59,130,246,0.15);
+    border: 1px solid rgba(59,130,246,0.3);
+    padding: 6px 18px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--accent-blue);
+    margin-top: 16px;
+    position: relative;
+  }
+
+  .reading-time {
+    display: inline-block;
+    background: rgba(34,197,94,0.12);
+    border: 1px solid rgba(34,197,94,0.25);
+    padding: 4px 14px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--accent-green);
+    margin-left: 10px;
+    position: relative;
+  }
+
+  .update-badge {
+    display: inline-block;
+    background: rgba(168,85,247,0.12);
+    border: 1px solid rgba(168,85,247,0.25);
+    padding: 4px 14px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--accent-purple);
+    margin-left: 10px;
+    position: relative;
+  }
+
+  .container {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 30px 24px;
+  }
+
+  /* Threat Level Banner */
+  .threat-banner {
+    border-radius: 16px;
+    padding: 24px 30px;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    animation: slideUp 0.5s ease-out;
+  }
+
+  .threat-banner.critical {
+    background: linear-gradient(135deg, rgba(239,68,68,0.12), rgba(245,158,11,0.08));
+    border: 1px solid rgba(239,68,68,0.35);
+  }
+
+  .threat-banner.elevated {
+    background: linear-gradient(135deg, rgba(245,158,11,0.10), rgba(234,179,8,0.06));
+    border: 1px solid rgba(245,158,11,0.30);
+  }
+
+  .threat-banner.new-development {
+    background: linear-gradient(135deg, rgba(168,85,247,0.12), rgba(59,130,246,0.08));
+    border: 1px solid rgba(168,85,247,0.35);
+  }
+
+  .threat-icon {
+    font-size: 2.2rem;
+    flex-shrink: 0;
+  }
+
+  .threat-content h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .threat-content h3.red { color: var(--accent-red); }
+  .threat-content h3.orange { color: var(--accent-orange); }
+  .threat-content h3.purple { color: var(--accent-purple); }
+
+  .threat-content p {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  /* Delta badges */
+  .delta {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 6px;
+    margin-left: 8px;
+    vertical-align: middle;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .delta-new {
+    background: var(--accent-purple-glow);
+    color: var(--accent-purple);
+    border: 1px solid rgba(168,85,247,0.3);
+  }
+
+  .delta-changed {
+    background: var(--accent-orange-glow);
+    color: var(--accent-orange);
+    border: 1px solid rgba(245,158,11,0.3);
+  }
+
+  .delta-escalated {
+    background: var(--accent-red-glow);
+    color: var(--accent-red);
+    border: 1px solid rgba(239,68,68,0.3);
+  }
+
+  /* Section Styles */
+  .section {
+    margin-bottom: 36px;
+    animation: slideUp 0.6s ease-out;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-icon {
+    font-size: 1.5rem;
+  }
+
+  .section-header h2 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+  }
+
+  .section-header .badge {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 3px 10px;
+    border-radius: 6px;
+    margin-left: auto;
+  }
+
+  .badge-critical { background: var(--accent-red-glow); color: var(--accent-red); border: 1px solid rgba(239,68,68,0.3); }
+  .badge-high { background: var(--accent-orange-glow); color: var(--accent-orange); border: 1px solid rgba(245,158,11,0.3); }
+  .badge-moderate { background: var(--accent-blue-glow); color: var(--accent-blue); border: 1px solid rgba(59,130,246,0.3); }
+  .badge-info { background: var(--accent-cyan-glow); color: var(--accent-cyan); border: 1px solid rgba(6,182,212,0.3); }
+  .badge-opportunity { background: var(--accent-green-glow); color: var(--accent-green); border: 1px solid rgba(34,197,94,0.3); }
+  .badge-paradigm { background: var(--accent-purple-glow); color: var(--accent-purple); border: 1px solid rgba(168,85,247,0.3); }
+
+  /* Cards */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    gap: 16px;
+  }
+
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px;
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card:hover {
+    background: var(--bg-card-hover);
+    border-color: rgba(59,130,246,0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+  }
+
+  .card-accent {
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px;
+    height: 100%;
+    border-radius: 14px 0 0 14px;
+  }
+
+  .accent-red { background: var(--accent-red); }
+  .accent-orange { background: var(--accent-orange); }
+  .accent-green { background: var(--accent-green); }
+  .accent-blue { background: var(--accent-blue); }
+  .accent-purple { background: var(--accent-purple); }
+  .accent-cyan { background: var(--accent-cyan); }
+  .accent-gold { background: var(--accent-gold); }
+
+  .card h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .card p {
+    font-size: 0.84rem;
+    color: var(--text-secondary);
+    line-height: 1.65;
+  }
+
+  .card .meta {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    font-size: 0.68rem;
+    font-weight: 600;
+    padding: 3px 9px;
+    border-radius: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .tag-red { background: var(--accent-red-glow); color: var(--accent-red); }
+  .tag-orange { background: var(--accent-orange-glow); color: var(--accent-orange); }
+  .tag-green { background: var(--accent-green-glow); color: var(--accent-green); }
+  .tag-blue { background: var(--accent-blue-glow); color: var(--accent-blue); }
+  .tag-purple { background: var(--accent-purple-glow); color: var(--accent-purple); }
+  .tag-cyan { background: var(--accent-cyan-glow); color: var(--accent-cyan); }
+  .tag-gold { background: var(--accent-gold-glow); color: var(--accent-gold); }
+
+  /* Key Metrics Bar */
+  .metrics-bar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+    gap: 12px;
+    margin-bottom: 30px;
+  }
+
+  .metric {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 18px;
+    text-align: center;
+    transition: all 0.2s;
+  }
+
+  .metric:hover { border-color: rgba(59,130,246,0.3); }
+
+  .metric .label {
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+
+  .metric .value {
+    font-size: 1.45rem;
+    font-weight: 800;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .metric .change {
+    font-size: 0.72rem;
+    font-weight: 600;
+    margin-top: 2px;
+  }
+
+  .metric .vs-prev {
+    font-size: 0.62rem;
+    color: var(--text-muted);
+    margin-top: 3px;
+    font-style: italic;
+  }
+
+  .up { color: var(--accent-green); }
+  .down { color: var(--accent-red); }
+  .neutral { color: var(--accent-orange); }
+  .shifted { color: var(--accent-purple); }
+
+  /* Deal Table */
+  .deal-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.84rem;
+  }
+
+  .deal-table th {
+    text-align: left;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .deal-table td {
+    padding: 12px 14px;
+    border-bottom: 1px solid rgba(42,53,83,0.5);
+    color: var(--text-secondary);
+  }
+
+  .deal-table tr:hover td {
+    background: rgba(59,130,246,0.04);
+  }
+
+  .deal-table .company {
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  /* Analyst Cards */
+  .analyst-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.2s;
+    gap: 16px;
+  }
+
+  .analyst-card:hover {
+    background: var(--bg-card-hover);
+    transform: translateX(4px);
+  }
+
+  .analyst-info { flex: 1; }
+
+  .analyst-info .firm {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .analyst-info .stock {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-top: 2px;
+  }
+
+  .analyst-info .detail {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-top: 2px;
+  }
+
+  .rating-badge {
+    padding: 6px 16px;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    flex-shrink: 0;
+    text-align: center;
+  }
+
+  .rating-upgrade { background: var(--accent-green-glow); color: var(--accent-green); border: 1px solid rgba(34,197,94,0.3); }
+  .rating-downgrade { background: var(--accent-red-glow); color: var(--accent-red); border: 1px solid rgba(239,68,68,0.3); }
+  .rating-top-pick { background: var(--accent-purple-glow); color: var(--accent-purple); border: 1px solid rgba(168,85,247,0.3); }
+  .rating-hold { background: var(--accent-orange-glow); color: var(--accent-orange); border: 1px solid rgba(245,158,11,0.3); }
+  .rating-new { background: var(--accent-cyan-glow); color: var(--accent-cyan); border: 1px solid rgba(6,182,212,0.3); }
+
+  /* Correlation Section */
+  .correlation-box {
+    background: linear-gradient(135deg, rgba(168,85,247,0.08), rgba(59,130,246,0.06));
+    border: 1px solid rgba(168,85,247,0.25);
+    border-radius: 14px;
+    padding: 24px;
+    margin-bottom: 12px;
+  }
+
+  .correlation-box h4 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--accent-purple);
+    margin-bottom: 8px;
+  }
+
+  .correlation-box p {
+    font-size: 0.84rem;
+    color: var(--text-secondary);
+    line-height: 1.65;
+  }
+
+  /* Previous Briefing Correlation */
+  .prev-correlation {
+    background: linear-gradient(135deg, rgba(6,182,212,0.08), rgba(59,130,246,0.06));
+    border: 1px solid rgba(6,182,212,0.25);
+    border-radius: 14px;
+    padding: 24px;
+    margin-bottom: 12px;
+  }
+
+  .prev-correlation h4 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--accent-cyan);
+    margin-bottom: 8px;
+  }
+
+  .prev-correlation p {
+    font-size: 0.84rem;
+    color: var(--text-secondary);
+    line-height: 1.65;
+  }
+
+  /* Questions Section */
+  .question-box {
+    background: linear-gradient(135deg, rgba(234,179,8,0.08), rgba(245,158,11,0.06));
+    border: 1px solid rgba(234,179,8,0.25);
+    border-radius: 14px;
+    padding: 20px 24px;
+    margin-bottom: 10px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+
+  .question-box .q-icon {
+    font-size: 1.2rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .question-box .q-text {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .question-box .q-text strong {
+    color: var(--accent-gold);
+  }
+
+  /* Scorecard */
+  .scorecard {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+  }
+
+  .scorecard h4 {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--accent-cyan);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .scorecard-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(42,53,83,0.4);
+    font-size: 0.84rem;
+  }
+
+  .scorecard-row:last-child { border-bottom: none; }
+
+  .scorecard-row .item { color: var(--text-secondary); }
+  .scorecard-row .apr-val { color: var(--text-muted); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; }
+  .scorecard-row .may-val { font-weight: 700; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; }
+  .scorecard-row .direction { font-size: 0.75rem; font-weight: 700; }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 40px;
+    border-top: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 0.75rem;
+  }
+
+  .source-list {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .source-list a {
+    font-size: 0.68rem;
+    background: var(--bg-card);
+    padding: 3px 10px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .source-list a:hover {
+    color: var(--accent-blue);
+    border-color: rgba(59,130,246,0.3);
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg-primary); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  /* Nav Tabs */
+  .nav-tabs {
+    display: flex;
+    gap: 6px;
+    padding: 0 24px;
+    margin-top: -10px;
+    margin-bottom: 20px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .nav-tabs::-webkit-scrollbar { display: none; }
+
+  .nav-tab {
+    padding: 8px 16px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--bg-secondary);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+    text-decoration: none;
+  }
+
+  .nav-tab:hover { color: var(--text-primary); border-color: rgba(59,130,246,0.3); }
+
+  .nav-tab.hot {
+    border-color: rgba(239,68,68,0.4);
+    color: var(--accent-red);
+    background: rgba(239,68,68,0.06);
+  }
+
+  @media (max-width: 768px) {
+    .hero { padding: 40px 20px 30px; }
+    .hero h1 { font-size: 1.6rem; }
+    .container { padding: 20px 14px; }
+    .card-grid { grid-template-columns: 1fr; }
+    .metrics-bar { grid-template-columns: repeat(2, 1fr); }
+    .threat-banner { flex-direction: column; text-align: center; }
+    .analyst-card { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <div><span class="live-dot"></span> CLASSIFIED: C-SUITE EYES ONLY &mdash; INTELLIGENCE BRIEFING</div>
+  <div>Compiled: May 23, 2026 &bull; Sources: Fed, IMF, Bloomberg, CNBC, Goldman Sachs, Morgan Stanley, JP Morgan, Bank Indonesia, Al Jazeera</div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <h1>CEO Daily Intelligence Briefing</h1>
+  <p class="subtitle">Market-Moving Events &bull; Filtered &amp; Prioritized &bull; Executive Summary</p>
+  <div>
+    <span class="date-badge">Friday, May 23, 2026</span>
+    <span class="reading-time">~14 min read</span>
+    <span class="update-badge">Update #2 &bull; Since Apr 26</span>
+  </div>
+</div>
+
+<!-- NAV TABS -->
+<div style="padding-top: 20px;">
+  <div class="nav-tabs">
+    <a href="#alerts" class="nav-tab hot">Critical Alerts</a>
+    <a href="#scorecard" class="nav-tab">Apr &rarr; May Scorecard</a>
+    <a href="#markets" class="nav-tab">Market Snapshot</a>
+    <a href="#geopolitical" class="nav-tab">Geopolitical</a>
+    <a href="#macro" class="nav-tab">Macro</a>
+    <a href="#mna" class="nav-tab">M&amp;A</a>
+    <a href="#indonesia" class="nav-tab hot">Indonesia / IDX</a>
+    <a href="#analysts" class="nav-tab">Analyst Calls</a>
+    <a href="#correlations" class="nav-tab">Correlations</a>
+    <a href="#questions" class="nav-tab">Strategic Questions</a>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ============================================ -->
+<!-- CRITICAL ALERTS (3 BANNERS) -->
+<!-- ============================================ -->
+<div id="alerts">
+
+  <div class="threat-banner critical">
+    <div class="threat-icon">&#9888;&#65039;</div>
+    <div class="threat-content">
+      <h3 class="red">CRITICAL: Indonesia in Crisis &mdash; IHSG Crashes 15%, Rupiah Hits Record Low, BI Emergency Hike</h3>
+      <p>Since our April 26 briefing, IHSG has collapsed from <strong>7,594 to 6,429</strong> (&minus;15.3%). The Rupiah plunged to a record low of <strong>Rp 17,719/USD</strong>, forcing Bank Indonesia to deliver an emergency <strong>50bps rate hike to 5.25%</strong> on May 20 &mdash; the first hike since 2024 and the largest since Nov 2022. President Prabowo's new policy mandating commodity exports through a single state-owned exporter triggered capital flight. Barito Pacific &minus;9.9%, Medco Energi &minus;8.7%, Amman Mineral &minus;5.7%. <strong>Action: Review all IDX exposure, reassess Rupiah hedges, and reconsider Indonesia deployment timeline.</strong></p>
+    </div>
+  </div>
+
+  <div class="threat-banner new-development">
+    <div class="threat-icon">&#127975;</div>
+    <div class="threat-content">
+      <h3 class="purple">PARADIGM SHIFT: Kevin Warsh Is Now Fed Chair &mdash; Markets Pricing Zero Cuts in 2026</h3>
+      <p>Kevin Warsh was confirmed <strong>54&ndash;45</strong> on May 13 and sworn in May 15, replacing Jerome Powell in the most divisive Fed confirmation in history. Wholesale prices soared <strong>6% in April</strong> on energy. Markets now price <strong>&lt;3% probability of any rate cut</strong> at remaining 2026 FOMC meetings &mdash; some traders pricing <em>hikes</em>. Warsh's first meeting is <strong>June 16&ndash;17</strong>. He views AI as "significantly disinflationary" but faces $100+ oil pushing headline inflation. <strong>Action: Reassess all rate-sensitive positions. The Powell era is over.</strong></p>
+    </div>
+  </div>
+
+  <div class="threat-banner elevated">
+    <div class="threat-icon">&#128165;</div>
+    <div class="threat-content">
+      <h3 class="orange">ONGOING: Hormuz Ceasefire Collapsed &mdash; Oil Spiked to $114, Operation Project Freedom Paused</h3>
+      <p>The April 7 ceasefire broke down in early May. On <strong>May 4</strong>, Trump launched <strong>Operation Project Freedom</strong> (Navy escort mission), then <strong>paused it May 6</strong> citing "great progress." Oil spiked to <strong>$114.44</strong> on May 4 after Iran attacked commercial vessels and UAE was hit by Iranian missiles/drones. Hormuz traffic at <strong>5% of pre-conflict levels</strong>. Brent now ~<strong>$104</strong> on tentative diplomacy hopes. Kalshi gives only <strong>56% chance</strong> traffic normalizes by August. <strong>The April 26 briefing warned of fragility &mdash; that scenario played out exactly.</strong></p>
+    </div>
+  </div>
+
+</div>
+
+<!-- ============================================ -->
+<!-- APRIL → MAY SCORECARD -->
+<!-- ============================================ -->
+<div id="scorecard" class="section">
+  <div class="section-header">
+    <span class="section-icon">&#128202;</span>
+    <h2>April 26 &rarr; May 23 Scorecard</h2>
+    <span class="badge badge-info">27-Day Delta</span>
+  </div>
+
+  <div class="scorecard">
+    <h4>Key Metrics: Then vs. Now</h4>
+    <div class="scorecard-row">
+      <span class="item">S&amp;P 500</span>
+      <span class="apr-val">7,165</span>
+      <span class="may-val up">7,446</span>
+      <span class="direction up">+3.9%</span>
+    </div>
+    <div class="scorecard-row">
+      <span class="item">Nasdaq Composite</span>
+      <span class="apr-val">24,837</span>
+      <span class="may-val up">26,635</span>
+      <span class="direction up">+7.2%</span>
+    </div>
+    <div class="scorecard-row">
+      <span class="item">Brent Crude</span>
+      <span class="apr-val">$106</span>
+      <span class="may-val neutral">$104</span>
+      <span class="direction neutral">&minus;1.9% (spiked $114)</span>
+    </div>
+    <div class="scorecard-row">
+      <span class="item">IHSG (Indonesia)</span>
+      <span class="apr-val">7,594</span>
+      <span class="may-val down">6,429</span>
+      <span class="direction down">&minus;15.3%</span>
+    </div>
+    <div class="scorecard-row">
+      <span class="item">Rupiah / USD</span>
+      <span class="apr-val">~16,500</span>
+      <span class="may-val down">17,719 (record low)</span>
+      <span class="direction down">&minus;7.4%</span>
+    </div>
+    <div class="scorecard-row">
+      <span class="item">Fed Chair</span>
+      <span class="apr-val">Jerome Powell</span>
+      <span class="may-val shifted">Kevin Warsh</span>
+      <span class="direction shifted">New Era</span>
+    </div>
+    <div class="scorecard-row">
+      <span class="item">Fed Rate</span>
+      <span class="apr-val">3.00&ndash;3.25%</span>
+      <span class="may-val neutral">3.00&ndash;3.25%</span>
+      <span class="direction neutral">Held &bull; Hike risk rising</span>
+    </div>
+    <div class="scorecard-row">
+      <span class="item">BI Rate (Indonesia)</span>
+      <span class="apr-val">4.75%</span>
+      <span class="may-val down">5.25%</span>
+      <span class="direction down">+50bps emergency hike</span>
+    </div>
+    <div class="scorecard-row">
+      <span class="item">Hormuz Traffic</span>
+      <span class="apr-val">~0% (closed)</span>
+      <span class="may-val down">~5%</span>
+      <span class="direction neutral">Marginal improvement</span>
+    </div>
+    <div class="scorecard-row">
+      <span class="item">IDX IPOs (YTD)</span>
+      <span class="apr-val">0</span>
+      <span class="may-val neutral">1 (WBSA)</span>
+      <span class="direction neutral">Waresix sub listed</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- MARKET SNAPSHOT -->
+<!-- ============================================ -->
+<div id="markets" class="section">
+  <div class="section-header">
+    <span class="section-icon">&#128200;</span>
+    <h2>Global Market Snapshot</h2>
+    <span class="badge badge-opportunity">May 22 Close</span>
+  </div>
+
+  <div class="metrics-bar">
+    <div class="metric">
+      <div class="label">S&amp;P 500</div>
+      <div class="value up">7,446</div>
+      <div class="change up">Hit 7,501 ATH May 15</div>
+      <div class="vs-prev">Apr 26: 7,165 (+3.9%)</div>
+    </div>
+    <div class="metric">
+      <div class="label">Nasdaq</div>
+      <div class="value up">26,635</div>
+      <div class="change up">Nvidia-fueled breakout</div>
+      <div class="vs-prev">Apr 26: 24,837 (+7.2%)</div>
+    </div>
+    <div class="metric">
+      <div class="label">Brent Crude</div>
+      <div class="value neutral">$104</div>
+      <div class="change neutral">Range: $101&ndash;$114</div>
+      <div class="vs-prev">Apr 26: $106 (volatile)</div>
+    </div>
+    <div class="metric">
+      <div class="label">IHSG (Indonesia)</div>
+      <div class="value down">6,429</div>
+      <div class="change down">&minus;15.3% since Apr 26</div>
+      <div class="vs-prev">Apr 26: 7,594</div>
+    </div>
+    <div class="metric">
+      <div class="label">NVIDIA (NVDA)</div>
+      <div class="value up">~$236</div>
+      <div class="change up">ATH &bull; $81.6B Rev Beat</div>
+      <div class="vs-prev">AI mega-cycle confirmed</div>
+    </div>
+    <div class="metric">
+      <div class="label">Fed Rate</div>
+      <div class="value neutral">3.25%</div>
+      <div class="change neutral">Warsh era &bull; Hike risk</div>
+      <div class="vs-prev">No cuts priced for 2026</div>
+    </div>
+    <div class="metric">
+      <div class="label">BI Rate</div>
+      <div class="value down">5.25%</div>
+      <div class="change down">Emergency +50bps</div>
+      <div class="vs-prev">Apr 26: 4.75%</div>
+    </div>
+    <div class="metric">
+      <div class="label">Wholesale PPI</div>
+      <div class="value down">+6.0% YoY</div>
+      <div class="change down">Energy-driven surge</div>
+      <div class="vs-prev">Complicates rate path</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- GEOPOLITICAL TENSIONS -->
+<!-- ============================================ -->
+<div id="geopolitical" class="section">
+  <div class="section-header">
+    <span class="section-icon">&#127758;</span>
+    <h2>Geopolitical Tensions</h2>
+    <span class="badge badge-critical">Escalated</span>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-accent accent-red"></div>
+      <h4>&#128165; Hormuz Ceasefire Collapse &amp; Operation Project Freedom <span class="delta delta-escalated">Escalated</span></h4>
+      <p>The April 7 ceasefire unraveled when Iran attacked commercial vessels in early May. UAE was struck by Iranian missiles and drones. On <strong>May 4</strong>, Trump launched <strong>Operation Project Freedom</strong> &mdash; a US Navy escort mission to force open the strait. Oil surged to <strong>$114.44</strong>. Two days later, Trump paused the operation citing "great progress" in backchannel talks. Hormuz traffic remains at <strong>5% of pre-conflict levels</strong>. Iran demands the US lift its naval blockade before reopening &mdash; the US refuses. Kalshi prediction market: <strong>56% chance</strong> of normalization by August.</p>
+      <div class="meta">
+        <span class="tag tag-red">Ceasefire Failed</span>
+        <span class="tag tag-red">UAE Attacked</span>
+        <span class="tag tag-orange">Op. Freedom Paused</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-accent accent-orange"></div>
+      <h4>&#127919; US-China Decoupling: Status Quo <span class="delta delta-changed">Ongoing</span></h4>
+      <p>No new escalation since April, but structural decoupling continues. McKinsey confirms geopolitical distance remains the <strong>single biggest force</strong> reshaping trade geometry. EY's May geostrategic analysis flags <strong>AI sovereignty</strong> as the emerging friction point &mdash; US and China racing to build separate AI ecosystems. Defense spending scaling globally. Indonesia's "connector economy" thesis <strong>now under stress</strong> from Prabowo's export nationalization policies.</p>
+      <div class="meta">
+        <span class="tag tag-orange">AI Sovereignty</span>
+        <span class="tag tag-blue">Defense Surge</span>
+        <span class="tag tag-orange">Trade Rerouting</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-accent accent-purple"></div>
+      <h4>&#127975; Warsh Fed &mdash; Political Dimension <span class="delta delta-new">New</span></h4>
+      <p>The 54&ndash;45 confirmation vote &mdash; <strong>most divisive in Fed history</strong> &mdash; only Sen. Fetterman (D) crossed party lines. Trump wants rate cuts; Warsh faces <strong>6% wholesale inflation</strong> driven by oil. The tension between political pressure for easing and inflation data demanding tightening will define H2 2026. Powell remains on the board "for a period," creating an unusual dual-power dynamic. Markets are pricing in Warsh <em>raising</em> rates &mdash; the opposite of Trump's agenda.</p>
+      <div class="meta">
+        <span class="tag tag-purple">Political Risk</span>
+        <span class="tag tag-red">Inflation vs. Politics</span>
+        <span class="tag tag-orange">June 16 FOMC</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-accent accent-cyan"></div>
+      <h4>&#127470;&#127465; Indonesia: Prabowo Export Nationalization <span class="delta delta-new">New</span></h4>
+      <p>President Prabowo tightened export rules on <strong>palm oil, coal, and ferroalloys</strong>, mandating shipments through a single state-owned exporter. This is a dramatic policy shift that spooked foreign investors and contributed to the IHSG collapse and Rupiah crisis. The "connector economy" thesis is being <strong>directly undermined</strong> by commodity nationalism. Transport, energy, and industrial sectors led the decline.</p>
+      <div class="meta">
+        <span class="tag tag-red">Capital Flight</span>
+        <span class="tag tag-orange">Policy Shock</span>
+        <span class="tag tag-cyan">Commodity Nationalism</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- GLOBAL MACROECONOMICS -->
+<!-- ============================================ -->
+<div id="macro" class="section">
+  <div class="section-header">
+    <span class="section-icon">&#127974;</span>
+    <h2>Global Macroeconomics</h2>
+    <span class="badge badge-high">Paradigm Shift</span>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-accent accent-purple"></div>
+      <h4>&#127975; The Warsh Fed: A New Regime <span class="delta delta-new">New</span></h4>
+      <p>Kevin Warsh's policy DNA: <strong>tighter inflation discipline, streamlined communication, narrower Fed mandate.</strong> He believes AI is "significantly disinflationary" &mdash; giving theoretical room to cut even with elevated headline inflation. But reality bites: <strong>wholesale PPI at +6%</strong>, Brent above $100, shelter inflation doubling in April. Markets have priced out all rate cuts for 2026. His <strong>first FOMC (June 16&ndash;17)</strong> will be the most watched monetary policy event of the year. Warsh's opening statement will signal whether he leans hawk or uses the AI-disinflation thesis to justify holds.</p>
+      <div class="meta">
+        <span class="tag tag-purple">Regime Change</span>
+        <span class="tag tag-red">PPI +6%</span>
+        <span class="tag tag-orange">June 16 Key</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-accent accent-orange"></div>
+      <h4>&#128202; ECB Holding at 2.00% &mdash; Europe Diverges <span class="delta delta-changed">Updated</span></h4>
+      <p>ECB deposit rate steady at <strong>2.00%</strong> since late 2025. Three-quarters of polled economists expect <strong>no change before year-end</strong>. Europe's economy is "resilient in a challenging global environment" per ECB &mdash; low unemployment, defense spending rollout, and infrastructure investment supporting growth. The <strong>US-Europe rate gap</strong> (3.25% vs 2.00%) is widening under Warsh, strengthening the dollar and adding pressure on EM currencies including the Rupiah.</p>
+      <div class="meta">
+        <span class="tag tag-orange">Rate Gap Widening</span>
+        <span class="tag tag-blue">Europe Steady</span>
+        <span class="tag tag-cyan">Dollar Strength</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-accent accent-green"></div>
+      <h4>&#129302; Nvidia's $81.6B Quarter: AI Capex Supercycle <span class="delta delta-new">New</span></h4>
+      <p>Nvidia reported FQ1 2027 revenue of <strong>$81.6B</strong> (vs $78.9B consensus), EPS <strong>$1.76</strong> (beat). Blackwell chip demand is insatiable. Big Tech AI capex surged to <strong>$700B+</strong> in 2026 (vs $400B in 2025). Morgan Stanley projects AI infra capex reaching <strong>$1.16 trillion by 2027</strong>. The AI trade isn't just alive &mdash; it's accelerating. NVDA hit a fresh ATH of <strong>$236.54</strong>. But the question from our April 26 briefing stands: <strong>what happens if this single pillar cracks?</strong></p>
+      <div class="meta">
+        <span class="tag tag-green">$81.6B Rev</span>
+        <span class="tag tag-green">ATH $236</span>
+        <span class="tag tag-blue">$700B Capex</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-accent accent-red"></div>
+      <h4>&#9981;&#65039; Energy: The $100+ New Normal <span class="delta delta-changed">Updated</span></h4>
+      <p>Oil has traded in a <strong>$101&ndash;$114 range</strong> in May, with extreme volatility on each Hormuz headline. Brent spiked to <strong>$114.44 on May 4</strong> (Iran-UAE exchange), eased to $101 on diplomacy rumors, then crept back to $104. The April 26 briefing flagged "extreme fragility beneath surface calm" &mdash; <strong>that call was validated</strong>. Wholesale PPI at +6% shows energy costs are now feeding through to producer prices. This is the linchpin variable for Warsh's first rate decision.</p>
+      <div class="meta">
+        <span class="tag tag-red">$101&ndash;$114 Range</span>
+        <span class="tag tag-red">PPI Transmission</span>
+        <span class="tag tag-orange">Warsh Pressure</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- M&A ACTIVITY -->
+<!-- ============================================ -->
+<div id="mna" class="section">
+  <div class="section-header">
+    <span class="section-icon">&#129309;</span>
+    <h2>M&amp;A &mdash; Mergers &amp; Acquisitions</h2>
+    <span class="badge badge-opportunity">Mega-Deal Wave</span>
+  </div>
+
+  <div class="card" style="margin-bottom: 16px;">
+    <p style="margin-bottom: 14px;"><strong style="color: var(--accent-blue);">Market Context:</strong> M&amp;A is running hot. US $100M+ deals are up <strong>65% in value and 17% in volume YoY</strong>, driven by a rebound in $5B+ megadeals (EY). Multiple <strong>$30B&ndash;$110B</strong> transformational deals are in flight simultaneously. Media consolidation, AI infrastructure, fintech/crypto, and energy are the hottest sectors. Goldman Sachs maintains its <strong>#1 position in M&amp;A and equity offerings</strong> in Q1 2026.</p>
+  </div>
+
+  <div style="overflow-x: auto;">
+    <table class="deal-table">
+      <thead>
+        <tr>
+          <th>Deal</th>
+          <th>Value</th>
+          <th>Sector</th>
+          <th>Status</th>
+          <th>Note</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="company">Paramount Skydance &rarr; Warner Bros. Discovery</span></td>
+          <td style="font-weight:700; color: var(--accent-red);">$110.9B</td>
+          <td>Media / Entertainment</td>
+          <td><span class="tag tag-orange">Shareholder Approved</span></td>
+          <td>Outbid Netflix's $83B. Close expected Q3 2026. 38.5% Gulf sovereign wealth ownership.</td>
+        </tr>
+        <tr>
+          <td><span class="company">PIF / Silver Lake / Affinity &rarr; Electronic Arts</span></td>
+          <td style="font-weight:700; color: var(--accent-red);">$55.0B</td>
+          <td>Gaming / LBO</td>
+          <td><span class="tag tag-blue">Regulatory Review</span></td>
+          <td>Largest gaming LBO ever. $210/share, 25% premium. Close by June 2026.</td>
+        </tr>
+        <tr>
+          <td><span class="company">Charter &rarr; Cox Communications</span></td>
+          <td style="font-weight:700; color: var(--accent-green);">$34.5B</td>
+          <td>Telecom / Broadband</td>
+          <td><span class="tag tag-green">FCC Approved</span></td>
+          <td>FCC cleared Feb 27. Awaiting California. Largest US broadband provider (36M subs). Deadline Sep 15.</td>
+        </tr>
+        <tr>
+          <td><span class="company">QXO &rarr; TopBuild</span></td>
+          <td style="font-weight:700; color: var(--accent-green);">$17.0B</td>
+          <td>Building / Construction</td>
+          <td><span class="tag tag-blue">Announced</span></td>
+          <td>Brad Jacobs roll-up. Reprices building services comps.</td>
+        </tr>
+        <tr>
+          <td><span class="company">Mastercard &rarr; BVNK</span></td>
+          <td style="font-weight:700; color: var(--accent-green);">$1.8B</td>
+          <td>Fintech / Crypto / Stablecoin</td>
+          <td><span class="tag tag-blue">Announced Mar 17</span></td>
+          <td>Largest stablecoin acquisition ever. Eclipses Stripe/Bridge. Regulatory close late 2026.</td>
+        </tr>
+        <tr>
+          <td><span class="company">NextEra Energy &rarr; Caliber Resource</span></td>
+          <td style="font-weight:700; color: var(--accent-green);">$1.3B</td>
+          <td>Energy</td>
+          <td><span class="tag tag-blue">Announced May 20</span></td>
+          <td>Energy transition play. Grid infrastructure demand.</td>
+        </tr>
+        <tr>
+          <td><span class="company">Anthropic &rarr; Stainless</span></td>
+          <td style="font-weight:700; color: var(--text-muted);">Undisclosed</td>
+          <td>AI / Dev Tools</td>
+          <td><span class="tag tag-green">Closed May 18</span></td>
+          <td>AI company acquiring dev tooling. Vertical integration signal.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card-grid" style="margin-top: 16px;">
+    <div class="card">
+      <div class="card-accent accent-red"></div>
+      <h4>&#128161; CEO Takeaway: The $110B Media Mega-Merger</h4>
+      <p>Paramount Skydance outbid Netflix with a <strong>$110.9B offer for WBD</strong> &mdash; the largest media deal in history. Funded by $47B in equity from Ellison Family and RedBird Capital. <strong>38.5% Gulf sovereign wealth ownership</strong> (PIF, ADIA, QIA) signals Middle Eastern capital aggressively deploying into Western media. $6B in synergies expected. This deal reshapes the competitive landscape for every content and streaming business. <strong>If you have media/entertainment exposure, valuations just got repriced.</strong></p>
+    </div>
+    <div class="card">
+      <div class="card-accent accent-purple"></div>
+      <h4>&#128161; CEO Takeaway: Stablecoin M&amp;A Goes Mainstream</h4>
+      <p>Mastercard's $1.8B BVNK acquisition &mdash; <strong>the largest stablecoin deal ever</strong> &mdash; signals crypto infrastructure crossing from speculative to core payments. Mastercard wants to bridge fiat and stablecoins across 130+ countries. After Stripe's $1.1B Bridge deal in 2025, traditional payment rails are actively acquiring crypto infra. <strong>If your portfolio includes fintech or payment processing, the competitive moat is shifting to crypto-native rails.</strong></p>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- GLOBAL STOCK MARKETS -->
+<!-- ============================================ -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-icon">&#128640;</span>
+    <h2>Global Stock Markets &mdash; Key Movers</h2>
+    <span class="badge badge-opportunity">New ATHs</span>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-accent accent-green"></div>
+      <h4>&#129302; Nvidia: The $81.6B Quarter That Silenced Doubters <span class="delta delta-new">New</span></h4>
+      <p>FQ1 2027 revenue: <strong>$81.6B</strong> (vs $78.9B consensus). EPS: <strong>$1.76</strong> (beat). Blackwell chips driving insatiable data center demand. Big Tech AI capex: <strong>$700B+ in 2026</strong> (Microsoft and Meta leading). Stock hit fresh ATH at <strong>$236.54</strong>. Nvidia is now treated as the <em>single most important earnings release in global equity markets</em> &mdash; Wall Street uses it as the directional signal for the entire AI trade, semiconductors, and tech momentum.</p>
+      <div class="meta">
+        <span class="tag tag-green">$81.6B Rev</span>
+        <span class="tag tag-green">ATH $236</span>
+        <span class="tag tag-blue">Blackwell Cycle</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-accent accent-blue"></div>
+      <h4>&#128201; S&amp;P 500 Breaks 7,500 for First Time <span class="delta delta-changed">Updated</span></h4>
+      <p>S&amp;P 500 hit <strong>7,501.24 on May 15</strong> &mdash; a historic milestone &mdash; before pulling back to 7,446. That's <strong>+3.9% since April 26</strong> and <strong>+26.7% YoY</strong>. JP Morgan has revised its year-end target <em>down</em> to <strong>7,200</strong> (from 7,500), while Morgan Stanley targets <strong>8,300 by mid-2027</strong>. The divergence between banks is notable: JPM sees downside risk, MS sees AI carrying markets higher. <strong>S&amp;P EPS growth projected at 23% in 2026.</strong></p>
+      <div class="meta">
+        <span class="tag tag-green">7,501 ATH</span>
+        <span class="tag tag-blue">+26.7% YoY</span>
+        <span class="tag tag-orange">JPM Target Cut</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-accent accent-green"></div>
+      <h4>&#128187; Nasdaq +7.2% Since April Briefing <span class="delta delta-changed">Updated</span></h4>
+      <p>Nasdaq surged from <strong>24,837 to 26,635</strong> (+7.2%), massively outperforming the S&amp;P. This is a pure <strong>AI-semiconductor supercycle</strong> story. The Nasdaq 100 pulled back 0.7% on May 21 after Nvidia earnings failed to extend the rally further, but the trend is clear: <strong>AI is the only trade that matters in equities right now.</strong> The April briefing's warning about "narrow breadth" still applies &mdash; non-tech is lagging.</p>
+      <div class="meta">
+        <span class="tag tag-green">+7.2%</span>
+        <span class="tag tag-blue">AI Supercycle</span>
+        <span class="tag tag-orange">Narrow Rally</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-accent accent-orange"></div>
+      <h4>&#9888;&#65039; The April Warning Was Right: Fragility Beneath Calm <span class="delta delta-changed">Validated</span></h4>
+      <p>Our April 26 briefing stated: <em>"A single escalation headline could trigger a 3&ndash;5% down day."</em> On <strong>May 4&ndash;5</strong>, when Iran attacked UAE and the US destroyed Iranian boats, <strong>oil spiked 6% in a single session</strong> and equities whipsawed. The S&amp;P fell 9% below its January peak before recovering. Markets are resilient on the surface but remain <strong>one headline away from a sharp correction.</strong> The AI earnings pillar is holding &mdash; but it's the only pillar.</p>
+      <div class="meta">
+        <span class="tag tag-orange">Call Validated</span>
+        <span class="tag tag-red">One-Pillar Market</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- INDONESIA / IDX -->
+<!-- ============================================ -->
+<div id="indonesia" class="section">
+  <div class="section-header">
+    <span class="section-icon">&#127470;&#127465;</span>
+    <h2>Indonesia &mdash; IDX / IHSG &amp; IPO Pipeline</h2>
+    <span class="badge badge-critical">Crisis</span>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-accent accent-red"></div>
+      <h4>&#128200; IHSG Collapse: &minus;15.3% Since April 26 <span class="delta delta-escalated">Crisis</span></h4>
+      <p>IHSG crashed from <strong>7,594 &rarr; 6,429</strong>, falling below the psychologically critical <strong>7,000 level</strong> in early May and never recovering. Six consecutive down sessions through May 20. All sectors declining &mdash; transport, energy, and industrials leading losses. <strong>Barito Pacific &minus;9.9%, Medco Energi &minus;8.7%, Darma Henwa &minus;7.7%, Amman Mineral &minus;5.7%.</strong> This is the worst IHSG performance since mid-2025. The "connector economy" thesis from our April briefing is being overwhelmed by domestic policy shock.</p>
+      <div class="meta">
+        <span class="tag tag-red">&minus;15.3%</span>
+        <span class="tag tag-red">Below 7,000</span>
+        <span class="tag tag-red">Broad Selloff</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-accent accent-red"></div>
+      <h4>&#128176; Rupiah Crisis: Record Low Rp 17,719 <span class="delta delta-escalated">Crisis</span></h4>
+      <p>The Rupiah plunged to a <strong>record low of Rp 17,719/USD</strong> on May 20, down &minus;7.4% since our April briefing. Bank Indonesia delivered a <strong>surprise 50bps emergency hike to 5.25%</strong> &mdash; double what markets expected and the first hike since April 2024. BI cited "pro-stability" focus to strengthen external resilience. Despite inflation easing to 2.42% in April, the BI chose currency defense over growth. This is a <strong>defensive, not expansionary</strong> hike &mdash; bad for equities and credit.</p>
+      <div class="meta">
+        <span class="tag tag-red">Record Low Rupiah</span>
+        <span class="tag tag-red">Emergency +50bps</span>
+        <span class="tag tag-orange">Growth Sacrifice</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-accent accent-orange"></div>
+      <h4>&#128220; IDX IPO Pipeline: First Listing of 2026, But Window Barely Open <span class="delta delta-changed">Updated</span></h4>
+      <p><strong>PT BSA Logistics Indonesia (WBSA)</strong> &mdash; a Waresix subsidiary &mdash; became the <strong>first IDX IPO of 2026</strong>, ending the drought flagged in April. IDX targets <strong>50 IPOs in 2026</strong> but the pipeline is stalling. <strong>Titan Infra Sejahtera (TIS)</strong> and <strong>Anugrah Neo Energy Materials (ANEM)</strong> are the two most anticipated large-cap listings. OCBC Sekuritas is underwriting four IPOs. But with IHSG at 6,429 and Rupiah at record lows, the <strong>IPO window is effectively shut</strong> for anything that isn't a forced listing.</p>
+      <div class="meta">
+        <span class="tag tag-green">WBSA Listed</span>
+        <span class="tag tag-orange">TIS &amp; ANEM Watch</span>
+        <span class="tag tag-red">Window Shut</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-accent accent-purple"></div>
+      <h4>&#128161; Indonesia Strategic Reassessment <span class="delta delta-changed">Revised</span></h4>
+      <p>Our April briefing was <strong>"medium-term bullish if oil normalizes."</strong> That assessment must be <strong>revised downward</strong>. Three new headwinds have emerged: (1) <strong>Prabowo's commodity export nationalization</strong> is scaring foreign capital. (2) <strong>Rupiah defense</strong> is forcing BI to tighten while the economy needs easing. (3) <strong>Oil at $100+</strong> is still crushing import costs. The connector economy thesis <em>structurally</em> still holds, but <em>politically</em> Indonesia is undermining its own advantages. <strong>Short-term: bearish. Re-entry point: when Prabowo reverses export policy or oil drops below $85.</strong></p>
+      <div class="meta">
+        <span class="tag tag-red">Revised Bearish</span>
+        <span class="tag tag-purple">Policy Risk</span>
+        <span class="tag tag-orange">Wait for Signal</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- ANALYST RECOMMENDATIONS -->
+<!-- ============================================ -->
+<div id="analysts" class="section">
+  <div class="section-header">
+    <span class="section-icon">&#127919;</span>
+    <h2>Top Analyst Calls &amp; Recommendations</h2>
+    <span class="badge badge-info">May 2026</span>
+  </div>
+
+  <p style="font-size: 0.84rem; color: var(--text-secondary); margin-bottom: 16px;">Curated from Morgan Stanley, Goldman Sachs, JP Morgan, Seeking Alpha, UBS, Canaccord Genuity. 49 upgrades, 51 downgrades, 69 initiations tracked this month.</p>
+
+  <!-- MEGA-CAP AI CONSENSUS -->
+  <h3 style="font-size: 0.85rem; font-weight: 700; color: var(--accent-purple); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px;">&#11088; AI / Semiconductor &mdash; Consensus Bullish</h3>
+
+  <div class="analyst-card">
+    <div class="analyst-info">
+      <div class="firm">Seeking Alpha / Multi-Analyst Consensus</div>
+      <div class="stock">NVIDIA (NVDA)</div>
+      <div class="detail">$81.6B revenue beat. Blackwell demand insatiable. AI capex $700B+. ATH $236.54. The bellwether for all AI equities.</div>
+    </div>
+    <span class="rating-badge rating-upgrade">Strong Buy</span>
+  </div>
+
+  <div class="analyst-card">
+    <div class="analyst-info">
+      <div class="firm">Seeking Alpha / Multi-Analyst Consensus</div>
+      <div class="stock">Meta Platforms (META)</div>
+      <div class="detail">Seen as undervalued despite heavy AI capex. AI boosting ad efficiency. One of the largest AI infrastructure spenders ($700B+ cohort).</div>
+    </div>
+    <span class="rating-badge rating-top-pick">Top Pick</span>
+  </div>
+
+  <div class="analyst-card">
+    <div class="analyst-info">
+      <div class="firm">Seeking Alpha</div>
+      <div class="stock">Alphabet (GOOG)</div>
+      <div class="detail">Upgraded to Bullish. "Largest pure-play option for AI investors." Dominance across the AI stack + accelerating cloud growth.</div>
+    </div>
+    <span class="rating-badge rating-upgrade">Upgrade</span>
+  </div>
+
+  <div class="analyst-card">
+    <div class="analyst-info">
+      <div class="firm">Seeking Alpha / JP Morgan</div>
+      <div class="stock">Micron Technology (MU)</div>
+      <div class="detail">Significant upgrade driven by "transformative AI infrastructure boom." HBM (High Bandwidth Memory) demand accelerating for data centers.</div>
+    </div>
+    <span class="rating-badge rating-upgrade">Upgrade</span>
+  </div>
+
+  <div class="analyst-card">
+    <div class="analyst-info">
+      <div class="firm">JP Morgan</div>
+      <div class="stock">Broadcom (AVGO), Marvell (MRVL), Analog Devices (ADI)</div>
+      <div class="detail">Data center infrastructure backbone. "Biggest AI winners extend well beyond headline GPU names." Maintained from April.</div>
+    </div>
+    <span class="rating-badge rating-top-pick">Top Pick</span>
+  </div>
+
+  <!-- HEALTHCARE / OTHER -->
+  <h3 style="font-size: 0.85rem; font-weight: 700; color: var(--accent-green); margin: 20px 0 12px; text-transform: uppercase; letter-spacing: 1px;">&#11014;&#65039; Notable Upgrades &amp; Maintained Calls</h3>
+
+  <div class="analyst-card">
+    <div class="analyst-info">
+      <div class="firm">UBS</div>
+      <div class="stock">Cigna Group (CI)</div>
+      <div class="detail">Maintains Buy. PT raised from $375 to $400. Healthcare sector resilience.</div>
+    </div>
+    <span class="rating-badge rating-upgrade">PT Raised</span>
+  </div>
+
+  <div class="analyst-card">
+    <div class="analyst-info">
+      <div class="firm">Morgan Stanley (Maintained from April)</div>
+      <div class="stock">CrowdStrike (CRWD)</div>
+      <div class="detail">#1 pick in software. Cybersecurity demand accelerating post-Iran conflict. Overweight maintained.</div>
+    </div>
+    <span class="rating-badge rating-top-pick">Top Pick</span>
+  </div>
+
+  <div class="analyst-card">
+    <div class="analyst-info">
+      <div class="firm">Goldman Sachs (Maintained from April)</div>
+      <div class="stock">GE Vernova (GEV)</div>
+      <div class="detail">PT maintained at $1,328. Energy transition + grid infrastructure. AI data center power demand tailwind.</div>
+    </div>
+    <span class="rating-badge rating-upgrade">Buy</span>
+  </div>
+
+  <div class="analyst-card">
+    <div class="analyst-info">
+      <div class="firm">Canaccord Genuity</div>
+      <div class="stock">Toromont Industries (TIH)</div>
+      <div class="detail">Upgraded from Hold to Buy. Infrastructure capex cycle beneficiary.</div>
+    </div>
+    <span class="rating-badge rating-upgrade">Upgrade</span>
+  </div>
+
+  <!-- DOWNGRADES -->
+  <h3 style="font-size: 0.85rem; font-weight: 700; color: var(--accent-red); margin: 20px 0 12px; text-transform: uppercase; letter-spacing: 1px;">&#11015;&#65039; Notable Downgrades</h3>
+
+  <div class="analyst-card">
+    <div class="analyst-info">
+      <div class="firm">Multiple Analysts</div>
+      <div class="stock">Target (TGT)</div>
+      <div class="detail">Downgraded to Hold. Valuation became less attractive after rally. Macro headwinds increasing for consumer discretionary.</div>
+    </div>
+    <span class="rating-badge rating-downgrade">Downgrade</span>
+  </div>
+
+  <div class="analyst-card">
+    <div class="analyst-info">
+      <div class="firm">Morgan Stanley (Maintained from April)</div>
+      <div class="stock">CSX Corp (CSX)</div>
+      <div class="detail">Underweight maintained. PT $30. Rail volumes still pressured by trade slowdown and energy costs.</div>
+    </div>
+    <span class="rating-badge rating-downgrade">Underweight</span>
+  </div>
+
+  <!-- BANK TARGETS -->
+  <h3 style="font-size: 0.85rem; font-weight: 700; color: var(--accent-blue); margin: 20px 0 12px; text-transform: uppercase; letter-spacing: 1px;">&#127970; Investment Bank S&amp;P 500 Targets</h3>
+
+  <div class="analyst-card">
+    <div class="analyst-info">
+      <div class="firm">Morgan Stanley</div>
+      <div class="stock">S&amp;P 500 Target: 8,300 (mid-2027)</div>
+      <div class="detail">23% EPS growth in 2026, 12% in 2027. AI capex $1.16T by 2027. Most bullish major bank.</div>
+    </div>
+    <span class="rating-badge rating-upgrade">Bull Case</span>
+  </div>
+
+  <div class="analyst-card">
+    <div class="analyst-info">
+      <div class="firm">JP Morgan</div>
+      <div class="stock">S&amp;P 500 Target: 7,200 (year-end 2026)</div>
+      <div class="detail">Revised DOWN from 7,500. Cautious on geopolitical risk and rate path. Most cautious major bank.</div>
+    </div>
+    <span class="rating-badge rating-downgrade">Target Cut</span>
+  </div>
+
+  <div class="analyst-card">
+    <div class="analyst-info">
+      <div class="firm">Goldman Sachs</div>
+      <div class="stock">Global Growth: 2.8% in 2026 (vs 2.5% consensus)</div>
+      <div class="detail">Above consensus. US at 2.6%. Constructive on equities but lower index returns than 2025.</div>
+    </div>
+    <span class="rating-badge rating-new">Constructive</span>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- CROSS-CORRELATIONS & SYNTHESIS -->
+<!-- ============================================ -->
+<div id="correlations" class="section">
+  <div class="section-header">
+    <span class="section-icon">&#128279;</span>
+    <h2>Cross-Correlations &amp; Strategic Synthesis</h2>
+    <span class="badge badge-paradigm">Analysis</span>
+  </div>
+
+  <!-- UPDATES FROM PREVIOUS BRIEFING -->
+  <h3 style="font-size: 0.85rem; font-weight: 700; color: var(--accent-cyan); margin-bottom: 14px; text-transform: uppercase; letter-spacing: 1px;">&#128257; April 26 Predictions &mdash; What Played Out</h3>
+
+  <div class="prev-correlation">
+    <h4>&#9989; VALIDATED: "Extreme Fragility Beneath Surface Calm"</h4>
+    <p>April 26 briefing warned: <em>"A single escalation headline could trigger a 3&ndash;5% down day. Keep powder dry and hedges current."</em> On May 4&ndash;5, Iran attacked UAE, US destroyed Iranian boats, oil spiked 6%, S&amp;P dropped 9% from January peak. <strong>The fragility call was exactly right.</strong> Markets recovered but the structural vulnerability remains unchanged.</p>
+  </div>
+
+  <div class="prev-correlation">
+    <h4>&#9989; VALIDATED: Indonesia Oil Vulnerability Chain</h4>
+    <p>April 26 mapped: <em>"Hormuz closure &rarr; inflation &rarr; Fed paralysis &rarr; EM vulnerability &rarr; Indonesia exposed."</em> This chain played out with devastating precision: oil stayed $100+, wholesale PPI hit 6%, Fed froze, Rupiah collapsed to record lows, BI emergency hiked, IHSG crashed 15%. <strong>But we missed the Prabowo policy shock</strong> &mdash; commodity export nationalization was an exogenous variable that amplified the chain.</p>
+  </div>
+
+  <div class="prev-correlation">
+    <h4>&#9989; VALIDATED: AI as Single Market Pillar</h4>
+    <p>April 26: <em>"AI capex cycle > oil cycle in market weighting. But this creates dangerous concentration."</em> Nvidia's $81.6B beat and $236 ATH proved the thesis. Nasdaq +7.2% vs S&amp;P +3.9% confirms AI is doing all the lifting. The concentration risk <strong>has intensified, not diminished.</strong></p>
+  </div>
+
+  <div class="prev-correlation">
+    <h4>&#10060; MISSED: Fed Chair Transition &amp; Rate Repricing</h4>
+    <p>April 26 briefing noted rates "paused" and expected the oil-dependent path to continue. We did not anticipate the <strong>speed and magnitude of the Warsh transition's market impact</strong>: zero rate cuts priced for 2026, possible hikes being discussed, and a complete regime change at the world's most important central bank. This was a blind spot.</p>
+  </div>
+
+  <!-- NEW CORRELATIONS -->
+  <h3 style="font-size: 0.85rem; font-weight: 700; color: var(--accent-purple); margin: 24px 0 14px; text-transform: uppercase; letter-spacing: 1px;">&#128257; New Correlation Chains &mdash; May 2026</h3>
+
+  <div class="correlation-box">
+    <h4>&#128257; Warsh Fed + $100 Oil + 6% PPI &rarr; Rate Hike Risk &rarr; Dollar Strength &rarr; EM Carnage</h4>
+    <p>Warsh's inflation-hawk DNA meets energy-driven PPI surge. If he signals hawkishness at the <strong>June 16 FOMC</strong>, expect: (1) Dollar strengthens further, (2) EM currencies (especially Rupiah, TRY, ZAR) face another leg down, (3) BI forced into more emergency hikes, (4) IHSG tests 6,000 support. <strong>The Warsh-oil-PPI nexus is the single most dangerous feedback loop for your EM portfolio.</strong></p>
+  </div>
+
+  <div class="correlation-box">
+    <h4>&#128257; Nvidia $81.6B &rarr; AI Capex $700B+ &rarr; GE Vernova/Energy Grid Demand &rarr; Infra M&amp;A Wave</h4>
+    <p>AI capex isn't just a chip story &mdash; it's a <strong>power and infrastructure story</strong>. Every $1 spent on GPUs requires $0.50&ndash;0.80 in power, cooling, and grid infrastructure. GE Vernova (GS PT $1,328), NextEra's $1.3B Caliber deal, and Charter-Cox's broadband merger are all downstream beneficiaries. <strong>The AI-to-infra pipeline is the next M&amp;A hunting ground for PE.</strong></p>
+  </div>
+
+  <div class="correlation-box">
+    <h4>&#128257; Media Mega-Mergers + Gulf Sovereign Capital &rarr; New Content-Distribution Power Map</h4>
+    <p>Paramount-WBD at $110B with 38.5% Gulf sovereign ownership + EA going private via PIF at $55B. Gulf sovereign wealth funds now control <strong>$165B+ in Western entertainment assets</strong>. This is a structural shift in who controls content creation and distribution. <strong>For PE/IB, this signals: (1) Gulf capital is the marginal buyer in media/entertainment, (2) valuations in media are being set by strategic, not financial, logic.</strong></p>
+  </div>
+
+  <div class="correlation-box">
+    <h4>&#128257; Prabowo Export Nationalism &rarr; Indonesia Connector Economy Thesis at Risk &rarr; ASEAN Reallocation</h4>
+    <p>Indonesia's appeal as a connector economy depended on <strong>trade openness and predictable regulation</strong>. Prabowo's forced single-exporter mandate for palm oil, coal, and ferroalloys directly contradicts this. If sustained, expect <strong>trade rerouting to shift from Indonesia toward Vietnam and India</strong>. For PE deployment: pause Indonesia; increase Vietnam exposure. Watch for a Prabowo policy reversal &mdash; that would be the re-entry signal.</p>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- STRATEGIC QUESTIONS -->
+<!-- ============================================ -->
+<div id="questions" class="section">
+  <div class="section-header">
+    <span class="section-icon">&#10067;</span>
+    <h2>Strategic Questions for You</h2>
+    <span class="badge badge-high">Action Required</span>
+  </div>
+
+  <div class="question-box">
+    <div class="q-icon">&#129300;</div>
+    <div class="q-text"><strong>Warsh's First Move (June 16):</strong> The most important macro event of Q2. If Warsh signals hawkishness at his first FOMC, every rate-sensitive position reprices. Are you positioned for a hold, or for the tail risk of a hike? What's your duration exposure across fixed income? Do you need to reduce long-duration bonds before June 16?</div>
+  </div>
+
+  <div class="question-box">
+    <div class="q-icon">&#129300;</div>
+    <div class="q-text"><strong>Indonesia: Cut or Hold?</strong> IHSG is down 15%, Rupiah at record lows, BI emergency hiking, and Prabowo nationalizing exports. Is this a bottom to buy, or the start of a deeper unwind? What's your current IDX exposure as a % of EM allocation? Do you have Rupiah hedges in place? At what level does the connector economy thesis break permanently?</div>
+  </div>
+
+  <div class="question-box">
+    <div class="q-icon">&#129300;</div>
+    <div class="q-text"><strong>AI Concentration Trade:</strong> Nvidia at $236 ATH, Nasdaq +7.2% in a month. The AI trade is working spectacularly but breadth is narrow. Morgan Stanley targets 8,300; JP Morgan cut to 7,200. Which bank's view aligns with your positioning? Are you hedging AI concentration risk, or riding it? What's your stop-loss if Nvidia misses next quarter?</div>
+  </div>
+
+  <div class="question-box">
+    <div class="q-icon">&#129300;</div>
+    <div class="q-text"><strong>M&amp;A Deployment Window:</strong> With $100M+ deals up 65% in value, mega-deals are happening despite wars and rate uncertainty. Goldman is #1 in M&amp;A advisory. Paramount-WBD shows Gulf capital will outbid on strategic assets. Are you seeing competitive dynamics shift in your deal pipeline? Is Gulf sovereign capital showing up in your auctions?</div>
+  </div>
+
+  <div class="question-box">
+    <div class="q-icon">&#129300;</div>
+    <div class="q-text"><strong>Stablecoin / Crypto Infrastructure:</strong> Mastercard's $1.8B BVNK deal (largest stablecoin acquisition ever) signals crypto rails are going mainstream. Stripe bought Bridge for $1.1B in 2025. Traditional payments are acquiring crypto infra at scale. Do your portfolio companies have a stablecoin strategy? Is this an M&amp;A opportunity or a competitive threat for your fintech holdings?</div>
+  </div>
+
+  <div class="question-box">
+    <div class="q-icon">&#129300;</div>
+    <div class="q-text"><strong>Oil Scenario Update:</strong> The April briefing asked about three scenarios. Scenario (A) Hormuz reopens by June is now unlikely (Kalshi: 56% by August). Scenario (B) escalation partially materialized (UAE attacked, oil $114). We're in Scenario (C): <strong>$100&ndash;114 oil grind.</strong> Are your energy hedges sized for a prolonged $100+ environment? Has your portfolio's cost base been stress-tested at these levels through year-end?</div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- FOOTER & SOURCES -->
+<!-- ============================================ -->
+<div class="footer">
+  <p><strong>CEO Intelligence Briefing #2</strong> &bull; Compiled May 23, 2026 &bull; For internal decision-making only</p>
+  <p style="margin-top: 6px;">Data sourced from public financial intelligence. Not investment advice. Verify with your CIO/risk team before acting.</p>
+  <p style="margin-top: 6px; color: var(--accent-purple);">Previous briefing: April 26, 2026 &bull; Next briefing: On demand</p>
+
+  <div class="source-list" style="margin-top: 16px;">
+    <a href="https://www.federalreserve.gov/newsevents/pressreleases/other20260515a.htm" target="_blank">Fed &mdash; Warsh Appointment</a>
+    <a href="https://www.cnbc.com/2026/05/13/kevin-warsh-wins-senate-confirmation-as-the-next-federal-reserve-chair.html" target="_blank">CNBC &mdash; Warsh Confirmed</a>
+    <a href="https://finance.yahoo.com/economy/policy/article/kevin-warsh-confirmed-new-fed-chair-as-inflation-kicks-higher-complicating-the-central-banks-path-164303609.html" target="_blank">Yahoo &mdash; Warsh Inflation</a>
+    <a href="https://intellectia.ai/blog/nvidia-earnings-may-2026" target="_blank">Nvidia Earnings</a>
+    <a href="https://www.kiplinger.com/investing/live/nvidia-earnings-live-updates-and-commentary-may-2026" target="_blank">Kiplinger Nvidia</a>
+    <a href="https://fortune.com/2026/05/04/iran-ceasefire-oil-brent-crude-stock-project-freedom-strait-of-hormuz/" target="_blank">Fortune &mdash; Iran/Oil</a>
+    <a href="https://www.aljazeera.com/economy/2026/5/5/oil-prices-surge-as-violence-flares-in-strait-of-hormuz" target="_blank">Al Jazeera &mdash; Hormuz</a>
+    <a href="https://www.cnbc.com/amp/2026/05/08/oil-prices-today-wti-brent-us-iran-fire-war-hormuz-ceasefire.html" target="_blank">CNBC &mdash; Oil Prices</a>
+    <a href="https://tradingeconomics.com/indonesia/interest-rate" target="_blank">BI Rate Decision</a>
+    <a href="https://www.bloomberg.com/news/articles/2026-05-20/bank-indonesia-surprises-markets-with-half-point-rate-hike" target="_blank">Bloomberg &mdash; BI Hike</a>
+    <a href="https://tradingeconomics.com/indonesia/stock-market" target="_blank">IHSG Data</a>
+    <a href="https://www.heygotrade.com/en/news/indonesia-ihsg-closes-up-0-22-percent-may-4-2026/" target="_blank">IHSG May</a>
+    <a href="https://www.asiabusinessoutlook.com/news/waresix-subsidiary-wbsa-lists-on-idx-in-2026-s-first-ipo-nwid-11714.html" target="_blank">WBSA IPO</a>
+    <a href="https://jakartaglobe.id/news/idx-eyes-at-least-six-large-cap-ipos-in-2026-with-two-seen-listing-in-first-quarter" target="_blank">IDX IPO Pipeline</a>
+    <a href="https://www.prnewswire.com/news-releases/paramount-acquire-warner-bros-discovery-form-next-generation-302699998.html" target="_blank">Paramount-WBD</a>
+    <a href="https://ir.ea.com/press-releases/press-release-details/2025/EA-Announces-Agreement-to-be-Acquired-by-PIF-Silver-Lake-and-Affinity-Partners-for-55-Billion/default.aspx" target="_blank">EA LBO</a>
+    <a href="https://broadbandbreakfast.com/fcc-approves-34-5-billion-charter-cox-merger/" target="_blank">Charter-Cox FCC</a>
+    <a href="https://fortune.com/2026/03/17/mastercard-bvnk-acquisition-stablecoins-1-8-billion/" target="_blank">Mastercard BVNK</a>
+    <a href="https://www.morganstanley.com/Themes/outlooks" target="_blank">Morgan Stanley Outlook</a>
+    <a href="https://www.jpmorgan.com/insights/global-research/outlook/market-outlook" target="_blank">JP Morgan Outlook</a>
+    <a href="https://www.goldmansachs.com/insights/outlooks/2026-outlooks" target="_blank">Goldman Sachs Outlook</a>
+    <a href="https://www.ey.com/en_us/insights/mergers-acquisitions/m-and-a-activity-report" target="_blank">EY M&amp;A Report</a>
+    <a href="https://seekingalpha.com/news/4596405-sa-analyst-upgrades-downgrades-nvda-meta-gdrx-jpm" target="_blank">SA Analyst Calls</a>
+    <a href="https://www.ecb.europa.eu/press/pr/date/2026/html/ecb.mp260205~001d26959b.en.html" target="_blank">ECB Rates</a>
+    <a href="https://fortune.com/article/price-of-oil-05-21-2026/" target="_blank">Oil Price Current</a>
+    <a href="https://finance.yahoo.com/markets/stocks/articles/stock-market-news-may-15-092100519.html" target="_blank">Yahoo S&amp;P 7,500</a>
+    <a href="https://www.ey.com/en_gl/insights/geostrategy/geostrategic-analysis" target="_blank">EY Geostrategy</a>
+    <a href="https://www.enterprisebank.com/insights/geopolitical-update-may-2026" target="_blank">Enterprise Geo Update</a>
+  </div>
+</div>
+
+</div>
+
+</body>
+</html>
