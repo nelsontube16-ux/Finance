@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The Morning Brief — 26 May 2026</title>
+<style>
+  :root{
+    --bg:#ffffff;
+    --ink:#0a0a0a;
+    --muted:#6b6b6b;
+    --line:#ececec;
+    --soft:#fafafa;
+    --soft2:#f4f4f3;
+    --accent:#0a0a0a;
+    --up:#0a7d3b;
+    --down:#b3261e;
+    --tag:#1f1f1f;
+    --hl:#fff7b3;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);
+    font-family: ui-sans-serif, -apple-system, "Inter", "Helvetica Neue", Arial, sans-serif;
+    font-size:15.5px; line-height:1.55; -webkit-font-smoothing:antialiased;}
+  a{color:inherit; text-decoration:none; border-bottom:1px solid #d8d8d8}
+  a:hover{border-bottom-color:var(--ink)}
+  .wrap{max-width:1100px; margin:0 auto; padding:48px 36px 96px}
+  header.top{display:flex; justify-content:space-between; align-items:flex-end; border-bottom:1px solid var(--line); padding-bottom:22px; margin-bottom:36px;}
+  .eyebrow{font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted)}
+  h1.masthead{font-family:"Georgia","Iowan Old Style", serif; font-weight:400; font-size:42px; letter-spacing:-.01em; margin:8px 0 0;}
+  .meta{font-size:12px; color:var(--muted); text-align:right; line-height:1.7}
+  .meta b{color:var(--ink); font-weight:600}
+
+  /* Snapshot */
+  .snap{display:grid; grid-template-columns: 1.4fr 1fr; gap:28px; margin-bottom:42px;}
+  .lede{font-family:"Georgia", serif; font-size:21px; line-height:1.45;}
+  .lede em{font-style:italic; background:linear-gradient(transparent 60%, var(--hl) 60%); padding:0 2px}
+  .ticker{border:1px solid var(--line); border-radius:10px; padding:18px 20px; background:var(--soft)}
+  .ticker h4{margin:0 0 10px; font-size:11px; letter-spacing:.15em; color:var(--muted); text-transform:uppercase; font-weight:600}
+  .row{display:flex; justify-content:space-between; padding:6px 0; border-bottom:1px dashed #e3e3e3; font-variant-numeric: tabular-nums;}
+  .row:last-child{border-bottom:none}
+  .row .nm{color:var(--ink)}
+  .row .vl{color:var(--ink); font-weight:600}
+  .up{color:var(--up)}
+  .down{color:var(--down)}
+
+  /* Sections */
+  section{margin:42px 0 8px}
+  .sec-head{display:flex; align-items:baseline; gap:14px; border-bottom:1px solid var(--ink); padding-bottom:10px; margin-bottom:18px}
+  .sec-num{font-family:"Georgia", serif; font-size:13px; color:var(--muted)}
+  .sec-title{font-size:22px; font-weight:600; letter-spacing:-.005em}
+  .sec-kicker{margin-left:auto; font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.14em}
+
+  /* Cards */
+  .grid-2{display:grid; grid-template-columns:1fr 1fr; gap:18px}
+  .grid-3{display:grid; grid-template-columns:repeat(3,1fr); gap:18px}
+  .card{border:1px solid var(--line); border-radius:10px; padding:16px 18px; background:#fff}
+  .card.soft{background:var(--soft)}
+  .card h3{margin:0 0 6px; font-size:15px; font-weight:600}
+  .card p{margin:6px 0; font-size:14px; color:#1f1f1f}
+  .card .small{font-size:12px; color:var(--muted)}
+  .tag{display:inline-block; font-size:10px; letter-spacing:.14em; text-transform:uppercase;
+    border:1px solid var(--line); padding:2px 8px; border-radius:999px; color:var(--tag); background:#fff; margin-right:6px}
+  .tag.k{background:#0a0a0a; color:#fff; border-color:#0a0a0a}
+  .tag.up{color:var(--up); border-color:#cfead9; background:#f1faf4}
+  .tag.dn{color:var(--down); border-color:#f1d3d0; background:#fbf1f0}
+
+  ul.tight{margin:6px 0 0; padding-left:18px}
+  ul.tight li{margin:4px 0}
+
+  /* Pull quote */
+  .pull{font-family:"Georgia",serif; font-size:19px; line-height:1.5; border-left:2px solid var(--ink); padding:6px 16px; color:#1a1a1a; margin:16px 0}
+
+  /* Two-col content */
+  .twocol{column-count:2; column-gap:32px}
+  .twocol p{margin-top:0}
+
+  /* Footer chips */
+  .chips{display:flex; flex-wrap:wrap; gap:8px}
+
+  /* Questions */
+  .q{display:flex; gap:14px; padding:12px 0; border-bottom:1px dashed #e3e3e3}
+  .q:last-child{border-bottom:none}
+  .qn{font-family:"Georgia",serif; font-size:18px; color:var(--muted); width:32px; flex-shrink:0}
+  .qt{font-size:15px}
+
+  /* Source list */
+  .sources{font-size:12px; color:var(--muted); columns:2; column-gap:32px}
+  .sources a{border-bottom:1px dotted #c8c8c8}
+
+  /* Book card */
+  .book{display:grid; grid-template-columns:90px 1fr; gap:18px; align-items:start;
+    border:1px solid var(--line); border-radius:10px; padding:18px; background:var(--soft2)}
+  .book .spine{height:120px; background:#0a0a0a; color:#fff; border-radius:4px;
+    display:flex; align-items:center; justify-content:center; text-align:center; font-family:"Georgia",serif;
+    font-size:11px; padding:8px; line-height:1.2}
+
+  /* Footer */
+  footer.bot{margin-top:64px; padding-top:18px; border-top:1px solid var(--line);
+    font-size:11.5px; color:var(--muted); display:flex; justify-content:space-between}
+
+  @media (max-width: 820px){
+    .snap, .grid-2, .grid-3{grid-template-columns:1fr}
+    .twocol{column-count:1}
+    .sources{columns:1}
+    h1.masthead{font-size:32px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HEADER -->
+  <header class="top">
+    <div>
+      <div class="eyebrow">The Morning Brief · Equity Research Desk</div>
+      <h1 class="masthead">Risk-On, but the Cracks Are Underneath</h1>
+    </div>
+    <div class="meta">
+      <div><b>Tuesday, 26 May 2026</b></div>
+      <div>Cut-off 18:00 WIB · 07:00 ET</div>
+      <div>Read time · <b>~14 min</b></div>
+    </div>
+  </header>
+
+  <!-- SNAPSHOT -->
+  <div class="snap">
+    <div class="lede">
+      Two markets, two moods. New York is <em>printing fresh highs</em> on AI memory and Iran de-escalation hopes; Jakarta is <em>limping into Eid al-Adha</em> after Bank Indonesia's surprise 50 bp hike. The expensive trade today is complacency — oil, the Rupiah and the back end of the US curve are all pricing risk the equity tape isn't.
+    </div>
+    <div class="ticker">
+      <h4>Tape · Close / Last</h4>
+      <div class="row"><span class="nm">S&amp;P 500</span><span class="vl up">7,519.12 &nbsp;+0.61%</span></div>
+      <div class="row"><span class="nm">Nasdaq Comp.</span><span class="vl up">26,656.18 &nbsp;+1.19%</span></div>
+      <div class="row"><span class="nm">Dow Jones</span><span class="vl down">50,461.68 &nbsp;−0.23%</span></div>
+      <div class="row"><span class="nm">IHSG (Jakarta)</span><span class="vl down">6,130.19 &nbsp;−1.23%</span></div>
+      <div class="row"><span class="nm">Nikkei 225</span><span class="vl down">64,996.09 &nbsp;−0.25%</span></div>
+      <div class="row"><span class="nm">Hang Seng</span><span class="vl down">25,599.45 &nbsp;−0.03%</span></div>
+      <div class="row"><span class="nm">UST 10Y</span><span class="vl">~4.00% &nbsp;<span class="small">avg fcst</span></span></div>
+      <div class="row"><span class="nm">BI 7-Day Rate</span><span class="vl up">5.25% &nbsp;+50 bp</span></div>
+    </div>
+  </div>
+
+  <!-- 1. WHAT MATTERS -->
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">01</span>
+      <span class="sec-title">What Actually Matters Today</span>
+      <span class="sec-kicker">5-bullet executive read</span>
+    </div>
+    <ul class="tight">
+      <li><b>Kevin Warsh sworn in as Fed Chair</b> as gasoline-driven inflation from the Iran conflict bites consumer confidence (Conf. Board 93.1, −0.7). Hawkish-credible chair + sticky CPI = back-end UST should be your pain trade hedge.</li>
+      <li><b>NextEra + Dominion = ~$66.8 B all-stock megamerger</b>, the largest regulated utility globally. Read-through: AI-power demand is now driving capital structure, not just capex.</li>
+      <li><b>Micron +19%, crosses $1 T cap.</b> Citi PT $425 → $840 on +40% DRAM price hikes. Memory cycle is being repriced as an AI-infra cycle, not a commodity cycle.</li>
+      <li><b>Bank Indonesia hikes 50 bp to 5.25%</b> defending Rupiah (Prabowo's 2027 budget targets IDR 16,800–17,500 / USD). IHSG below 7,000 ahead of Eid holiday; foreign outflows accelerating.</li>
+      <li><b>OpenAI confidentially filed S-1 on 22 May.</b> Combined with HK relistings (Creality, Viewtrix, DeepZero) this week, the 2026 IPO window is officially open — but pricing discipline matters.</li>
+    </ul>
+  </section>
+
+  <!-- 2. MACRO -->
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">02</span>
+      <span class="sec-title">Macro &amp; Rates</span>
+      <span class="sec-kicker">US · Indonesia</span>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div><span class="tag k">US</span><span class="tag">Inflation</span></div>
+        <h3>Sticky, with second-wave risk</h3>
+        <p>PCE forecast 2.8% → 2.7% for 2026 as tariff effects fade, but CPI is staying ≥3% on Middle East oil pass-through. Cleveland Fed's May nowcast didn't worsen, but risk distribution skews hot.</p>
+        <p class="small"><b>So what:</b> Long-duration tech and small caps remain vulnerable; quality compounders + pricing-power names continue to outperform.</p>
+      </div>
+
+      <div class="card">
+        <div><span class="tag k">US</span><span class="tag">Growth</span></div>
+        <h3>Two-speed economy</h3>
+        <p>Real GDP rebounded to +2.0% Q1, full-year tracking ~2.2%. Private payrolls in Q1 ran 2.5× the 2025 monthly pace, but hiring is forecast to decelerate toward ~50k/mo with unemployment drifting to 4.5%.</p>
+        <p class="small"><b>So what:</b> Earnings revisions still net positive; watch for a Q3 deceleration in services hiring as the canary.</p>
+      </div>
+
+      <div class="card">
+        <div><span class="tag k">US</span><span class="tag">Rates</span></div>
+        <h3>10Y anchored ~4%, asymmetric up</h3>
+        <p>Vanguard / S&amp;P consensus: 10Y averages 4% in 2026 with upside risk from sticky inflation + a potential deficit-widening bill. Curve steepening trade still has legs.</p>
+        <p class="small"><b>So what:</b> Bank NIMs supported; long-duration discount rates capped for now. Watch term-premium expansion.</p>
+      </div>
+
+      <div class="card soft">
+        <div><span class="tag k">ID</span><span class="tag">Policy</span></div>
+        <h3>BI hikes 50 bp — Rupiah triage</h3>
+        <p>Bank Indonesia raised the BI-Rate to <b>5.25%</b> (DF 4.25% / LF 6.00%) at the 19–20 May meeting — first hike in two years. Governor Perry framed it as pre-emptive vs. Middle East spill-over and an inflation guardrail.</p>
+        <p class="small"><b>So what:</b> Negative for property &amp; consumer discretionary, neutral-to-positive for the big-4 banks on margin defence; FX-translation risk for USD revenue earners.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. GEOPOLITICS -->
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">03</span>
+      <span class="sec-title">Geopolitics</span>
+      <span class="sec-kicker">Market-moving only</span>
+    </div>
+
+    <div class="grid-3">
+      <div class="card">
+        <div><span class="tag">Iran · Israel</span></div>
+        <h3>Talks vs. tail risk</h3>
+        <p>Equity rally today partly rests on US–Iran "deal" optimism. But the Strait of Hormuz blockade narrative and Iran's water/sanctions crisis keep the energy tail fat. Brent sensitivity remains the dominant cross-asset variable.</p>
+      </div>
+      <div class="card">
+        <div><span class="tag">Russia · Ukraine</span></div>
+        <h3>Slow grind, no off-ramp</h3>
+        <p>Ukraine lost the Kursk foothold; Russia advancing along the line. Energy pricing &amp; European defence capex remain the equity transmission channel — Rheinmetall / Leonardo / BAE basket still structurally bid.</p>
+      </div>
+      <div class="card">
+        <div><span class="tag">US · China</span></div>
+        <h3>Post-summit calm</h3>
+        <p>Trump–Xi met in Beijing 14–15 May. Consensus now: Taiwan unlikely to escalate in 2026. Tariff &amp; export-control noise remains the swing factor for semis and rare-earths.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. M&A -->
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">04</span>
+      <span class="sec-title">M&amp;A — The Deal Tape</span>
+      <span class="sec-kicker">Top 5 of the week ≈ $79.8 B</span>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div><span class="tag k">$66.8 B</span><span class="tag">Utilities</span></div>
+        <h3>NextEra / Dominion · all-stock</h3>
+        <p>Creates the world's largest regulated electric utility by market cap. Strategic logic = AI data-centre load growth + grid build-out. Watch for antitrust scope (multi-state regulated assets) and any ratings agency action on combined leverage.</p>
+        <p class="small"><b>Pitch hook:</b> Power demand is the most under-owned AI play — the picks-and-shovels of the picks-and-shovels.</p>
+      </div>
+      <div class="card">
+        <div><span class="tag k">$6.75 B</span><span class="tag">Healthcare</span></div>
+        <h3>Qualtrics → Press Ganey Forsta · closed</h3>
+        <p>Expands XM platform into clinical / patient-experience data and regulated workflows. Validates the "vertical SaaS rolls up healthcare data" thesis.</p>
+      </div>
+      <div class="card">
+        <div><span class="tag k">$1.5 B</span><span class="tag">Semis</span></div>
+        <h3>Analog Devices → Empower Semiconductor</h3>
+        <p>All-cash. Integrated voltage regulators / silicon capacitors for AI compute. Tells you power-delivery IP is the next M&amp;A target list — screen the rest of the analog/power names.</p>
+      </div>
+      <div class="card soft">
+        <div><span class="tag">Trend</span></div>
+        <h3>Fewer, larger</h3>
+        <p>PwC / Wall Street Horizon view: deal <i>volume</i> down but average ticket up — megadeal regime. Implication for IB juniors: more strategic / antitrust workstreams, fewer plain-vanilla mid-market sell-sides.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. IPOs -->
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">05</span>
+      <span class="sec-title">IPOs — The Window Is Open</span>
+      <span class="sec-kicker">Watch HK + the OpenAI optionality</span>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3>This week's HKEX slate</h3>
+        <ul class="tight">
+          <li><b>Creality 3D</b> — 29 May · HKD 18.80 · ~$176 M raise.</li>
+          <li><b>Viewtrix Technology</b> — 27 May · HKD 20.81 · ~$140 M.</li>
+          <li><b>Shenzhen SDMC</b> — 27 May · HKD 32.80 · ~$80 M.</li>
+          <li><b>Beijing DeepZero</b> — 27 May · HKD 43.50–55.50 · ~$64 M.</li>
+        </ul>
+        <p class="small">Reads as a quiet reopening of the China-tech offshore listing channel — H-share liquidity will be the tell.</p>
+      </div>
+      <div class="card">
+        <h3>OpenAI · S-1 filed 22 May (confidential)</h3>
+        <p>The single most important pipeline event of 2026. Even if pricing slips to 1H27, every AI-adjacent comp will be re-rated off the marketing roadshow. Start building your comps and DCF sensitivity grids now.</p>
+        <p class="small"><b>Pitch hook:</b> If OpenAI prices, expect a venture-secondary unlock, a wave of AI-infra IPOs (Anthropic / xAI / SpaceX-tier names) and a re-rating in cloud + power utilities.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. GLOBAL EQUITY -->
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">06</span>
+      <span class="sec-title">Global Equity — Single-Stock Signal</span>
+      <span class="sec-kicker">Where the alpha is moving</span>
+    </div>
+
+    <div class="grid-3">
+      <div class="card">
+        <div><span class="tag up">+19%</span><span class="tag">MU</span></div>
+        <h3>Micron crosses $1 T</h3>
+        <p>UBS lift + Citi PT to $840. DRAM +40% in C2Q after Samsung's +100% in Q1. AI is turning memory into a multi-year duration cycle, not the old 18-month boom-bust.</p>
+      </div>
+      <div class="card">
+        <div><span class="tag dn">DG</span><span class="tag">INTC</span></div>
+        <h3>Intel cut to Market Perform</h3>
+        <p>Northland: stretched valuation as data-centre spend rolls off. Pair-trade candidate vs. long MU / NVDA.</p>
+      </div>
+      <div class="card">
+        <div><span class="tag">NVDA</span></div>
+        <h3>Melius reiterates Buy</h3>
+        <p>Calls it "Nvidia's time to re-rate — most upside to any of our targets." Print on 20 May framed as beat-and-raise.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. INDONESIA FOCUS -->
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">07</span>
+      <span class="sec-title">Indonesia Focus</span>
+      <span class="sec-kicker">For your IDX pitch</span>
+    </div>
+
+    <div class="grid-2">
+      <div class="card soft">
+        <h3>IHSG — pre-holiday risk-off</h3>
+        <p>Closed <b>6,130.19, −1.23%</b> Tuesday ahead of Eid al-Adha (27–28 May). Eight of eleven sectors red: Industrials −3.38%, Consumer Non-cyclical −2.20%, Property −2.14%. Only Infra, Tech and Transport eked out gains.</p>
+        <p>Volume: 24.88 B shares · IDR 18.10 T turnover · 1.96 M tx. Liquidity is thinning — a classic holiday tape that exaggerates moves.</p>
+      </div>
+      <div class="card">
+        <h3>Prabowo's 2027 budget guard-rails</h3>
+        <ul class="tight">
+          <li>FX corridor: <b>IDR 16,800–17,500 / USD</b>.</li>
+          <li>GDP growth target: <b>5.8–6.5%</b>.</li>
+          <li>Inflation cap: <b>1.5–3.5%</b>.</li>
+        </ul>
+        <p class="small">Reading: the BI hike is the price of keeping these targets credible. Fiscal-monetary coordination is tighter than the market is pricing.</p>
+      </div>
+      <div class="card">
+        <h3>BBCA — the contrarian set-up</h3>
+        <p>Trading <b>IDR 5,900</b> (22 May) vs. 12-month consensus PT <b>IDR 8,889</b> (range 5,500–10,900). 23 buys, 0 sells — Strong Buy consensus. Implied upside ~50%.</p>
+        <p class="small"><b>Risk:</b> consensus is one-sided; any NIM compression or asset-quality slip in Q2 results is binary.</p>
+      </div>
+      <div class="card">
+        <h3>Sector playbook into Eid</h3>
+        <ul class="tight">
+          <li><b>OW:</b> Big-4 banks (rate-defensive NIMs), Telco (defensive cashflow), select Infra.</li>
+          <li><b>UW:</b> Property (rate-sensitive), Consumer discretionary (real-income squeeze), Industrials (cyclical earnings risk).</li>
+          <li><b>Watch:</b> Coal &amp; nickel names on any Hormuz escalation — commodity beta is your hedge against IDR weakness.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. ANALYST CALLS -->
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">08</span>
+      <span class="sec-title">Famous Analyst Calls — Cheat Sheet</span>
+      <span class="sec-kicker">Last 24–48 h</span>
+    </div>
+    <div class="grid-3">
+      <div class="card"><h3>Citi · MU</h3><p>Buy reiterated · PT $425 → <b>$840</b>. DRAM +40% C2Q after Samsung +100% Q1.</p></div>
+      <div class="card"><h3>UBS · MU</h3><p>PT lift drove +19% session. AI memory cycle "rerated."</p></div>
+      <div class="card"><h3>Melius · NVDA</h3><p>Buy reiterated · "Most upside to any of our targets."</p></div>
+      <div class="card"><h3>D.A. Davidson · MU</h3><p>"AI is creating a longer-than-usual memory cycle."</p></div>
+      <div class="card"><h3>Northland · INTC</h3><p>Outperform → <b>Market Perform</b>. Valuation + DC spend roll-off.</p></div>
+      <div class="card"><h3>IDX Consensus · BBCA</h3><p>23 Buy / 0 Sell · PT IDR 8,889 (high 10,900).</p></div>
+    </div>
+  </section>
+
+  <!-- 9. CORRELATIONS -->
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">09</span>
+      <span class="sec-title">Running Thread — Today's Baseline</span>
+      <span class="sec-kicker">Tomorrow's correlations start here</span>
+    </div>
+    <div class="card soft">
+      <p>This is the first brief in our running thread, so today I'm seeding the variables we'll track day-over-day:</p>
+      <ul class="tight">
+        <li><b>Iran de-escalation premium</b> — equities are pricing a deal; Brent and the UST 10Y are not. One side will give.</li>
+        <li><b>Memory cycle</b> — MU's $840 PT &amp; the Samsung +100% / MU +40% pricing chain. Watch HBM commentary at the next Hynix print.</li>
+        <li><b>AI power demand</b> — NextEra/Dominion is the first megadeal explicitly underwritten by data-centre load. Track regulated-utility M&amp;A and PPA pricing.</li>
+        <li><b>Rupiah defence</b> — BI 5.25% is the new floor; if USD/IDR breaks 17,000, expect a second hike + capital flow controls discussion.</li>
+        <li><b>IPO window credibility</b> — OpenAI S-1 + HK relisting wave. If the HK debuts price &gt;range and break green, the window is real.</li>
+      </ul>
+      <p class="small">In tomorrow's brief I will reference these five anchors and flag any directional change.</p>
+    </div>
+  </section>
+
+  <!-- 10. STUDENT KNOWLEDGE DROP -->
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">10</span>
+      <span class="sec-title">Knowledge Drop — For Your Internship Brain</span>
+      <span class="sec-kicker">Today's concept · 3 min</span>
+    </div>
+    <div class="card">
+      <h3>How a rate hike actually moves a bank's valuation</h3>
+      <p>When Bank Indonesia hikes 50 bp like today, the market reaction is almost never linear. Three things change at the same time, and a junior who can articulate all three in an interview stands out:</p>
+      <div class="twocol">
+        <p><b>1. Net Interest Margin (NIM).</b> Banks reprice loans faster than deposits (asset-sensitive book), so NIMs widen short-term. This is why BBCA &amp; BBRI typically catch a bid on hike day even if the index sells off.</p>
+        <p><b>2. Cost of Risk (CoR).</b> Higher rates eventually compress borrower cashflow → NPL formation rises with a 2–4 quarter lag. The "good" P&amp;L now creates a "bad" provision charge later. This is where the analyst alpha sits: model the lag.</p>
+        <p><b>3. Discount rate / multiple.</b> Higher risk-free → higher cost of equity (Ke = Rf + β·ERP). Even with better near-term earnings, P/B and P/E should mechanically compress. The stock can rally on EPS and still be derating — both can be true.</p>
+        <p><b>Net:</b> trade is usually <i>long the bank for 1–2 quarters of NIM, then rotate</i> before the CoR cycle prints. That's the difference between a quarterly trader and a structural investor — and it's exactly the kind of nuance MDs want to hear in a stock pitch.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11. BOOK -->
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">11</span>
+      <span class="sec-title">Daily Read — One Book, Used Properly</span>
+      <span class="sec-kicker">IB · PE · M&amp;A</span>
+    </div>
+    <div class="book">
+      <div class="spine">Investment Banking<br/>Rosenbaum &amp; Pearl</div>
+      <div>
+        <h3 style="margin-top:0">Investment Banking: Valuation, LBOs, M&amp;A, and IPOs — Joshua Rosenbaum &amp; Joshua Pearl</h3>
+        <p>This is the technical bible used inside every bulge-bracket analyst training programme. It is not a "read cover-to-cover" book — it's a <b>20–30 minutes / day</b> reference. The discipline is what compounds.</p>
+        <p><b>How to actually use it:</b></p>
+        <ul class="tight">
+          <li><b>Mon–Tue:</b> Trading Comps &amp; Precedent Transactions chapters — re-do one screen end-to-end on a name in the news (today: a US utility for the NextEra/Dominion read-across).</li>
+          <li><b>Wed–Thu:</b> DCF — re-build one model from a 10-K. Force yourself to defend every WACC input out loud.</li>
+          <li><b>Fri:</b> LBO &amp; M&amp;A — work through one accretion/dilution and one paper-LBO. This is the single most-tested skill in PE interviews.</li>
+        </ul>
+        <p class="small"><b>Pair with (5 min/day):</b> one Howard Marks memo per week (oaktreecapital.com) for judgement and cycle thinking, and the FT "Lex" column daily for one-paragraph pitch-writing style.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12. QUESTIONS -->
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">12</span>
+      <span class="sec-title">Questions Back to You</span>
+      <span class="sec-kicker">So tomorrow's brief is sharper</span>
+    </div>
+    <div class="card">
+      <div class="q"><div class="qn">Q1</div><div class="qt"><b>Pitch geography:</b> Is your stock pitch IDX-focused, US-focused, or cross-listed/ADR? That determines whether I lead tomorrow's brief with IHSG flows or US single-stock catalysts.</div></div>
+      <div class="q"><div class="qn">Q2</div><div class="qt"><b>Sector lens:</b> Are you building toward a thesis (Banks · Tech/AI · Energy · Consumer · Utilities)? I'll deep-dive one sector per brief instead of breadth.</div></div>
+      <div class="q"><div class="qn">Q3</div><div class="qt"><b>Time horizon:</b> 3-month trade, 12-month investment, or 3–5y structural? Each demands different evidence in the pitch.</div></div>
+      <div class="q"><div class="qn">Q4</div><div class="qt"><b>Pitch audience:</b> University stock-pitch competition, internship "stock idea of the week", or personal book? Calibrates the level of model detail.</div></div>
+      <div class="q"><div class="qn">Q5</div><div class="qt"><b>Long or Short bias:</b> Most students default long-only. Want me to also surface 1 short idea per day with the borrow/catalyst setup?</div></div>
+    </div>
+  </section>
+
+  <!-- SOURCES -->
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">13</span>
+      <span class="sec-title">Sources</span>
+      <span class="sec-kicker">Trust but verify</span>
+    </div>
+    <div class="sources">
+      <p><a href="https://www.cnbc.com/2026/05/25/stock-futures-today-live-updates.html">CNBC — Stock market news, 26 May 2026</a></p>
+      <p><a href="https://www.fool.com/coverage/stock-market-today/2026/05/26/stock-market-today-may-26-micron-surges-after-ubs-lifts-price-target-on-ai-optimism/">Motley Fool — Micron / UBS, 26 May</a></p>
+      <p><a href="https://www.fool.com/investing/2026/05/26/fed-may-inflation-update-good-bad-news-wall-street/">Motley Fool — Fed inflation update</a></p>
+      <p><a href="https://www.schwab.com/learn/story/stock-market-update-open">Schwab — Iran talks, Warsh sworn in</a></p>
+      <p><a href="https://intellizence.com/insights/merger-and-acquisition/major-ma-deals-across-energy-events-rail-logistics-and-consumer-products/">Intellizence — Top 5 M&amp;A deals of the week</a></p>
+      <p><a href="https://www.wallstreethorizon.com/blog/fewer-deals-bigger-stakes">Wall Street Horizon — 2026 M&amp;A megadeal trend</a></p>
+      <p><a href="https://www.iposcoop.com/ipo-calendar/">IPOScoop — IPO calendar</a></p>
+      <p><a href="https://www.roborhythms.com/openai-ipo-filing-2026/">OpenAI S-1 filing, 22 May 2026</a></p>
+      <p><a href="https://databoks.katadata.co.id/en/market/statistics/6a156b7933f93/the-ihsg-weakens-ahead-of-the-eid-al-adha-holiday-tuesday-may-26-2026">Databoks — IHSG into Eid al-Adha</a></p>
+      <p><a href="https://databoks.katadata.co.id/en/monetary/statistics/6a0d94ffe56ef/rupiah-slumps-bank-indonesia-raises-interest-rate-to-525-in-may-2026">Databoks — BI rate hike to 5.25%</a></p>
+      <p><a href="https://en.tempo.co/read/2104529/why-bank-indonesia-raised-its-benchmark-rate-to-5-25-percent">Tempo — BI rate rationale</a></p>
+      <p><a href="https://www.bloomberg.com/news/articles/2026-05-20/bank-indonesia-rate-hike-in-play-as-rupiah-plumbs-new-lows">Bloomberg — Indonesia rate hike preview</a></p>
+      <p><a href="https://www.cfr.org/reports/conflicts-watch-2026">CFR — Conflicts to Watch 2026</a></p>
+      <p><a href="https://www.crisisgroup.org/cmt/global/10-conflicts-watch-2026">Crisis Group — 10 Conflicts to Watch 2026</a></p>
+      <p><a href="https://www.fdd.org/overnight-brief/may-21-2026/">FDD Overnight Brief — 21 May 2026</a></p>
+      <p><a href="https://www.cbo.gov/publication/62105">CBO — Budget &amp; Economic Outlook 2026–2036</a></p>
+      <p><a href="https://corporate.vanguard.com/content/corporatesite/us/en/corp/vemo/vemo-united-states.html">Vanguard — US economic outlook</a></p>
+      <p><a href="https://www.spglobal.com/ratings/en/regulatory/article/economic-outlook-us-q2-2026-curb-your-enthusiasm-s101676533">S&amp;P Global — US Q2 2026 outlook</a></p>
+      <p><a href="https://www.cnbc.com/2026/05/26/tuesday-biggest-wall-street-calls-like-nvidia.html">CNBC — Tuesday's biggest analyst calls</a></p>
+      <p><a href="https://www.investing.com/equities/bnk-central-as-consensus-estimates">Investing.com — BBCA consensus PT</a></p>
+    </div>
+  </section>
+
+  <footer class="bot">
+    <span>The Morning Brief · prepared for the Equity Research desk</span>
+    <span>Next edition · 27 May 2026, 07:00 ET</span>
+  </footer>
+
+</div>
+</body>
+</html>
