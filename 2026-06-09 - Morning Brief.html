@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-06-09 — Morning Brief</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fraunces:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  :root {
+    --bg: #ffffff;
+    --bg-soft: #fafaf8;
+    --bg-card: #ffffff;
+    --bg-accent: #f5f5f2;
+    --border: #ececea;
+    --border-strong: #d4d4d0;
+    --ink: #111111;
+    --ink-soft: #3a3a3a;
+    --ink-muted: #6b6b6b;
+    --ink-faint: #9a9a9a;
+    --red: #c8362c;
+    --red-soft: #fdf2f1;
+    --green: #2f7a4a;
+    --green-soft: #f0f7f2;
+    --amber: #b07a18;
+    --amber-soft: #fbf5e8;
+    --blue: #1f4d8c;
+    --blue-soft: #eef3fa;
+    --purple: #6b3a8a;
+    --purple-soft: #f4eef9;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.65;
+    font-size: 15px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ---------- Layout ---------- */
+  .page {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 56px 40px 120px;
+  }
+
+  /* ---------- Masthead ---------- */
+  .masthead {
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 24px;
+    margin-bottom: 36px;
+  }
+  .masthead .kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .masthead h1 {
+    font-family: 'Fraunces', serif;
+    font-size: 52px;
+    line-height: 1.05;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin-bottom: 14px;
+  }
+  .masthead .subtitle {
+    font-size: 16px;
+    color: var(--ink-soft);
+    max-width: 640px;
+  }
+  .masthead .meta {
+    display: flex;
+    gap: 20px;
+    margin-top: 22px;
+    font-size: 12px;
+    color: var(--ink-muted);
+    font-family: 'JetBrains Mono', monospace;
+    flex-wrap: wrap;
+  }
+  .masthead .meta span::before {
+    content: '●';
+    color: var(--green);
+    margin-right: 6px;
+    font-size: 8px;
+    vertical-align: middle;
+  }
+
+  /* ---------- TOC ---------- */
+  .toc {
+    background: var(--bg-soft);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 22px 26px;
+    margin-bottom: 48px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px 28px;
+  }
+  .toc .toc-title {
+    grid-column: 1 / -1;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 8px;
+  }
+  .toc a {
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 14px;
+    padding: 4px 0;
+    border-bottom: 1px dotted transparent;
+    transition: border-color .15s;
+    display: flex;
+    justify-content: space-between;
+  }
+  .toc a:hover { border-bottom-color: var(--ink); }
+  .toc a .num {
+    color: var(--ink-faint);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+  }
+
+  /* ---------- Sections ---------- */
+  section { margin-bottom: 56px; scroll-margin-top: 24px; }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 22px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-head .num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--ink-faint);
+    letter-spacing: 0.1em;
+  }
+  .section-head h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+  }
+  .section-head .read-time {
+    margin-left: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-faint);
+  }
+  .section-intro {
+    color: var(--ink-soft);
+    font-size: 14px;
+    margin-bottom: 22px;
+    font-style: italic;
+  }
+
+  /* ---------- TL;DR ---------- */
+  .tldr {
+    border: 1px solid var(--ink);
+    border-radius: 6px;
+    padding: 26px 28px;
+    margin-bottom: 56px;
+    background: linear-gradient(180deg, #fff 0%, #fafaf8 100%);
+  }
+  .tldr h3 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 16px;
+  }
+  .tldr ol {
+    list-style: none;
+    counter-reset: tldr;
+  }
+  .tldr li {
+    counter-increment: tldr;
+    padding: 10px 0 10px 38px;
+    border-bottom: 1px dotted var(--border);
+    position: relative;
+    font-size: 15px;
+  }
+  .tldr li:last-child { border: 0; }
+  .tldr li::before {
+    content: counter(tldr, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--ink-faint);
+    font-weight: 500;
+  }
+  .tldr strong { font-weight: 600; }
+
+  /* ---------- Cards ---------- */
+  .card {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 22px 24px;
+    margin-bottom: 16px;
+    background: var(--bg-card);
+    transition: border-color .15s;
+  }
+  .card:hover { border-color: var(--border-strong); }
+  .card h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    letter-spacing: -0.01em;
+  }
+  .card .meta-row {
+    display: flex;
+    gap: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-muted);
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .card p { color: var(--ink-soft); font-size: 14.5px; }
+  .card p + p { margin-top: 10px; }
+  .card .why {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px dotted var(--border);
+    font-size: 13.5px;
+    color: var(--ink);
+  }
+  .card .why strong { font-weight: 600; }
+
+  /* ---------- Tags / Pills ---------- */
+  .tag {
+    display: inline-block;
+    padding: 2px 9px;
+    border-radius: 999px;
+    font-size: 10.5px;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .tag-red { background: var(--red-soft); color: var(--red); }
+  .tag-green { background: var(--green-soft); color: var(--green); }
+  .tag-amber { background: var(--amber-soft); color: var(--amber); }
+  .tag-blue { background: var(--blue-soft); color: var(--blue); }
+  .tag-purple { background: var(--purple-soft); color: var(--purple); }
+  .tag-grey { background: var(--bg-accent); color: var(--ink-muted); }
+
+  /* ---------- Tickers ---------- */
+  .ticker-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+  .ticker {
+    background: #fff;
+    padding: 16px 18px;
+  }
+  .ticker .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.1em;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .ticker .value {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .ticker .delta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    margin-top: 4px;
+    font-weight: 500;
+  }
+  .delta.up { color: var(--green); }
+  .delta.down { color: var(--red); }
+  .delta.flat { color: var(--ink-muted); }
+
+  /* ---------- Emails ---------- */
+  .email-list {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .email-item {
+    display: grid;
+    grid-template-columns: 1fr 2.5fr auto;
+    gap: 18px;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    align-items: center;
+    transition: background .12s;
+  }
+  .email-item:last-child { border: 0; }
+  .email-item:hover { background: var(--bg-soft); }
+  .email-sender {
+    font-weight: 600;
+    font-size: 13.5px;
+    color: var(--ink);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .email-subject {
+    font-size: 13.5px;
+    color: var(--ink-soft);
+  }
+  .email-subject .gist {
+    display: block;
+    color: var(--ink-muted);
+    font-size: 12.5px;
+    margin-top: 2px;
+  }
+  .email-flag { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; }
+
+  /* ---------- Empty State ---------- */
+  .empty-state {
+    padding: 24px;
+    border: 1px dashed var(--border-strong);
+    border-radius: 6px;
+    text-align: center;
+    color: var(--ink-muted);
+    font-size: 14px;
+    background: var(--bg-soft);
+  }
+
+  /* ---------- Quote / Pull ---------- */
+  blockquote {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 17px;
+    color: var(--ink);
+    border-left: 3px solid var(--ink);
+    padding: 4px 0 4px 18px;
+    margin: 14px 0;
+  }
+  blockquote cite {
+    display: block;
+    margin-top: 6px;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-size: 12px;
+    color: var(--ink-muted);
+  }
+
+  /* ---------- Mechanism Box ---------- */
+  .mechanism {
+    background: var(--bg-soft);
+    border-left: 3px solid var(--blue);
+    padding: 14px 18px;
+    margin-top: 14px;
+    border-radius: 0 4px 4px 0;
+    font-size: 13.5px;
+    color: var(--ink-soft);
+  }
+  .mechanism strong { color: var(--ink); font-weight: 600; }
+  .mechanism .title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.12em;
+    color: var(--blue);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  /* ---------- Correlation ---------- */
+  .correlation {
+    background: var(--purple-soft);
+    border: 1px solid #e5d6f0;
+    border-radius: 6px;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+  }
+  .correlation .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.12em;
+    color: var(--purple);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .correlation .chain {
+    font-family: 'Fraunces', serif;
+    font-size: 16px;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+  .correlation p { font-size: 13.5px; color: var(--ink-soft); }
+
+  /* ---------- Book ---------- */
+  .book {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 28px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 26px;
+    background: var(--bg-card);
+  }
+  .book-cover {
+    height: 156px;
+    background: linear-gradient(135deg, #2a2a2a 0%, #4a4a4a 100%);
+    border-radius: 3px;
+    color: white;
+    padding: 14px;
+    font-family: 'Fraunces', serif;
+    font-size: 12px;
+    line-height: 1.3;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.08);
+  }
+  .book-cover .b-title { font-weight: 600; font-size: 13.5px; }
+  .book-cover .b-author { font-size: 10px; opacity: 0.7; }
+  .book h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    margin-bottom: 4px;
+  }
+  .book .b-meta {
+    font-size: 12px;
+    color: var(--ink-muted);
+    margin-bottom: 12px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .book .b-why { font-size: 13.5px; color: var(--ink-soft); }
+  .book .b-daily {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px dotted var(--border);
+    font-size: 13px;
+  }
+
+  /* ---------- Knowledge cards ---------- */
+  .knowledge-grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
+  .know {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 22px 24px;
+  }
+  .know .lvl {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.1em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .know h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  .know p { font-size: 14px; color: var(--ink-soft); }
+  .know p + p { margin-top: 8px; }
+  .know .formula {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    background: var(--bg-accent);
+    padding: 4px 10px;
+    border-radius: 3px;
+    font-size: 13px;
+    margin: 4px 0;
+  }
+
+  /* ---------- Analyst table ---------- */
+  .analyst-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+  }
+  .analyst-table th, .analyst-table td {
+    padding: 12px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  .analyst-table th {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.1em;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+    font-weight: 500;
+    background: var(--bg-soft);
+  }
+  .analyst-table tr:last-child td { border-bottom: 0; }
+  .analyst-table .ticker-cell {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+  }
+
+  /* ---------- Questions ---------- */
+  .question {
+    border-left: 3px solid var(--amber);
+    background: var(--amber-soft);
+    padding: 14px 18px;
+    margin-bottom: 12px;
+    border-radius: 0 4px 4px 0;
+  }
+  .question .q-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--amber);
+    letter-spacing: 0.1em;
+    margin-bottom: 4px;
+  }
+  .question p { font-size: 14px; color: var(--ink); }
+
+  /* ---------- Footer ---------- */
+  footer {
+    margin-top: 80px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-muted);
+    text-align: center;
+    letter-spacing: 0.05em;
+  }
+  footer .signature {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--ink);
+    margin-bottom: 10px;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 720px) {
+    .page { padding: 32px 20px 80px; }
+    .masthead h1 { font-size: 36px; }
+    .toc { grid-template-columns: 1fr; }
+    .ticker-row { grid-template-columns: repeat(2, 1fr); }
+    .email-item { grid-template-columns: 1fr; gap: 4px; }
+    .book { grid-template-columns: 1fr; }
+    .book-cover { width: 110px; }
+  }
+
+  ::selection { background: var(--ink); color: white; }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- =========== MASTHEAD =========== -->
+  <header class="masthead">
+    <div class="kicker">
+      <span>MORNING BRIEF · Nº 002</span>
+      <span>15-MINUTE READ</span>
+    </div>
+    <h1>The Daily Edge</h1>
+    <p class="subtitle">Curated market intelligence for an aspiring banker — filtered for the signal, stripped of the noise. Equity research, deal flow, macro, and one new skill for the desk.</p>
+    <div class="meta">
+      <span>Tuesday, June 9, 2026</span>
+      <span>Jakarta · 07:00 WIB</span>
+      <span>Last brief: April 26, 2026</span>
+      <span>Status: Risk-Off</span>
+    </div>
+  </header>
+
+  <!-- =========== TOC =========== -->
+  <nav class="toc">
+    <div class="toc-title">In this brief</div>
+    <a href="#tldr">The Six Things <span class="num">TL;DR</span></a>
+    <a href="#tickers">Market Snapshot <span class="num">01</span></a>
+    <a href="#email">Inbox Digest <span class="num">02</span></a>
+    <a href="#agenda">Today's Agenda <span class="num">03</span></a>
+    <a href="#geo">Geopolitics <span class="num">04</span></a>
+    <a href="#macro">Macro & Rates <span class="num">05</span></a>
+    <a href="#ma">M&A & Deal Flow <span class="num">06</span></a>
+    <a href="#ipo">IPO Pipeline <span class="num">07</span></a>
+    <a href="#idx">Indonesia Deep-Dive <span class="num">08</span></a>
+    <a href="#analyst">Analyst Calls <span class="num">09</span></a>
+    <a href="#correl">Correlations vs Apr 26 <span class="num">10</span></a>
+    <a href="#know">Today's Lesson <span class="num">11</span></a>
+    <a href="#book">Book of the Day <span class="num">12</span></a>
+    <a href="#questions">Questions for You <span class="num">13</span></a>
+  </nav>
+
+  <!-- =========== TL;DR =========== -->
+  <section id="tldr" class="tldr">
+    <h3>If you only read 60 seconds</h3>
+    <ol>
+      <li><strong>IHSG in crisis.</strong> Down ~34% YTD, worst-performing index globally. MSCI Frontier-Market downgrade review on <strong>June 19</strong> — passive-fund outflows could be brutal if it lands.</li>
+      <li><strong>Iran risk re-ignites.</strong> Trump teases fresh strikes after Iranian hit on US helicopter. Brent above $110. Tech & energy led S&P lower; Dow stayed green.</li>
+      <li><strong>US CPI prints tomorrow (Jun 10, 08:30 ET).</strong> Last reading was hot — core 2.8% vs 2.7% expected. Markets pricing 99% no-cut at the June 16–17 FOMC.</li>
+      <li><strong>Big deal: GSK to buy Nuvalent for $10.6B</strong> in oncology. Stock +39% pre-market. Pharma M&A still the cleanest sector despite war-time backdrop.</li>
+      <li><strong>SpaceX targets June 12 IPO</strong> — reportedly $75B raise at $1.75T valuation. Largest listing of the cycle.</li>
+      <li><strong>BI hiked 50bps to 5.25%</strong> — first hike since April 2024. Rupiah at 18,039/USD. The "connector economy" narrative we built in April is breaking down faster than expected.</li>
+    </ol>
+  </section>
+
+  <!-- =========== TICKERS =========== -->
+  <section id="tickers">
+    <div class="section-head">
+      <span class="num">01</span>
+      <h2>Market Snapshot</h2>
+      <span class="read-time">1 min</span>
+    </div>
+    <div class="ticker-row">
+      <div class="ticker">
+        <div class="label">S&P 500</div>
+        <div class="value">7,386.65</div>
+        <div class="delta down">−0.26%</div>
+      </div>
+      <div class="ticker">
+        <div class="label">Nasdaq</div>
+        <div class="value">25,678.82</div>
+        <div class="delta down">−0.97%</div>
+      </div>
+      <div class="ticker">
+        <div class="label">Dow Jones</div>
+        <div class="value">50,872.11</div>
+        <div class="delta up">+0.17%</div>
+      </div>
+      <div class="ticker">
+        <div class="label">IHSG (Jakarta)</div>
+        <div class="value">5,386.74</div>
+        <div class="delta up">+0.84%</div>
+      </div>
+      <div class="ticker">
+        <div class="label">Brent Crude</div>
+        <div class="value">$110+</div>
+        <div class="delta down">Spike risk</div>
+      </div>
+      <div class="ticker">
+        <div class="label">USD/IDR</div>
+        <div class="value">18,039</div>
+        <div class="delta down">−2.20% MoM</div>
+      </div>
+      <div class="ticker">
+        <div class="label">Fed Funds</div>
+        <div class="value">paused</div>
+        <div class="delta flat">99% no-cut Jun</div>
+      </div>
+      <div class="ticker">
+        <div class="label">BI Rate</div>
+        <div class="value">5.25%</div>
+        <div class="delta down">+50bps May</div>
+      </div>
+    </div>
+    <p style="font-size:13px; color:var(--ink-muted); font-style:italic;">Reading the tape: Dow up while Nasdaq down = textbook rotation out of tech into defensives. The market is dis-aggregating — a single index number hides what's really happening underneath.</p>
+  </section>
+
+  <!-- =========== EMAILS =========== -->
+  <section id="email">
+    <div class="section-head">
+      <span class="num">02</span>
+      <h2>Inbox Digest</h2>
+      <span class="read-time">1 min</span>
+    </div>
+    <p class="section-intro">Top 5 unread from last 24h. Most of your inbox is recruiter noise — surface what matters.</p>
+    <div class="email-list">
+
+      <div class="email-item">
+        <div class="email-sender">BCA</div>
+        <div class="email-subject">
+          Internet Transaction Journal
+          <span class="gist">Successful transfer recorded 09 Jun 12:56 — verify it was yours.</span>
+        </div>
+        <div class="email-flag"><span class="tag tag-red">Verify</span></div>
+      </div>
+
+      <div class="email-item">
+        <div class="email-sender">Morning Brew</div>
+        <div class="email-subject">
+          ☕ Souped-up Siri
+          <span class="gist">Apple Intelligence reveal underwhelmed — Apple −3%. Echoes the AI-narrative trade.</span>
+        </div>
+        <div class="email-flag"><span class="tag tag-blue">Read</span></div>
+      </div>
+
+      <div class="email-item">
+        <div class="email-sender">Deloitte SEA</div>
+        <div class="email-subject">
+          New jobs posted from jobs.sea.deloitte.com
+          <span class="gist">Weekly digest from your Talent Community — scan for analyst/internship lines.</span>
+        </div>
+        <div class="email-flag"><span class="tag tag-amber">Career</span></div>
+      </div>
+
+      <div class="email-item">
+        <div class="email-sender">Glassdoor</div>
+        <div class="email-subject">
+          Investment Advisory Intern — Wealth Asia + 8 more (Singapore)
+          <span class="gist">Directly relevant to your finance major. Apply before week-end.</span>
+        </div>
+        <div class="email-flag"><span class="tag tag-amber">Reply</span></div>
+      </div>
+
+      <div class="email-item">
+        <div class="email-sender">Google</div>
+        <div class="email-subject">
+          New privacy settings for Search services
+          <span class="gist">Marked Important by Gmail. Skim, action only if you want to opt out.</span>
+        </div>
+        <div class="email-flag"><span class="tag tag-grey">FYI</span></div>
+      </div>
+
+    </div>
+    <p style="margin-top:14px; font-size:12.5px; color:var(--ink-muted);">Inbox volume: 201+ unread. Remaining mail = LinkedIn job alerts, Indeed digests, Glassdoor — archive in bulk.</p>
+  </section>
+
+  <!-- =========== AGENDA =========== -->
+  <section id="agenda">
+    <div class="section-head">
+      <span class="num">03</span>
+      <h2>Today's Agenda</h2>
+      <span class="read-time">30 sec</span>
+    </div>
+    <div class="empty-state">
+      <strong>Google Calendar tool is not connected in this session.</strong><br>
+      Add the Calendar MCP server to your Claude config and I'll pull your day's events automatically in tomorrow's brief.
+    </div>
+    <p style="margin-top:14px; font-size:13.5px; color:var(--ink-soft);">
+      <strong>Market events to time-block instead:</strong><br>
+      • <strong>20:30 WIB</strong> — US CPI for May released (single biggest market-moving print of the week)<br>
+      • <strong>Jun 12</strong> — Reported SpaceX IPO debut<br>
+      • <strong>Jun 16–17</strong> — FOMC meeting (no rate change expected, but dot plot matters)<br>
+      • <strong>Jun 19</strong> — MSCI Indonesia reclassification review
+    </p>
+  </section>
+
+  <!-- =========== GEOPOLITICS =========== -->
+  <section id="geo">
+    <div class="section-head">
+      <span class="num">04</span>
+      <h2>Geopolitics — The Master Variable</h2>
+      <span class="read-time">2 min</span>
+    </div>
+    <p class="section-intro">If you only watch one driver this quarter, watch this. Everything downstream — Fed, EM, oil, equity multiples — bends to it.</p>
+
+    <div class="card">
+      <h3>Iran tensions re-escalate; Trump teases fresh strikes</h3>
+      <div class="meta-row">
+        <span class="tag tag-red">Risk-Off</span>
+        <span class="tag tag-amber">Energy</span>
+        <span>Source: TheStreet, Yahoo Finance</span>
+      </div>
+      <p>Equities sold off into the close after Trump announced the US would respond to an Iranian attack on a US military helicopter. The market action was clean: tech (-) + energy (-) led, defensives held — the textbook risk-off signature of a Middle East flare-up.</p>
+      <p>Brent crude is bid above $110 with the Strait of Hormuz tanker traffic still constrained (carries ~20% of global oil). The 2026 Iran war has now lasted ~3 months and shows no de-escalation path.</p>
+      <div class="why">
+        <strong>Why an analyst cares:</strong> Oil at $110+ is the input that breaks the disinflation story. Every model — Fed cut path, EM current accounts, S&P earnings — has to be rebuilt around a sustained energy shock. If you're writing a pitch, your base case must price this in, not treat it as a sidebar.
+      </div>
+    </div>
+
+    <div class="mechanism">
+      <div class="title">How it transmits — for the first-timer</div>
+      <strong>Oil up</strong> → fuel, fertilizer, freight all cost more → <strong>headline inflation rises</strong> → central banks can't cut rates → <strong>cost of capital stays high</strong> → growth-stock valuations (which discount future cash flows) compress → <strong>tech sells off</strong>. Meanwhile, oil producers (XOM, CVX, MEDC.JK) see margins expand → energy stocks rally. That's why an "oil shock" looks like a sector rotation, not a market crash.
+    </div>
+  </section>
+
+  <!-- =========== MACRO =========== -->
+  <section id="macro">
+    <div class="section-head">
+      <span class="num">05</span>
+      <h2>Macro & Rates</h2>
+      <span class="read-time">2 min</span>
+    </div>
+
+    <div class="card">
+      <h3>US CPI lands tomorrow — the print everyone is positioned around</h3>
+      <div class="meta-row">
+        <span class="tag tag-blue">US</span>
+        <span class="tag tag-amber">Catalyst</span>
+        <span>BLS · Jun 10, 08:30 ET</span>
+      </div>
+      <p>April CPI ran <strong>+0.6% MoM / +3.8% YoY</strong>; core stuck at <strong>2.8%</strong> (vs 2.7% expected). Services ex-energy +3.3%, goods +1.1% — tariffs and oil are doing the work. Tomorrow's May print will decide whether the "patient pause" narrative survives or whether traders need to start pricing a <em>hike</em>, not a cut.</p>
+      <div class="why"><strong>Trade setup:</strong> A hot print = USD ↑, bonds ↓, gold ↑, EM (incl. IHSG) ↓ hard. A cool print = relief rally in tech and EM. Polymarket has it at 99.1% no-cut at June 16–17 FOMC — meaning the surprise is asymmetric to the downside.</div>
+    </div>
+
+    <div class="card">
+      <h3>Bank Indonesia hikes 50bps to 5.25% — defending the rupiah</h3>
+      <div class="meta-row">
+        <span class="tag tag-red">Indonesia</span>
+        <span class="tag tag-blue">Rates</span>
+        <span>BI · Press release</span>
+      </div>
+      <p>First BI hike since April 2024. Inflation accelerated to <strong>3.08% in May</strong> (vs 2.42% April). Rupiah at 18,039/USD — that's the weakest in a generation. BI is choosing currency stability over growth support, which is the right textbook answer but politically painful.</p>
+      <div class="why"><strong>Read-through to IHSG:</strong> Higher rates = higher discount rate for Indonesian equities = lower fair-value multiples. Banks (BBCA, BMRI) get a NIM tailwind. Property (CTRA, PWON), small-caps, and high-multiple growth names get hit hardest.</div>
+    </div>
+
+    <div class="mechanism">
+      <div class="title">The mechanism — central-bank trilemma</div>
+      An emerging-market central bank can only ever pick <strong>two of three</strong>: (1) stable currency, (2) free capital flows, (3) independent monetary policy. Indonesia keeps capital flows open and floats the rupiah — so the moment the Fed pauses cuts and oil spikes, BI <em>must</em> hike to defend the IDR or watch it collapse. This is why EM rates are slaves to the Fed.
+    </div>
+  </section>
+
+  <!-- =========== M&A =========== -->
+  <section id="ma">
+    <div class="section-head">
+      <span class="num">06</span>
+      <h2>M&A & Deal Flow</h2>
+      <span class="read-time">2 min</span>
+    </div>
+    <p class="section-intro">War-time M&A is accelerating, not stalling — exactly the dynamic we flagged on April 26. Three deals to know.</p>
+
+    <div class="card">
+      <h3>GSK acquires Nuvalent for $10.6B</h3>
+      <div class="meta-row">
+        <span class="tag tag-green">Closed</span>
+        <span class="tag tag-purple">Pharma</span>
+        <span>NUV +39% pre-market</span>
+      </div>
+      <p>Oncology-focused biotech. GSK paying a premium for late-stage clinical assets to refill its pipeline ahead of patent cliffs. Standard big-pharma defensive M&A — buying R&D rather than building it.</p>
+      <div class="why"><strong>Pitch angle:</strong> Screen for mid-cap biotech with Phase 3 oncology assets and <$15B market cap → these are the next targets. Names to dig into: REGN-adjacent, IDYA, RLAY.</div>
+    </div>
+
+    <div class="card">
+      <h3>Telecom consortium to buy Patrick Drahi's SFR for $23.5B</h3>
+      <div class="meta-row">
+        <span class="tag tag-green">Closed</span>
+        <span class="tag tag-blue">Telecom</span>
+        <span>June 6</span>
+      </div>
+      <p>French telecom consolidation. Drahi sells his crown jewel under debt pressure — a sign that the leveraged-rollup era from 2021 is finally unwinding. Expect more forced divestitures from over-levered European holdcos.</p>
+      <div class="why"><strong>Why this matters for IB juniors:</strong> Telecom = capital-intensive, fee-heavy, multi-tranche financing. These are the deals that fill quarterly fee league tables. JPM, GS, BNP get the credit.</div>
+    </div>
+
+    <div class="card">
+      <h3>Ingredion to take over Tate & Lyle for $3.6B</h3>
+      <div class="meta-row">
+        <span class="tag tag-green">Closed</span>
+        <span class="tag tag-amber">Consumer / Ingredients</span>
+        <span>June 8</span>
+      </div>
+      <p>Consolidation in food ingredients. Specialty sweeteners + starches combined under one platform. Synergies pitched at procurement and global distribution. Plain-vanilla strategic deal.</p>
+    </div>
+
+    <div class="card">
+      <h3>Triton Partners buys Flender from Carlyle — €3B (~$3.5B)</h3>
+      <div class="meta-row">
+        <span class="tag tag-green">Closed</span>
+        <span class="tag tag-purple">PE Secondary</span>
+        <span>June 5</span>
+      </div>
+      <p>Sponsor-to-sponsor (Carlyle → Triton). Flender = wind-turbine gearbox manufacturer. This is exactly the kind of "industrials with green-transition tailwinds" thesis driving European PE right now.</p>
+      <div class="why"><strong>Lesson:</strong> Sponsor-to-sponsor deals usually mean a fund is at end-of-life and needs an exit, not that the asset has new strategic value. Watch the entry multiple Triton paid vs Carlyle's cost basis — that's where the real story is.</div>
+    </div>
+  </section>
+
+  <!-- =========== IPO =========== -->
+  <section id="ipo">
+    <div class="section-head">
+      <span class="num">07</span>
+      <h2>IPO Pipeline</h2>
+      <span class="read-time">1 min</span>
+    </div>
+
+    <div class="card">
+      <h3>SpaceX targets June 12 listing — $1.75T valuation, $75B raise</h3>
+      <div class="meta-row">
+        <span class="tag tag-purple">Mega-IPO</span>
+        <span class="tag tag-blue">Tech</span>
+        <span>WSJ report</span>
+      </div>
+      <p>Would be the largest IPO of the cycle — by an order of magnitude. The structure matters: $75B raise = enormous secondary-market liquidity event for early investors. Expect huge index-inclusion mechanics (S&P, Nasdaq-100) to drive forced buying post-listing.</p>
+      <div class="why"><strong>Pitch angle:</strong> If you're writing a SpaceX initiation, the question isn't "is it a good company" — it's "what's the right multiple for a vertically-integrated launch + Starlink + future-Mars optionality stack?" Use sum-of-the-parts: launch ≈ aerospace multiple, Starlink ≈ telecom multiple, Mars ≈ pure optionality (Black-Scholes it).</div>
+    </div>
+
+    <p style="font-size:13.5px; color:var(--ink-soft);">Other notables: 8 pricings June 9, 19 on June 10. <strong>WhiteHawk Minerals (WHK)</strong> priced at $26 for $200M raise. Anthropic targeting October listing at ~$900B valuation. Crusoe Energy targeting Q4 $13B AI-infra IPO.</p>
+
+    <div class="empty-state" style="margin-top:14px;">
+      <strong>IDX side:</strong> Still effectively frozen — the same picture from April 26. Zero meaningful Indonesian listings while volatility and the MSCI review cloud hang over the exchange.
+    </div>
+  </section>
+
+  <!-- =========== INDONESIA =========== -->
+  <section id="idx">
+    <div class="section-head">
+      <span class="num">08</span>
+      <h2>Indonesia Deep-Dive</h2>
+      <span class="read-time">2 min</span>
+    </div>
+    <p class="section-intro">This is the section that changes most vs Apr 26. The "connector economy" thesis is breaking under its own weight.</p>
+
+    <div class="card">
+      <h3>IHSG: worst-performing equity index globally YTD</h3>
+      <div class="meta-row">
+        <span class="tag tag-red">Crisis</span>
+        <span class="tag tag-red">Outflows</span>
+        <span>−34% YTD across 90+ global indices</span>
+      </div>
+      <p>IHSG at <strong>5,386.74</strong> (June 9) vs ~7,594 on April 20 — a ~29% drop in seven weeks. Foreign net selling has crossed <strong>IDR 67 trillion YTD</strong>. The June 8 session alone saw IHSG drop 116 points (−2.0%).</p>
+      <p>Three forces stacking on top of each other: (1) Iran-driven oil import bill blowing up Indonesia's current account; (2) Fed-paused-while-BI-must-hike → forced 50bps hike, which kills domestic demand; (3) the <strong>MSCI Frontier-Market downgrade review on June 19</strong> — if Indonesia drops from EM to Frontier classification, billions of passive index money mechanically rebalances out.</p>
+      <div class="why"><strong>Pitch idea:</strong> A binary-event pair trade. Long quality Indonesian banks (BBCA, BMRI) hedged with short broader EM index via FXI/EEM puts into the June 19 decision. The downside is capped by the index outperformance of large-cap defensives; the upside is asymmetric if MSCI keeps Indonesia in EM and a relief rally hits.</div>
+    </div>
+
+    <div class="card">
+      <h3>What broke the "connector economy" thesis</h3>
+      <div class="meta-row">
+        <span class="tag tag-amber">Thesis Failure</span>
+        <span>April 26 brief revisit</span>
+      </div>
+      <p>On April 26 we wrote: <em>"Indonesia benefits as a connector economy in US-China trade rerouting."</em> That thesis is now in question. Why: the connector premium only works if (a) global trade keeps growing and (b) Indonesia's currency stays stable. Both have failed — UNCTAD now warns global trade growth will slow, and IDR has weakened 2%+ MoM. The trade-rerouting narrative is intact long-term, but it can't offset the near-term capital outflow.</p>
+    </div>
+  </section>
+
+  <!-- =========== ANALYSTS =========== -->
+  <section id="analyst">
+    <div class="section-head">
+      <span class="num">09</span>
+      <h2>Analyst Calls Worth Knowing</h2>
+      <span class="read-time">1 min</span>
+    </div>
+    <table class="analyst-table">
+      <thead>
+        <tr>
+          <th>Ticker</th>
+          <th>Analyst / House</th>
+          <th>Call</th>
+          <th>Note</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="ticker-cell">GS</td>
+          <td>Glenn Schorr · Evercore ISI</td>
+          <td><span class="tag tag-green">Outperform</span> PT $830 (from $752)</td>
+          <td>Rebounding M&A volumes lifting IB revenue.</td>
+        </tr>
+        <tr>
+          <td class="ticker-cell">GS</td>
+          <td>Mike Mayo · Wells Fargo</td>
+          <td><span class="tag tag-green">Overweight</span> PT $855</td>
+          <td>Fee-based growth + IB pipeline.</td>
+        </tr>
+        <tr>
+          <td class="ticker-cell">MS</td>
+          <td>Sell-side consensus</td>
+          <td><span class="tag tag-blue">Preferred over GS</span></td>
+          <td>Better wealth-management mix, shareholder-friendly capital return.</td>
+        </tr>
+        <tr>
+          <td class="ticker-cell">JPM</td>
+          <td>Zacks consensus</td>
+          <td><span class="tag tag-green">Positive</span></td>
+          <td>Solid IB income growth into 2026.</td>
+        </tr>
+        <tr>
+          <td class="ticker-cell">AAPL</td>
+          <td>Street post-Apple Intelligence event</td>
+          <td><span class="tag tag-red">Cooling</span></td>
+          <td>−3% reaction; AI-narrative trade losing the bid.</td>
+        </tr>
+        <tr>
+          <td class="ticker-cell">NUV</td>
+          <td>Post-deal</td>
+          <td><span class="tag tag-amber">Halt-pending</span></td>
+          <td>+39% pre-market on GSK take-out at $10.6B.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- =========== CORRELATIONS =========== -->
+  <section id="correl">
+    <div class="section-head">
+      <span class="num">10</span>
+      <h2>Correlations vs Apr 26 Briefing</h2>
+      <span class="read-time">1 min</span>
+    </div>
+    <p class="section-intro">What we got right, what we missed, and what changed.</p>
+
+    <div class="correlation">
+      <div class="label">Confirmed → Bullish on our call</div>
+      <div class="chain">Oil shock → Fed paralysis → EM vulnerability</div>
+      <p>The April 26 chain played out almost exactly. Hormuz still constrained, Brent still above $100, Fed extended pause, and EM (Indonesia especially) took the hit. Score the call: 4/4 directional correct.</p>
+    </div>
+
+    <div class="correlation">
+      <div class="label">Failed → Thesis broke</div>
+      <div class="chain">Indonesia as "connector economy" winner</div>
+      <p>The narrative was right in the long run but wrong in tactical timeframe. IHSG went from 7,594 to 5,386 (−29%) while we expected medium-term bullishness. <strong>Lesson:</strong> "Eventually right" trades still lose money if leverage forces you out first. Always think about path, not just destination.</p>
+    </div>
+
+    <div class="correlation">
+      <div class="label">Confirmed → Risk we flagged</div>
+      <div class="chain">AI-narrative trade is dangerously concentrated</div>
+      <p>April 26: <em>"Hedge the AI consensus trade. If AI earnings disappoint, the only pillar holding equities crumbles."</em> Today's Apple Intelligence underwhelm = first crack. Nasdaq −0.97% led by chips. Watch the next mega-cap event for confirmation.</p>
+    </div>
+
+    <div class="correlation">
+      <div class="label">New variable not on Apr 26 radar</div>
+      <div class="chain">MSCI Indonesia Frontier-Market downgrade risk (June 19)</div>
+      <p>This was not in the April brief. It's now the single biggest binary event for Indonesian equities in the next two weeks. If it lands, mechanical passive outflows. If it doesn't, sharp relief rally. Plan for both.</p>
+    </div>
+  </section>
+
+  <!-- =========== KNOWLEDGE =========== -->
+  <section id="know">
+    <div class="section-head">
+      <span class="num">11</span>
+      <h2>Today's Lesson — Sharpen the Sword</h2>
+      <span class="read-time">2 min</span>
+    </div>
+    <p class="section-intro">One new concept per day. Internalize it before market open. Today: <strong>Sum-of-the-Parts (SOTP) Valuation</strong> — the technique behind almost every conglomerate pitch.</p>
+
+    <div class="knowledge-grid">
+      <div class="know">
+        <div class="lvl">Concept</div>
+        <h3>What Sum-of-the-Parts means</h3>
+        <p>When a company has multiple business lines that deserve different valuation multiples — like SpaceX (launch business + Starlink + future Mars optionality) — you can't just slap one EV/EBITDA on the whole thing. You value each segment separately, then add them up.</p>
+        <p>It's the cleanest way to argue a company is undervalued (or overvalued). If management's stock trades at $100, but the parts add up to $150 if spun off → that's your "hidden value" pitch.</p>
+      </div>
+
+      <div class="know">
+        <div class="lvl">Mechanism</div>
+        <h3>How to actually do it — 4 steps</h3>
+        <p><strong>1. Split the company</strong> into reporting segments (from 10-K / annual report). E.g. Alphabet = Search + YouTube + Cloud + Other Bets.</p>
+        <p><strong>2. Apply the right comp multiple to each.</strong> Search → mature ad business → use Meta/Baidu comps. Cloud → growth infra → use AMZN AWS or AZURE comps. Other Bets → pure optionality → DCF with high discount rate or zero it.</p>
+        <p><strong>3. Sum the segment valuations</strong> → that's your gross enterprise value.</p>
+        <p><strong>4. Subtract net debt, add back cash</strong> → divide by share count → that's your SOTP price target.</p>
+        <div class="formula">SOTP Equity Value = Σ (Segment EV) − Net Debt + Cash + Tax-adjusted Optionality</div>
+      </div>
+
+      <div class="know">
+        <div class="lvl">Where it shows up at work</div>
+        <h3>Why this is non-negotiable for an analyst</h3>
+        <p>Every activist short report (think Hindenburg) and every break-up pitch uses SOTP. Every IB MD will ask: <em>"Run me a sum-of-the-parts on this conglomerate."</em> If you can do it cold on a napkin in 4 minutes, you will stand out in any internship interview.</p>
+        <p>Today, try this exercise: pull up Astra International (ASII.JK) — it has automotive, financial services, agribusiness, infrastructure, heavy equipment, and IT all under one roof. Build a SOTP. You'll see why the holding-co discount exists.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========== BOOK =========== -->
+  <section id="book">
+    <div class="section-head">
+      <span class="num">12</span>
+      <h2>Book of the Day</h2>
+      <span class="read-time">30 sec</span>
+    </div>
+
+    <div class="book">
+      <div class="book-cover">
+        <div>
+          <div class="b-title">The Intelligent Investor</div>
+        </div>
+        <div class="b-author">— Benjamin Graham</div>
+      </div>
+      <div>
+        <h3>The Intelligent Investor — Benjamin Graham</h3>
+        <div class="b-meta">First published 1949 · Revised 2003 by Jason Zweig · ~640 pages · Bible of value investing</div>
+        <p class="b-why">If you read one book through your internship, make it this one. Warren Buffett calls it <em>"by far the best book on investing ever written."</em> It teaches the <strong>two ideas that survive every crisis</strong>: (1) Mr. Market is a manic-depressive — your job is to use his moods, not catch them; (2) margin of safety — you don't invest unless price is sufficiently below intrinsic value to absorb being wrong.</p>
+        <p class="b-daily"><strong>Daily ritual (15 min):</strong> Read one Zweig commentary section per morning before market open. They are short, ground each Graham principle in a modern example, and prime your brain to think like an analyst, not a trader. Pair with today's brief = you'll be a different student in 90 days.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========== QUESTIONS =========== -->
+  <section id="questions">
+    <div class="section-head">
+      <span class="num">13</span>
+      <h2>Questions Back to You</h2>
+      <span class="read-time">1 min</span>
+    </div>
+    <p class="section-intro">A few decisions I need from you to sharpen tomorrow's brief and shape your pitch work.</p>
+
+    <div class="question">
+      <div class="q-num">Q · 01</div>
+      <p><strong>Pitch focus.</strong> You're going to write an equity research / stock pitch — what's the angle? (A) Long single name in IHSG playing the MSCI relief case, (B) Short a US AI-narrative mega-cap, (C) Pair trade on a sector rotation, or (D) Pitch a deep-dive on the upcoming SpaceX IPO?</p>
+    </div>
+
+    <div class="question">
+      <div class="q-num">Q · 02</div>
+      <p><strong>Coverage universe.</strong> Should I tilt tomorrow's brief more toward (A) Indonesian banks & commodities, (B) US large-cap tech & financials, or (C) cross-border deals where IB fee pools are biggest? Pick one to deepen.</p>
+    </div>
+
+    <div class="question">
+      <div class="q-num">Q · 03</div>
+      <p><strong>Career signal.</strong> Of the recruiter emails sitting in your inbox, do you want me to auto-draft replies for the (A) Wealth Asia Investment Advisory Intern, (B) Deloitte SEA digest, (C) Both, or (D) Neither?</p>
+    </div>
+
+    <div class="question">
+      <div class="q-num">Q · 04</div>
+      <p><strong>Hook a calendar.</strong> Want me to walk you through connecting the Google Calendar MCP server so tomorrow's "Agenda" section actually pulls your meetings?</p>
+    </div>
+
+    <div class="question">
+      <div class="q-num">Q · 05</div>
+      <p><strong>Knowledge cadence.</strong> Today's lesson was SOTP valuation. Should tomorrow be (A) DCF mechanics, (B) Comparable companies / trading comps, (C) Precedent transactions, or (D) LBO modeling?</p>
+    </div>
+  </section>
+
+  <!-- =========== FOOTER =========== -->
+  <footer>
+    <div class="signature">— Compiled at 07:00 WIB. Trade well, sleep well.</div>
+    Sources: TheStreet · CNBC · Yahoo Finance · Reuters · BLS · Bank Indonesia · IDX · WSJ · IPOScoop · Cleveland Fed · Polymarket · Glassdoor · Evercore ISI · Wells Fargo
+  </footer>
+
+</div>
+
+</body>
+</html>
