@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Morning Brief · June 18, 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600;9..144,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ffffff;
+    --bg-soft: #fafaf9;
+    --bg-tint: #f5f5f4;
+    --ink: #0a0a0a;
+    --ink-2: #404040;
+    --ink-3: #737373;
+    --ink-4: #a3a3a3;
+    --line: #e7e5e4;
+    --line-2: #d6d3d1;
+    --green: #15803d;
+    --green-soft: #ecfdf5;
+    --red: #b91c1c;
+    --red-soft: #fef2f2;
+    --amber: #b45309;
+    --amber-soft: #fffbeb;
+    --blue: #1d4ed8;
+    --blue-soft: #eff6ff;
+    --violet: #6d28d9;
+    --violet-soft: #f5f3ff;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: "ss01", "cv11";
+  }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 32px; }
+
+  /* TOP BAR */
+  .topbar {
+    border-bottom: 1px solid var(--line);
+    padding: 14px 0;
+    position: sticky; top: 0; background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(10px);
+    z-index: 50;
+  }
+  .topbar-inner {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 12px; color: var(--ink-3); letter-spacing: 0.02em;
+  }
+  .topbar .brand { font-weight: 700; color: var(--ink); letter-spacing: -0.01em; }
+  .topbar .brand .dot { display: inline-block; width: 6px; height: 6px; background: #16a34a; border-radius: 50%; margin-right: 8px; vertical-align: middle; animation: blink 2.4s infinite; }
+  @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }
+
+  /* HERO */
+  .hero { padding: 80px 0 48px; border-bottom: 1px solid var(--line); }
+  .hero .eyebrow { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 18px; font-weight: 600; }
+  .hero h1 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 56px; line-height: 1.05; font-weight: 400; letter-spacing: -0.025em;
+    color: var(--ink); margin-bottom: 18px;
+  }
+  .hero h1 em { font-style: italic; color: var(--ink-2); }
+  .hero .sub { font-size: 17px; color: var(--ink-2); max-width: 720px; line-height: 1.6; }
+  .meta-row { display: flex; gap: 32px; flex-wrap: wrap; margin-top: 30px; font-size: 13px; color: var(--ink-3); }
+  .meta-row span b { color: var(--ink); font-weight: 600; }
+
+  /* TICKER STRIP */
+  .ticker-strip {
+    background: var(--bg-soft);
+    border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    padding: 14px 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    overflow: hidden;
+  }
+  .ticker-row { display: flex; gap: 36px; justify-content: space-between; flex-wrap: wrap; }
+  .ticker-row .t { display: flex; gap: 8px; align-items: baseline; }
+  .ticker-row .t .sym { color: var(--ink-3); font-weight: 500; }
+  .ticker-row .t .px { color: var(--ink); font-weight: 600; }
+  .up { color: var(--green); }
+  .down { color: var(--red); }
+  .flat { color: var(--ink-3); }
+
+  /* TABLE OF CONTENTS */
+  .toc {
+    margin: 56px 0 24px; padding: 26px 28px;
+    border: 1px solid var(--line); border-radius: 14px;
+    background: var(--bg-soft);
+  }
+  .toc h4 { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 16px; font-weight: 700; }
+  .toc-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px 24px; font-size: 14px; }
+  .toc-grid a { color: var(--ink); text-decoration: none; padding: 6px 0; display: flex; gap: 10px; align-items: center; border-bottom: 1px dashed transparent; transition: 0.15s; }
+  .toc-grid a:hover { border-bottom-color: var(--ink-4); }
+  .toc-grid a .n { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--ink-4); }
+
+  /* SECTIONS */
+  section { padding: 56px 0; border-bottom: 1px solid var(--line); }
+  .sec-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 28px; }
+  .sec-head .ix { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--ink-4); font-weight: 500; letter-spacing: 0.05em; }
+  .sec-head h2 {
+    font-family: 'Fraunces', serif; font-weight: 500; font-size: 32px; letter-spacing: -0.02em; color: var(--ink);
+  }
+  .sec-head .tag {
+    margin-left: auto; font-size: 11px; padding: 4px 10px; border-radius: 999px;
+    background: var(--bg-tint); color: var(--ink-3); font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+  .sec-intro { color: var(--ink-2); font-size: 15px; max-width: 720px; margin-bottom: 28px; }
+
+  /* CARDS */
+  .card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .card-grid.one { grid-template-columns: 1fr; }
+  .card {
+    border: 1px solid var(--line); border-radius: 12px;
+    padding: 22px 24px; background: #fff;
+    transition: 0.18s;
+  }
+  .card:hover { border-color: var(--line-2); transform: translateY(-1px); }
+  .card .label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-3); font-weight: 600; margin-bottom: 8px; }
+  .card .label.green { color: var(--green); }
+  .card .label.red { color: var(--red); }
+  .card .label.amber { color: var(--amber); }
+  .card .label.blue { color: var(--blue); }
+  .card .label.violet { color: var(--violet); }
+  .card h3 { font-size: 17px; font-weight: 600; line-height: 1.35; margin-bottom: 10px; color: var(--ink); letter-spacing: -0.01em; }
+  .card p { font-size: 14px; color: var(--ink-2); line-height: 1.6; }
+  .card p + p { margin-top: 8px; }
+  .card .why { margin-top: 12px; padding-top: 12px; border-top: 1px dashed var(--line); font-size: 13px; color: var(--ink-2); }
+  .card .why b { color: var(--ink); font-weight: 600; }
+  .card .ticker { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--ink-3); }
+
+  /* PILL */
+  .pill { display: inline-block; font-size: 11px; padding: 3px 8px; border-radius: 6px; font-weight: 500; margin-right: 6px; }
+  .pill.green { background: var(--green-soft); color: var(--green); }
+  .pill.red { background: var(--red-soft); color: var(--red); }
+  .pill.amber { background: var(--amber-soft); color: var(--amber); }
+  .pill.blue { background: var(--blue-soft); color: var(--blue); }
+  .pill.violet { background: var(--violet-soft); color: var(--violet); }
+  .pill.gray { background: var(--bg-tint); color: var(--ink-3); }
+
+  /* EMAIL LIST */
+  .email-list { display: flex; flex-direction: column; }
+  .email-row {
+    display: grid; grid-template-columns: 1fr 2fr auto; gap: 18px; align-items: start;
+    padding: 16px 0; border-bottom: 1px solid var(--line);
+  }
+  .email-row:last-child { border-bottom: none; }
+  .email-row .sender { font-size: 13px; color: var(--ink-2); font-weight: 500; }
+  .email-row .sender .from { color: var(--ink); font-weight: 600; display: block; font-size: 14px; }
+  .email-row .sender .when { color: var(--ink-4); font-size: 11px; margin-top: 2px; display: block; font-family: 'JetBrains Mono', monospace; }
+  .email-row .body h4 { font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 4px; line-height: 1.4; }
+  .email-row .body p { font-size: 13px; color: var(--ink-2); line-height: 1.5; }
+  .email-row .priority { text-align: right; }
+
+  /* ANALYST TABLE */
+  table.analyst { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 13px; }
+  table.analyst th, table.analyst td { padding: 12px 12px; text-align: left; border-bottom: 1px solid var(--line); }
+  table.analyst th { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); font-weight: 600; background: var(--bg-soft); }
+  table.analyst td { color: var(--ink-2); }
+  table.analyst td b { color: var(--ink); font-weight: 600; }
+  table.analyst tr:hover td { background: var(--bg-soft); }
+  table.analyst .ticker { font-family: 'JetBrains Mono', monospace; font-weight: 600; color: var(--ink); }
+
+  /* CALLOUT */
+  .callout {
+    border-left: 3px solid var(--ink); padding: 8px 0 8px 20px;
+    margin: 16px 0; font-size: 14px; color: var(--ink-2);
+  }
+  .callout b { color: var(--ink); }
+  .callout.blue { border-color: var(--blue); }
+  .callout.amber { border-color: var(--amber); }
+  .callout.green { border-color: var(--green); }
+  .callout.red { border-color: var(--red); }
+  .callout.violet { border-color: var(--violet); }
+
+  /* CORRELATION BOX */
+  .corr {
+    background: var(--bg-soft); border-radius: 14px; padding: 28px 30px;
+    border: 1px solid var(--line);
+  }
+  .corr .row { display: grid; grid-template-columns: 140px 1fr; gap: 22px; padding: 14px 0; border-top: 1px solid var(--line); }
+  .corr .row:first-of-type { border-top: none; padding-top: 4px; }
+  .corr .row .when { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--ink-4); padding-top: 3px; letter-spacing: 0.03em; }
+  .corr .row .what { font-size: 14px; color: var(--ink-2); line-height: 1.6; }
+  .corr .row .what b { color: var(--ink); }
+
+  /* PITCH CARDS */
+  .pitch-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .pitch-card { border: 1px solid var(--line); border-radius: 12px; padding: 20px; background: #fff; display: flex; flex-direction: column; gap: 10px; }
+  .pitch-card .side { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700; }
+  .pitch-card .side.long { color: var(--green); }
+  .pitch-card .side.short { color: var(--red); }
+  .pitch-card .side.pair { color: var(--violet); }
+  .pitch-card h3 { font-size: 16px; font-weight: 600; }
+  .pitch-card p { font-size: 13px; color: var(--ink-2); line-height: 1.55; }
+  .pitch-card .meta { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--ink-3); margin-top: auto; padding-top: 10px; border-top: 1px dashed var(--line); }
+
+  /* BOOK */
+  .book {
+    display: grid; grid-template-columns: 130px 1fr; gap: 30px; align-items: start;
+    padding: 28px; border: 1px solid var(--line); border-radius: 14px; background: var(--bg-soft);
+  }
+  .book-cover {
+    aspect-ratio: 2/3; background: linear-gradient(160deg, #1c1917 0%, #292524 60%, #44403c 100%);
+    border-radius: 6px; box-shadow: 0 12px 30px rgba(0,0,0,0.18), 0 2px 5px rgba(0,0,0,0.10);
+    display: flex; flex-direction: column; justify-content: space-between; padding: 18px 14px;
+    color: #fafaf9; position: relative; overflow: hidden;
+  }
+  .book-cover::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.3) 100%);
+  }
+  .book-cover .title { font-family: 'Fraunces', serif; font-size: 14px; font-weight: 600; line-height: 1.15; letter-spacing: -0.01em; z-index: 1; }
+  .book-cover .author { font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.75; z-index: 1; }
+  .book-info h3 { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 500; letter-spacing: -0.01em; margin-bottom: 4px; }
+  .book-info .author-name { font-size: 13px; color: var(--ink-3); margin-bottom: 14px; }
+  .book-info p { font-size: 14px; color: var(--ink-2); line-height: 1.6; margin-bottom: 10px; }
+  .book-info .daily { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; margin-top: 14px; font-size: 13px; }
+  .book-info .daily b { color: var(--ink); }
+
+  /* KNOWLEDGE FEED */
+  .know-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .know-card {
+    border: 1px solid var(--line); border-radius: 12px; padding: 24px; background: #fff;
+  }
+  .know-card .chip { display: inline-block; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--violet); background: var(--violet-soft); padding: 3px 9px; border-radius: 6px; font-weight: 600; margin-bottom: 12px; }
+  .know-card h3 { font-family: 'Fraunces', serif; font-size: 20px; font-weight: 500; letter-spacing: -0.01em; margin-bottom: 12px; }
+  .know-card p { font-size: 13.5px; color: var(--ink-2); line-height: 1.65; margin-bottom: 10px; }
+  .know-card p b { color: var(--ink); font-weight: 600; }
+  .know-card ul { padding-left: 18px; }
+  .know-card li { font-size: 13.5px; color: var(--ink-2); line-height: 1.6; margin-bottom: 6px; }
+  .know-card .formula {
+    font-family: 'JetBrains Mono', monospace; font-size: 12px; background: var(--bg-tint);
+    padding: 10px 12px; border-radius: 6px; margin: 8px 0; color: var(--ink-2);
+  }
+
+  /* QUESTIONS */
+  .q-list { display: flex; flex-direction: column; gap: 10px; }
+  .q-row {
+    padding: 16px 20px; background: var(--bg-soft); border: 1px solid var(--line);
+    border-radius: 10px; display: flex; gap: 14px; align-items: flex-start;
+  }
+  .q-row .num { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--ink-3); font-weight: 600; margin-top: 2px; }
+  .q-row .q { font-size: 14px; color: var(--ink); line-height: 1.55; }
+  .q-row .q small { display: block; color: var(--ink-3); font-size: 12px; margin-top: 4px; font-weight: 400; }
+
+  /* FOOTER */
+  footer { padding: 40px 0 60px; text-align: center; color: var(--ink-4); font-size: 12px; }
+  footer a { color: var(--ink-3); text-decoration: none; border-bottom: 1px dotted var(--ink-4); }
+  footer .sources { margin-top: 20px; font-size: 11px; line-height: 1.8; }
+
+  /* RESPONSIVE */
+  @media (max-width: 720px) {
+    .hero h1 { font-size: 36px; }
+    .card-grid { grid-template-columns: 1fr; }
+    .toc-grid { grid-template-columns: 1fr; }
+    .pitch-grid { grid-template-columns: 1fr; }
+    .know-grid { grid-template-columns: 1fr; }
+    .email-row { grid-template-columns: 1fr; }
+    .book { grid-template-columns: 1fr; }
+    .book-cover { max-width: 130px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="wrap topbar-inner">
+    <div class="brand"><span class="dot"></span>NELSON · MORNING BRIEF</div>
+    <div>Thursday · 18 June 2026 · 07:30 WIB</div>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Volume 02 · Edition 06.18.2026</div>
+    <h1>The Fed went <em>hawkish</em>, Iran went <em>quiet</em>,<br>and Indonesia raised the wall.</h1>
+    <p class="sub">A 15-minute brief on the last 48 hours: one surprise rate signal from the Fed, a fragile Middle East peace, SpaceX's history-making IPO, Yum's $2.7B Pizza Hut carve-out, and Bank Indonesia choosing rupiah stability over growth. Everything you need to sit down and draft an equity research note today.</p>
+    <div class="meta-row">
+      <span><b>Read time</b> · ~14 minutes</span>
+      <span><b>Items curated</b> · 23 of 180+</span>
+      <span><b>Coverage window</b> · Jun 16 – Jun 18, 2026</span>
+      <span><b>Confidence</b> · High (multi-source)</span>
+    </div>
+  </div>
+</div>
+
+<!-- TICKER -->
+<div class="ticker-strip">
+  <div class="wrap ticker-row">
+    <div class="t"><span class="sym">S&amp;P 500</span><span class="px">7,505.45</span><span class="up">+1.15%</span></div>
+    <div class="t"><span class="sym">NDX</span><span class="px">26,412</span><span class="up">+1.50%</span></div>
+    <div class="t"><span class="sym">DJI</span><span class="px">51,904</span><span class="up">+0.80%</span></div>
+    <div class="t"><span class="sym">IHSG</span><span class="px">6,172.34</span><span class="down">−0.78%</span></div>
+    <div class="t"><span class="sym">USDIDR</span><span class="px">17,864</span><span class="flat">flat</span></div>
+    <div class="t"><span class="sym">BRENT</span><span class="px">$71.20</span><span class="down">−3.4%</span></div>
+    <div class="t"><span class="sym">UST 10Y</span><span class="px">4.62%</span><span class="up">+7 bps</span></div>
+    <div class="t"><span class="sym">BTC</span><span class="px">$89,826</span><span class="flat">−0.2%</span></div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- TOC -->
+  <nav class="toc">
+    <h4>In this brief</h4>
+    <div class="toc-grid">
+      <a href="#email"><span class="n">01</span> Inbox digest</a>
+      <a href="#agenda"><span class="n">02</span> Today's agenda</a>
+      <a href="#macro"><span class="n">03</span> Macro &amp; the Fed</a>
+      <a href="#geo"><span class="n">04</span> Geopolitics &amp; oil</a>
+      <a href="#global"><span class="n">05</span> Global markets</a>
+      <a href="#indo"><span class="n">06</span> Indonesia (IHSG / BI)</a>
+      <a href="#ma"><span class="n">07</span> M&amp;A and IPOs</a>
+      <a href="#earnings"><span class="n">08</span> Earnings tape</a>
+      <a href="#analyst"><span class="n">09</span> Analyst calls</a>
+      <a href="#corr"><span class="n">10</span> Correlations w/ prior brief</a>
+      <a href="#pitch"><span class="n">11</span> Equity pitch starters</a>
+      <a href="#book"><span class="n">12</span> Daily book</a>
+      <a href="#knowledge"><span class="n">13</span> Knowledge feed (intern prep)</a>
+      <a href="#questions"><span class="n">14</span> Questions for you</a>
+    </div>
+  </nav>
+
+  <!-- 01 EMAIL -->
+  <section id="email">
+    <div class="sec-head">
+      <span class="ix">SECTION 01</span>
+      <h2>Inbox digest</h2>
+      <span class="tag">Gmail · last 24h</span>
+    </div>
+    <p class="sec-intro">5 threads pulled from your unread/important Gmail. The rest of the inbox (jobs, alerts, receipts) is noise — filtered out. <b>One requires action.</b></p>
+
+    <div class="email-list">
+      <div class="email-row">
+        <div class="sender">
+          <span class="from">Morning Brew (Crew)</span>
+          <span>crew@community.morningbrew.com</span>
+          <span class="when">18 Jun · 21:00 WIB</span>
+        </div>
+        <div class="body">
+          <h4>"Show Me the Deal: How AI Is Reshaping M&amp;A" — webinar invite, June 23</h4>
+          <p>40-minute live session on AI-accelerated deal sourcing &amp; diligence. Directly relevant to your career track. Free to register.</p>
+        </div>
+        <div class="priority"><span class="pill amber">RSVP</span></div>
+      </div>
+
+      <div class="email-row">
+        <div class="sender">
+          <span class="from">Morning Brew (newsletter)</span>
+          <span>crew@morningbrew.com</span>
+          <span class="when">18 Jun · 09:19 WIB</span>
+        </div>
+        <div class="body">
+          <h4>"☕ Welcome to Warsh" — Fed may raise rates this year</h4>
+          <p>Leads with the hawkish Fed pivot signal (more on this in §03). Confirms the consensus shift toward zero cuts in 2026.</p>
+        </div>
+        <div class="priority"><span class="pill gray">Read</span></div>
+      </div>
+
+      <div class="email-row">
+        <div class="sender">
+          <span class="from">LinkedIn Updates</span>
+          <span>updates-noreply@linkedin.com</span>
+          <span class="when">18 Jun · 12:41 WIB</span>
+        </div>
+        <div class="body">
+          <h4>Discussion: PP No. 20/2026 (issued 22 April) reshaping Indonesian regs</h4>
+          <p>Network sharing analysis of Government Regulation 20/2026. Worth a 5-min skim — regulatory shifts at home that may affect equity coverage.</p>
+        </div>
+        <div class="priority"><span class="pill gray">Skim</span></div>
+      </div>
+
+      <div class="email-row">
+        <div class="sender">
+          <span class="from">Indeed Job Alerts (JKT)</span>
+          <span>donotreply@jobalert.indeed.com</span>
+          <span class="when">18 Jun · 09:11 WIB</span>
+        </div>
+        <div class="body">
+          <h4>L'Oréal HFI 2026 (Batch 2) — Finance role + 17 more in Jakarta</h4>
+          <p>L'Oréal Finance Internship Batch 2 just opened. Aligned to your trajectory; consider applying within 48h.</p>
+        </div>
+        <div class="priority"><span class="pill red">ACT 48h</span></div>
+      </div>
+
+      <div class="email-row">
+        <div class="sender">
+          <span class="from">Google Play</span>
+          <span>googleplay-noreply@google.com</span>
+          <span class="when">18 Jun · 13:11 WIB</span>
+        </div>
+        <div class="body">
+          <h4>Anthropic subscription renewed — confirmation receipt</h4>
+          <p>Routine receipt. Filed for your records.</p>
+        </div>
+        <div class="priority"><span class="pill gray">FYI</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 AGENDA -->
+  <section id="agenda">
+    <div class="sec-head">
+      <span class="ix">SECTION 02</span>
+      <h2>Today's agenda</h2>
+      <span class="tag">Calendar · unavailable</span>
+    </div>
+    <div class="callout amber">
+      <b>Heads-up:</b> Google Calendar isn't connected in this session — only Gmail and Drive are. To enable agenda pulls (Bagian 2), add the Google Calendar MCP server to your remote environment's tool config. Once connected, this section will auto-populate from <code>list_events</code>. <br><br>
+      In the meantime: <b>Tidak ada agenda terjadwal hari ini.</b> Suggested time-blocks below.
+    </div>
+    <div class="card-grid">
+      <div class="card">
+        <div class="label blue">07:30 – 08:00 WIB</div>
+        <h3>Read this brief</h3>
+        <p>Cover-to-cover. Note any tickers you want to pull tearsheets on.</p>
+      </div>
+      <div class="card">
+        <div class="label blue">08:00 – 10:00 WIB</div>
+        <h3>Equity research draft block</h3>
+        <p>Pick one of the three pitch starters in §11. Outline thesis → catalyst → valuation → risk in two pages.</p>
+      </div>
+      <div class="card">
+        <div class="label blue">10:00 – 10:30 WIB</div>
+        <h3>Macro check-in</h3>
+        <p>Watch SGX Nikkei + HSI open as a proxy for Asian risk-on/off into IHSG open at 09:00.</p>
+      </div>
+      <div class="card">
+        <div class="label blue">20:30 WIB</div>
+        <h3>US open</h3>
+        <p>US initial jobless claims + Philly Fed manufacturing both pre-market — watch for a Fed-narrative recalibration.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 MACRO -->
+  <section id="macro">
+    <div class="sec-head">
+      <span class="ix">SECTION 03</span>
+      <h2>Macro &amp; the Fed</h2>
+      <span class="tag">Highest impact</span>
+    </div>
+    <p class="sec-intro">The Fed delivered a <b>hawkish pause</b> on June 17. The hold was expected; the <i>tone</i> was not. This is the single most market-moving event of the week.</p>
+
+    <div class="card-grid one">
+      <div class="card">
+        <div class="label red">FOMC · JUNE 17, 2026</div>
+        <h3>Hawkish hold at 3.50–3.75%. Cuts are no longer the baseline.</h3>
+        <p><b>Vote:</b> 10–2 to hold. The dissents wanted a hike. <b>SEP revision:</b> 2026 PCE inflation lifted to 3.6% (from 3.1% in March). <b>Dot plot:</b> median now sees only <b>one</b> 25bp cut for the remainder of 2026 — down from three.</p>
+        <p>Several officials flagged a <b>possible hike</b> later this year if inflation doesn't come back to target. Polymarket / SOFR futures repriced to 79.8% probability of <i>zero</i> cuts in 2026.</p>
+        <div class="why">
+          <b>Why it matters for your pitch:</b> Long-duration assets (high-multiple tech, REITs, EM debt, EM equities including IHSG) face a higher discount-rate regime than the consensus had assumed two weeks ago. Earnings yields need to clear ~4.6% UST 10Y again. Quality-balance-sheet and pricing-power names get re-rated <i>up</i>; unprofitable growth gets re-rated <i>down</i>.
+        </div>
+      </div>
+    </div>
+
+    <div class="callout blue">
+      <b>The 1-line takeaway:</b> "Higher-for-longer" is back, and the burden of proof has flipped — markets now need <i>evidence</i> of cuts, not the absence of hikes.
+    </div>
+  </section>
+
+  <!-- 04 GEOPOLITICS -->
+  <section id="geo">
+    <div class="sec-head">
+      <span class="ix">SECTION 04</span>
+      <h2>Geopolitics &amp; oil</h2>
+      <span class="tag">Risk-off → risk-on</span>
+    </div>
+    <p class="sec-intro">A pivotal de-escalation week. The U.S.–Iran interim agreement (announced Jun 15) and the end of the U.S. naval blockade (Jun 18) have collapsed the war-risk premium in oil.</p>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="label green">DE-ESCALATION</div>
+        <h3>U.S.–Iran interim deal + blockade ends</h3>
+        <p>After the Feb 28 US/Israel strike that killed Khamenei, and the March 4 Iranian closure of the Strait of Hormuz, the conflict appears to be transitioning into a managed truce. Brent has retraced from +60% above pre-conflict levels back near $71/bbl.</p>
+        <div class="why">
+          <b>2026 Brent forecast:</b> ~$86 avg vs $69 in 2025 (still high). <b>27%</b> of global seaborne crude moves through Hormuz — the optionality of re-escalation is the tail risk now embedded in long-dated oil.
+        </div>
+      </div>
+      <div class="card">
+        <div class="label amber">RUSSIA-UKRAINE</div>
+        <h3>Quietly grinds on; Russia loses oil-revenue tailwind</h3>
+        <p>Lower Brent removes one of Russia's funding pillars (energy revenues). Watch for accelerated diplomatic activity over the next 30–60 days if Brent stays sub-$75.</p>
+        <div class="why">
+          <b>Equity read-across:</b> European defense names (RTX, BAE, RHM-DE) underperformed yesterday on peace optimism; energy E&amp;Ps (XOM, CVX, OXY) under pressure.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 GLOBAL -->
+  <section id="global">
+    <div class="sec-head">
+      <span class="ix">SECTION 05</span>
+      <h2>Global markets</h2>
+      <span class="tag">Two-day round trip</span>
+    </div>
+    <p class="sec-intro">A textbook "sell on the Fed, buy on the geopolitics" 48 hours: Wednesday's −1.2% dump on the hawkish FOMC was fully reversed on Thursday by the Iran blockade lift.</p>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="label red">WEDNESDAY · JUN 17</div>
+        <h3>Hawkish Fed selloff</h3>
+        <p>S&amp;P 500 <b class="down">−1.21%</b> · 7,420.10 · Nasdaq <b class="down">−1.34%</b> · 26,021.66 · Dow <b class="down">−0.98%</b> · 51,492.55.</p>
+        <p>Tech leaders all red — MSFT, META, GOOGL, AMZN. Classic duration trade: higher rates = lower long-dated tech multiples.</p>
+      </div>
+      <div class="card">
+        <div class="label green">THURSDAY · JUN 18</div>
+        <h3>Iran-peace bounce</h3>
+        <p>S&amp;P 500 <b class="up">+1.15%</b> · Nasdaq <b class="up">+1.50%</b> · Dow <b class="up">+0.80%</b>. Russell 2000 <b class="down">−0.72%</b> — small-caps lagged (rate-sensitive).</p>
+        <p>Risk-on driven by oil collapse → lower implied breakevens → bid for risk assets despite the hawkish Fed signal.</p>
+      </div>
+      <div class="card">
+        <div class="label amber">RATES &amp; FX</div>
+        <h3>UST curve bear-steepens; DXY mixed</h3>
+        <p>10Y UST <b>+7bps to 4.62%</b>. 2s10s steeper. Dollar firm vs JPY/EUR but soft vs commodity FX as oil fell.</p>
+      </div>
+      <div class="card">
+        <div class="label violet">CRYPTO &amp; COMMODITIES</div>
+        <h3>BTC stable around $89.8k; Gold $4,518 (−0.75%)</h3>
+        <p>Gold sold on de-escalation. Bitcoin's correlation with Nasdaq-100 sat at <b>85%</b> through this week — it's trading as high-beta tech, not a safe haven.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 INDONESIA -->
+  <section id="indo">
+    <div class="sec-head">
+      <span class="ix">SECTION 06</span>
+      <h2>Indonesia · IHSG &amp; Bank Indonesia</h2>
+      <span class="tag">Defensive turn</span>
+    </div>
+    <p class="sec-intro">Bank Indonesia chose the rupiah over growth. A 25bp hike, an IHSG selloff, and a continuing capital outflow story that has reached the President's desk.</p>
+
+    <div class="card-grid one">
+      <div class="card">
+        <div class="label red">BI RATE · JUNE 18</div>
+        <h3>BI hikes 25bps to 5.75% — pure FX defense</h3>
+        <p><b>Deposit facility:</b> 4.75%. <b>Lending facility:</b> 6.25%. Gov. Perry Warjiyo framed it as "<i>a further step to strengthen the stability of the rupiah amidst persistently high global uncertainties.</i>"</p>
+        <p><b>IHSG closed −0.78% at 6,172.34.</b> Infrastructure sector worst (−1.96%), then financials (−1.32%) and healthcare (−1.07%). Breadth: 491 down / 258 up / 137 flat. Turnover Rp 17.97T.</p>
+        <p><b>USDIDR ~17,864.</b> FX reserves dropped USD$1.3B in May to $144.9B — lowest since June 2024. Q1 2026 capital outflow: <b>Rp 26.06T from equities + Rp 25.10T from govies</b>. Prabowo raised the issue in cabinet.</p>
+        <div class="why">
+          <b>Why it matters:</b> A higher BI rate compresses Indonesian bank NIMs short-term (deposit re-pricing faster than loans), pressures rate-sensitive sectors (property, autos via ASII, infra), and is a near-term headwind for IHSG multiple expansion. BUT — it stabilizes the rupiah, which is necessary before foreigners come back. <b>Sequence matters:</b> defend currency first, then equities follow.
+        </div>
+      </div>
+    </div>
+
+    <div class="callout red">
+      <b>Sector watch:</b> Banks (BBRI, BBCA, BMRI) — short-term margin pressure but defensive on credit quality. Property (CTRA, BSDE) and autos (ASII) — direct rate headwind. Commodities (ADRO, ITMG) — disinflation risk if global oil keeps falling.
+    </div>
+  </section>
+
+  <!-- 07 M&A IPO -->
+  <section id="ma">
+    <div class="sec-head">
+      <span class="ix">SECTION 07</span>
+      <h2>M&amp;A and IPOs</h2>
+      <span class="tag">Big week for deals</span>
+    </div>
+    <p class="sec-intro">SpaceX rewrote the IPO history book. Yum! executed a classic split-acquirer carve-out. OpenAI and Anthropic put their flags down for fall 2026 listings.</p>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="label violet">IPO · JUNE 12 · LIVE</div>
+        <h3>SpaceX (SPCX) — $75B raise, the largest IPO ever</h3>
+        <p>555,555,555 shares at $135 priced. Opened on Nasdaq at <b>$150</b> (+11%). Surpasses Saudi Aramco's 2019 listing. Re-opens the megacap IPO window that was closed since 2021.</p>
+        <div class="why">
+          <b>Read-through:</b> Risk appetite for "category-defining" private giants is intact. OpenAI &amp; Anthropic filings (below) become much more credible. Watch for <b>SPCX 6-month lockup</b> overhang into Dec 2026.
+        </div>
+      </div>
+      <div class="card">
+        <div class="label violet">IPO · CONFIDENTIAL FILINGS</div>
+        <h3>OpenAI &amp; Anthropic — both filed in June 2026</h3>
+        <p><b>OpenAI:</b> Confidential S-1 with SEC; possible fall 2026 debut. <b>Anthropic:</b> Filed at a market-leading <b>$965B valuation</b>. Both expected on Nasdaq.</p>
+        <div class="why">
+          <b>Note for your pitch:</b> Comp-set work for any AI-adjacent name will be redrawn the moment these price. Start building your comp table now.
+        </div>
+      </div>
+      <div class="card">
+        <div class="label blue">IPO · JUNE 4</div>
+        <h3>Quantinuum (QNT) — quantum, $1.68B</h3>
+        <p>Priced at $60, traded $64–$68 day-1. Upsized vs initial range — strong institutional demand for hardware-adjacent quantum.</p>
+      </div>
+      <div class="card">
+        <div class="label amber">IPO · JUNE 22 (HK)</div>
+        <h3>HQVT Technology — HKEX Main Board</h3>
+        <p>85.16M primary shares at HKD 7.20. Tests HK risk appetite post-IPO drought.</p>
+      </div>
+      <div class="card">
+        <div class="label amber">M&amp;A · JUNE 16</div>
+        <h3>Yum! Brands sells Pizza Hut for $2.7B (split deal)</h3>
+        <p><b>Pizza Hut ex-China → LongRange Capital</b> (PE) for ~$1.5B. <b>Pizza Hut Mainland China → Yum China</b> (YUMC) for the balance. Board approved a new <b>$4B share buyback</b>.</p>
+        <div class="why">
+          <b>Mechanism (see §13 for full explainer):</b> This is a <i>carve-out</i> — selling a non-core brand to a PE sponsor while simultaneously selling the geographic sub-segment to the natural strategic. Buyback funded partly with deal proceeds. Classic capital-recycling pitch for a sum-of-the-parts thesis on multi-brand consumer co's (think MDLZ, KO, PEP, ROST).
+        </div>
+      </div>
+      <div class="card">
+        <div class="label amber">M&amp;A · JUNE 15</div>
+        <h3>ODNB + National Capital Bancorp → $2.4B community bank</h3>
+        <p>Stock-for-stock merger forming a regional player. Part of the broader US community-bank consolidation theme (deposit-cost pressure → scale need).</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 EARNINGS -->
+  <section id="earnings">
+    <div class="sec-head">
+      <span class="ix">SECTION 08</span>
+      <h2>Earnings tape</h2>
+      <span class="tag">Light slate</span>
+    </div>
+    <div class="card-grid">
+      <div class="card">
+        <div class="label amber">LENNAR (LEN) · Q2 2026</div>
+        <h3>EPS beat, revenue miss — mixed housing read</h3>
+        <p><b>EPS $1.31</b> vs $1.24 consensus (+5.6%). <b>Revenue $7.94B</b> vs $8.07B (−1.6%, YoY −5%). Translation: <i>margin discipline holding, but unit deliveries weakening</i> — consistent with a rate-sensitive economy. Watch order intake guide for read-through to PHM, DHI, KBH.</p>
+      </div>
+      <div class="card">
+        <div class="label blue">UPCOMING · WATCHLIST</div>
+        <h3>FedEx (FDX) reports Jun 23</h3>
+        <p>Global freight bellwether. Cons. expects beat. Will set the read for global trade volumes post-Iran de-escalation. Accenture (ACN) also next week — IT services pulse.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 09 ANALYST -->
+  <section id="analyst">
+    <div class="sec-head">
+      <span class="ix">SECTION 09</span>
+      <h2>Analyst calls worth knowing</h2>
+      <span class="tag">Bulge bracket only</span>
+    </div>
+    <table class="analyst">
+      <thead>
+        <tr><th>Action</th><th>Ticker</th><th>Firm</th><th>Rating</th><th>PT</th><th>Thesis (1-line)</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><span class="pill green">Upgrade</span></td><td class="ticker">TER</td><td>Goldman Sachs</td><td><b>Buy</b> (from Sell — double-upgrade)</td><td>$230</td><td>GPU-test traction + traditional-customer recovery</td></tr>
+        <tr><td><span class="pill green">Upgrade</span></td><td class="ticker">HSY</td><td>Morgan Stanley</td><td><b>OW</b> (from EW)</td><td>$211</td><td>"Rare visibility into significant earnings growth" in staples</td></tr>
+        <tr><td><span class="pill green">Upgrade</span></td><td class="ticker">DG</td><td>JPMorgan</td><td><b>OW</b> (from Neutral)</td><td>$166</td><td>Upside to 2-3% SSS guide; trade-down beneficiary</td></tr>
+        <tr><td><span class="pill green">Upgrade</span></td><td class="ticker">DOCS</td><td>Morgan Stanley</td><td><b>OW</b> (from EW)</td><td>$65</td><td>Engagement strengthening, stock disconnected from fundamentals</td></tr>
+        <tr><td><span class="pill red">Downgrade</span></td><td class="ticker">ARM</td><td>Goldman Sachs</td><td><b>Sell</b> (from Neutral)</td><td>$120</td><td>Limited AI-cycle leverage + business-model transition risk</td></tr>
+        <tr><td><span class="pill red">Downgrade</span></td><td class="ticker">COST</td><td>Roth Capital</td><td><b>Sell</b> (from Neutral)</td><td>$769</td><td>Q1 beat but underlying metrics "concerning"</td></tr>
+        <tr><td><span class="pill amber">Coverage</span></td><td class="ticker">GS</td><td>JPMorgan</td><td>PT cut</td><td>$900 (−15%)</td><td>Cautious on capital-markets revenue normalization</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 10 CORRELATIONS -->
+  <section id="corr">
+    <div class="sec-head">
+      <span class="ix">SECTION 10</span>
+      <h2>Correlations with prior research</h2>
+      <span class="tag">Compares vs Apr 26 brief</span>
+    </div>
+    <p class="sec-intro">Your last brief in this repo was the <b>CEO Intelligence Briefing dated Apr 26, 2026</b> — that was during the peak Iran-conflict window. Here's what's changed and what's confirmed.</p>
+
+    <div class="corr">
+      <div class="row">
+        <div class="when">APR 26 → JUN 18</div>
+        <div class="what"><b>Oil:</b> Brent was peaking at +60% above pre-conflict levels in late April. Today it's back near $71 (still elevated vs 2025 average of $69, but the war-premium has largely bled out). <b>Net change in risk premium:</b> from "extreme" to "normalized-with-tail-risk."</div>
+      </div>
+      <div class="row">
+        <div class="when">APR 26 → JUN 18</div>
+        <div class="what"><b>Fed posture:</b> April expectations were for 2-3 cuts in 2026. Today: median dot now sees <b>one</b>, market pricing <b>zero</b>. The hawkish pivot is the single biggest narrative reversal of Q2.</div>
+      </div>
+      <div class="row">
+        <div class="when">APR 26 → JUN 18</div>
+        <div class="what"><b>Indonesia capital outflows</b> that surfaced in Q1 (Rp 26T equity, Rp 25T govies) intensified through the April Iran shock. BI is now <b>actively defending</b> the rupiah with a +25bp hike — a meaningful pivot from neutral stance in April.</div>
+      </div>
+      <div class="row">
+        <div class="when">CONFIRMED</div>
+        <div class="what"><b>EM equities under pressure</b> on twin headwinds (higher USD rates + commodity disinflation). IHSG underperformance is consistent with the thesis flagged in April.</div>
+      </div>
+      <div class="row">
+        <div class="when">NEW</div>
+        <div class="what"><b>IPO window is open</b> — SpaceX, Quantinuum, OpenAI/Anthropic filings. This was not yet visible in April. Implications for IB pipeline are positive for ECM franchises (GS, MS).</div>
+      </div>
+      <div class="row">
+        <div class="when">NEW</div>
+        <div class="what"><b>PE-led carve-outs returning</b> (LongRange / Pizza Hut). This is the kind of deal pattern that signals a healthy sponsor-financing environment.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 PITCH -->
+  <section id="pitch">
+    <div class="sec-head">
+      <span class="ix">SECTION 11</span>
+      <h2>Equity research / stock pitch starters</h2>
+      <span class="tag">Choose one to draft today</span>
+    </div>
+    <p class="sec-intro">Three differentiated angles, each grounded in the last 48h of news. Each has a clean thesis sentence, catalyst, and the risk to your view.</p>
+    <div class="pitch-grid">
+      <div class="pitch-card">
+        <div class="side long">LONG · GLOBAL</div>
+        <h3>Teradyne (TER)</h3>
+        <p><b>Thesis:</b> GS double-upgrade reflects a real inflection in GPU-test wins. ATE (automated-test equipment) leverage to AI capex is mid-cycle, not late.</p>
+        <p><b>Catalyst:</b> Q2 print (Jul); GPU customer order disclosure.</p>
+        <p><b>Risk:</b> Cyclical semi-test rolls over if AI capex moderates.</p>
+        <div class="meta">PT $230 · cap $30B · 24x fwd</div>
+      </div>
+      <div class="pitch-card">
+        <div class="side short">SHORT · GLOBAL</div>
+        <h3>Arm Holdings (ARM)</h3>
+        <p><b>Thesis:</b> Multiple compression on the realization that AI-data-center wins are routing more to NVDA &amp; AVGO than ARM royalties. GS PT $120 = 30%+ downside.</p>
+        <p><b>Catalyst:</b> Hyperscaler ASIC architecture disclosures; royalty-rate guide.</p>
+        <p><b>Risk:</b> A defensive AI rotation lifts all boats.</p>
+        <div class="meta">PT $120 · cap $160B · richly valued</div>
+      </div>
+      <div class="pitch-card">
+        <div class="side pair">PAIR · INDONESIA</div>
+        <h3>Long BBRI / Short CTRA</h3>
+        <p><b>Thesis:</b> Post-BI hike, large-cap state banks see <i>quality-balance-sheet</i> bid (defensive); rate-sensitive developer (CTRA) faces double headwind (mortgage demand + funding cost).</p>
+        <p><b>Catalyst:</b> Q2 earnings; rupiah stabilization → foreign return.</p>
+        <p><b>Risk:</b> BI surprise cut (unlikely &lt;6 months) or property stimulus.</p>
+        <div class="meta">Beta-neutral · 1m–3m horizon</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 BOOK -->
+  <section id="book">
+    <div class="sec-head">
+      <span class="ix">SECTION 12</span>
+      <h2>Daily book recommendation</h2>
+      <span class="tag">For IB / PE / M&amp;A track</span>
+    </div>
+    <div class="book">
+      <div class="book-cover">
+        <div class="author">ROSENBAUM · PEARL</div>
+        <div class="title">Investment Banking: Valuation, LBOs, M&amp;A and IPOs</div>
+      </div>
+      <div class="book-info">
+        <h3>Investment Banking, 3rd Edition</h3>
+        <div class="author-name">Joshua Rosenbaum &amp; Joshua Pearl · Wiley Finance</div>
+        <p>This is the <b>only book you should read every day</b> for the next 6–9 months if your target is IB/PE/M&amp;A. It is the de-facto bible of the industry: every junior analyst at GS, MS, JPM, Lazard, Evercore, and the bulge of PE shops has read it cover-to-cover before week 1.</p>
+        <p>It covers, in this order: <b>comparable companies analysis, precedent transactions, DCF, LBO modeling, and full M&amp;A sell-side / buy-side processes</b>. No other book gives you the same mechanical, exam-ready coverage of the four core valuation methodologies.</p>
+        <div class="daily">
+          <b>Suggested daily routine (30 min/day):</b><br>
+          • Mon–Wed → 10 pages of one chapter + 1 model exercise<br>
+          • Thu → re-do yesterday's exercise in a blank Excel<br>
+          • Fri → read the M&amp;A news of the week and label what's a "trading comp" vs "precedent" deal<br>
+          • Weekend → 1 LBO paper-LBO from scratch (30 min)<br>
+          <b>Outcome after 90 days:</b> you'll be able to build a trading-comps table and a basic DCF from memory — which is exactly what's tested in first-round IB technicals.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13 KNOWLEDGE -->
+  <section id="knowledge">
+    <div class="sec-head">
+      <span class="ix">SECTION 13</span>
+      <h2>Knowledge feed</h2>
+      <span class="tag">Intern-prep · explained from zero</span>
+    </div>
+    <p class="sec-intro">Two concepts drawn straight from this morning's news. Read these once and you'll understand the news <i>and</i> impress a senior in a coffee chat.</p>
+
+    <div class="know-grid">
+
+      <!-- CONCEPT 1: HAWKISH PAUSE & DOT PLOT -->
+      <div class="know-card">
+        <span class="chip">Concept 01 · Macro</span>
+        <h3>"Hawkish pause" and the dot plot — how to read a Fed meeting</h3>
+        <p>A <b>Fed meeting (FOMC)</b> happens 8 times a year. At each meeting, the Fed decides whether to raise, hold, or cut the policy rate (the <i>federal funds rate</i>). Yesterday they <b>held</b> at 3.50–3.75%.</p>
+        <p>But the market reacted as if rates had been <i>raised</i>. Why? Because of two things:</p>
+        <p><b>1. The dot plot.</b> Every 3 months the Fed publishes a chart of dots — each dot is one official's forecast for where rates will be at the end of 2026, 2027, etc. The <i>median</i> of those dots is what the market cares about. In March it showed <b>three</b> cuts in 2026; yesterday it showed <b>one</b>. <i>That</i> is the news.</p>
+        <p><b>2. The statement language.</b> "Hawkish" = leaning toward tighter policy (higher rates); "dovish" = leaning toward easier policy (lower rates). When the Fed <i>holds</i> the rate but signals via dots and language that future cuts are off the table, that combination is called a <b>"hawkish pause."</b></p>
+        <p class="formula">Mental model: Price of asset = Future cash flows / (1 + discount rate)^t</p>
+        <p>If the discount rate (driven by the Fed) is going to stay higher than the market thought, then today's price of every long-duration asset (tech stocks, REITs, EM bonds) must come down. <b>That's why yesterday Nasdaq dropped −1.3%.</b></p>
+        <p><b>Interview-ready 1-liner:</b> "A hawkish pause shifts the burden of proof: instead of needing evidence to <i>raise</i>, the Fed now needs evidence to <i>cut</i>."</p>
+      </div>
+
+      <!-- CONCEPT 2: CARVE-OUT M&A -->
+      <div class="know-card">
+        <span class="chip">Concept 02 · M&amp;A mechanics</span>
+        <h3>Carve-outs &amp; split-acquirer deals — Yum/Pizza Hut as the textbook case</h3>
+        <p>A <b>carve-out</b> is when a parent company sells a piece of itself (a brand, a division, a geography) to a buyer. The seller keeps the rest. Yum! Brands owns KFC, Taco Bell, and Pizza Hut. Yesterday they "carved out" Pizza Hut.</p>
+        <p>What made it interesting is the <b>split-acquirer</b> structure: instead of one buyer, they used <i>two</i>:</p>
+        <ul>
+          <li><b>Pizza Hut ex-China → LongRange Capital</b> (a private-equity firm) for ~$1.5B</li>
+          <li><b>Pizza Hut Mainland China → Yum China</b> (a publicly listed strategic) for the rest</li>
+        </ul>
+        <p>Why split? Because <b>different buyers value different parts differently</b>:</p>
+        <ul>
+          <li>PE wants the operating brand globally where they can cost-cut + add leverage to boost IRR</li>
+          <li>Yum China already operates the China business + has local know-how + can pay a synergy premium</li>
+        </ul>
+        <p>Selling each piece to its <i>natural</i> buyer maximizes total deal value. This is called <b>"sum-of-the-parts arbitrage"</b> and it's the entire job of an M&amp;A advisor on the sell-side.</p>
+        <p><b>Where the cash goes:</b> Yum announced a $4B share buyback alongside. The deal-proceeds fund the buyback → EPS rises → re-rating. This is called <b>"capital recycling"</b> — sell a low-multiple asset, buy back your own high-multiple stock, mechanical EPS lift.</p>
+        <p><b>Interview-ready 1-liner:</b> "Yum executed a textbook sum-of-the-parts carve-out: PE bought the operating brand globally, the local strategic bought the China geography, and the proceeds fund a buyback — three value-creation levers in one announcement."</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 14 QUESTIONS -->
+  <section id="questions">
+    <div class="sec-head">
+      <span class="ix">SECTION 14</span>
+      <h2>Questions for you</h2>
+      <span class="tag">Reply to focus tomorrow's brief</span>
+    </div>
+    <div class="q-list">
+      <div class="q-row"><span class="num">Q1</span><span class="q">Which of the three pitch starters do you want me to deep-dive next? <small>I can produce a full 1-page note (thesis · catalyst · valuation · risk · entry/exit) on TER, ARM short, or the BBRI/CTRA pair.</small></span></div>
+      <div class="q-row"><span class="num">Q2</span><span class="q">Bias for tomorrow's brief — <b>global</b>, <b>Indonesia</b>, or <b>balanced</b>? <small>Today is balanced. If you'd rather train the IDX coverage muscle, I can tilt 70/30.</small></span></div>
+      <div class="q-row"><span class="num">Q3</span><span class="q">Do you want me to enable a <b>watchlist</b> (5–8 tickers) that I track day-over-day? <small>Suggested seed: BBRI, BBCA, ASII, BREN (IDX) + TER, ARM, NVDA, XOM (US).</small></span></div>
+      <div class="q-row"><span class="num">Q4</span><span class="q">For the daily book — do you want me to add a <b>2-question quiz</b> at the bottom of each brief, drawn from yesterday's reading? <small>30-second self-check keeps the material sticky.</small></span></div>
+      <div class="q-row"><span class="num">Q5</span><span class="q">Should I connect a Google Calendar MCP to populate Bagian 2 properly? <small>Today's agenda section is a placeholder — your call on enabling it.</small></span></div>
+    </div>
+  </section>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div>Curated for Nelson · Built for the 15-minute desk read.</div>
+    <div class="sources">
+      <b>Sources:</b> CNBC · TheStreet · Federal Reserve · IDNFinancials · Tempo · Databoks Katadata · Bank Indonesia · J.P. Morgan Research · Benzinga · Yum! Brands IR · NPR · BuiltIn · IPOX · World Bank · Wood Mackenzie · Allianz · Polymarket · Kalshi · Gmail (your inbox).
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
