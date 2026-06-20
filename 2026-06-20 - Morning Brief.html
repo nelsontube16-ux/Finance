@@ -1,0 +1,446 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>20 Jun 2026 — Morning Brief</title>
+<style>
+  :root{
+    --ink:#0f1115;
+    --ink-2:#3a3f48;
+    --muted:#6b7280;
+    --line:#ececec;
+    --bg:#ffffff;
+    --accent:#0a66ff;
+    --green:#0f7a3a;
+    --red:#b3261e;
+    --amber:#a26200;
+    --chip:#f5f6f8;
+    --serif:"Iowan Old Style","Charter","Georgia",ui-serif,serif;
+    --sans:-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter","Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;}
+  .page{max-width:880px;margin:0 auto;padding:56px 40px 96px;}
+  /* Masthead */
+  .masthead{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:1px solid var(--ink);padding-bottom:18px;margin-bottom:36px;}
+  .masthead .brand{font-family:var(--serif);font-weight:600;font-size:34px;letter-spacing:-0.02em;line-height:1;}
+  .masthead .brand small{display:block;font-family:var(--sans);font-weight:500;color:var(--muted);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;margin-top:8px;}
+  .masthead .meta{text-align:right;font-size:12px;color:var(--muted);line-height:1.5;}
+  .meta .date{color:var(--ink);font-weight:600;letter-spacing:-0.01em;font-size:13px;}
+  /* TOC */
+  .toc{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:48px;}
+  .toc a{font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-2);text-decoration:none;border:1px solid var(--line);padding:10px 12px;border-radius:8px;text-align:center;transition:.15s;}
+  .toc a:hover{border-color:var(--ink);color:var(--ink);}
+  /* Section */
+  section{margin:0 0 56px;}
+  .kicker{font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
+  h2{font-family:var(--serif);font-weight:600;font-size:26px;letter-spacing:-0.01em;margin:0 0 6px;line-height:1.15;}
+  h3{font-family:var(--sans);font-weight:600;font-size:14px;letter-spacing:0.02em;margin:18px 0 6px;color:var(--ink);}
+  .lede{color:var(--ink-2);font-size:14.5px;line-height:1.55;margin:0 0 22px;max-width:720px;}
+  p{font-size:14.5px;line-height:1.65;color:var(--ink-2);margin:0 0 12px;}
+  ul{padding-left:18px;margin:6px 0 14px;}
+  li{font-size:14.5px;line-height:1.6;color:var(--ink-2);margin:4px 0;}
+  .rule{height:1px;background:var(--line);margin:42px 0;}
+  /* Cards */
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  .card{border:1px solid var(--line);border-radius:12px;padding:18px 20px;background:#fff;}
+  .card h4{margin:0 0 6px;font-size:13px;font-weight:600;letter-spacing:0.02em;}
+  .card p{margin:0;font-size:13.5px;color:var(--ink-2);line-height:1.55;}
+  .chip{display:inline-block;font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;background:var(--chip);color:var(--ink-2);padding:3px 8px;border-radius:999px;margin-right:6px;}
+  .chip.green{background:#e8f5ee;color:var(--green);}
+  .chip.red{background:#fbe9e7;color:var(--red);}
+  .chip.amber{background:#fdf2da;color:var(--amber);}
+  /* Notice */
+  .notice{border:1px dashed var(--ink-2);border-radius:12px;padding:16px 20px;background:#fafafa;}
+  .notice h4{margin:0 0 6px;font-size:13px;font-weight:600;}
+  .notice p{margin:0;font-size:13px;color:var(--ink-2);line-height:1.55;}
+  /* Email rows */
+  .email{display:grid;grid-template-columns:140px 1fr 80px;gap:14px;padding:12px 0;border-bottom:1px solid var(--line);font-size:13.5px;}
+  .email:last-child{border-bottom:0;}
+  .email .from{color:var(--ink);font-weight:600;}
+  .email .subj{color:var(--ink-2);}
+  .email .tag{font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);text-align:right;}
+  .email .tag.action{color:var(--red);font-weight:600;}
+  /* Book card */
+  .book{display:grid;grid-template-columns:120px 1fr;gap:22px;align-items:start;border:1px solid var(--line);border-radius:14px;padding:22px;background:#fff;}
+  .book .cover{aspect-ratio:2/3;background:linear-gradient(160deg,#1a1a1a,#2b2b2b);border-radius:6px;display:flex;align-items:flex-end;padding:14px;color:#fff;font-family:var(--serif);font-size:15px;line-height:1.15;letter-spacing:-0.01em;}
+  /* Knowledge */
+  .know{border-left:2px solid var(--ink);padding:4px 0 4px 18px;margin:18px 0;}
+  .know .term{font-family:var(--serif);font-size:19px;font-weight:600;letter-spacing:-0.01em;margin-bottom:4px;}
+  .know .pron{color:var(--muted);font-size:12px;margin-bottom:10px;}
+  /* Q&A */
+  .qcard{border:1px solid var(--line);border-radius:12px;padding:18px 22px;margin:10px 0;background:#fff;}
+  .qcard .q{font-family:var(--serif);font-size:17px;color:var(--ink);margin:0 0 4px;letter-spacing:-0.01em;}
+  .qcard .why{font-size:13px;color:var(--muted);margin:0;}
+  /* Footer */
+  footer{margin-top:64px;padding-top:18px;border-top:1px solid var(--line);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);display:flex;justify-content:space-between;}
+  @media (max-width:720px){
+    .page{padding:32px 22px 64px;}
+    .toc{grid-template-columns:repeat(2,1fr);}
+    .grid{grid-template-columns:1fr;}
+    .email{grid-template-columns:1fr;}
+    .email .tag{text-align:left;}
+    .book{grid-template-columns:1fr;}
+    .book .cover{aspect-ratio:auto;height:120px;}
+    .masthead{flex-direction:column;align-items:flex-start;gap:14px;}
+    .masthead .meta{text-align:left;}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Masthead -->
+  <div class="masthead">
+    <div class="brand">
+      The Morning Brief
+      <small>Equity Research · Pre-market Read</small>
+    </div>
+    <div class="meta">
+      <div class="date">Saturday, 20 June 2026</div>
+      <div>Edition 001 · Prepared 06:00 WIB</div>
+      <div>For: Nelson</div>
+    </div>
+  </div>
+
+  <!-- TOC -->
+  <nav class="toc">
+    <a href="#email">01 · Email</a>
+    <a href="#agenda">02 · Agenda</a>
+    <a href="#macro">03 · Macro</a>
+    <a href="#markets">04 · Markets</a>
+    <a href="#ma">05 · M&amp;A / IPO</a>
+    <a href="#geo">06 · Geopolitics</a>
+    <a href="#idx">07 · Indonesia</a>
+    <a href="#calls">08 · Analyst Calls</a>
+    <a href="#book">09 · Book of the Day</a>
+    <a href="#learn">10 · Knowledge Feed</a>
+    <a href="#qa">11 · Questions for You</a>
+    <a href="#disc">12 · Disclosures</a>
+  </nav>
+
+  <!-- Transparency notice -->
+  <section>
+    <div class="notice">
+      <h4>A note on today's data sourcing — read first</h4>
+      <p>
+        This session's sandbox blocks outbound traffic to live financial news domains (Reuters, Bloomberg, CNBC, Yahoo Finance, MarketWatch, Fed.gov, IDX) and the live-search tool is offline. To avoid fabricating prices or deal terms — which would be malpractice for equity-research input — the Macro, Markets, M&amp;A, and Indonesia sections below give you (a) the analytical <em>framework</em> and (b) the <em>watchlist of catalysts</em> for the next 48 hours that you should plug live numbers into. Gmail and the educational sections are fully delivered with real data. Tomorrow's brief will pull live tape if you grant the runner outbound access to a news API (Finnhub / Polygon / Alpha Vantage / NewsAPI) or paste two or three headlines into your reply.
+      </p>
+    </div>
+  </section>
+
+  <!-- 01 EMAIL -->
+  <section id="email">
+    <div class="kicker">Section 01</div>
+    <h2>📧 Inbox · last 24 hours</h2>
+    <p class="lede">15 unread threads pulled from Gmail. Filtered for signal — the rest is job-alert noise (Indeed, Glassdoor, LinkedIn). No emails today require an immediate reply.</p>
+
+    <div class="email">
+      <div class="from">Morning Brew</div>
+      <div class="subj"><strong>☕ Making it work</strong> — daily macro digest; lead item is the rise in dual-income households (labor-force participation read-through).</div>
+      <div class="tag">Read</div>
+    </div>
+    <div class="email">
+      <div class="from">Google Security</div>
+      <div class="subj"><strong>Security alert</strong> — new sign-in on your Apple iPad. Confirm it was you; otherwise revoke the session.</div>
+      <div class="tag action">Verify</div>
+    </div>
+    <div class="email">
+      <div class="from">Anthropic</div>
+      <div class="subj"><strong>Privacy Policy update</strong> — review before continued use of Claude products.</div>
+      <div class="tag">FYI</div>
+    </div>
+    <div class="email">
+      <div class="from">LinkedIn Jobs</div>
+      <div class="subj"><strong>D. E. Shaw India — Analyst, Credit Research</strong>. Hedge-fund-side credit research role; relevant to your IB/PE track if you want buy-side optionality.</div>
+      <div class="tag">Apply?</div>
+    </div>
+    <div class="email">
+      <div class="from">LinkedIn Jobs</div>
+      <div class="subj"><strong>Amazon — Financial Analyst, GFS FP&amp;A</strong>. Corporate finance / FP&amp;A path; good fallback if IB cycle slips.</div>
+      <div class="tag">Save</div>
+    </div>
+    <div class="email">
+      <div class="from">Glassdoor / Indeed</div>
+      <div class="subj">10+ job alerts across Jakarta &amp; Singapore (Prudential, Saudi Aramco intern, Yara data analyst, etc.). Treat as background; not action items.</div>
+      <div class="tag">Skim</div>
+    </div>
+
+    <h3>Action stack for today</h3>
+    <ul>
+      <li><strong>Verify the iPad sign-in</strong> (security hygiene — 30 seconds).</li>
+      <li><strong>Shortlist 2 roles</strong> from the D. E. Shaw / Amazon / Saudi Aramco intern set to apply this weekend.</li>
+      <li><strong>Read Morning Brew's lead item</strong> for one labor-market data point you can quote in your equity pitch.</li>
+    </ul>
+  </section>
+
+  <!-- 02 AGENDA -->
+  <section id="agenda">
+    <div class="kicker">Section 02</div>
+    <h2>📅 Today's agenda</h2>
+    <p class="lede">Google Calendar MCP is not connected in this session, so I can't pull live events. To enable: connect the Google Calendar integration; tomorrow's brief will list events with times and read-aheads.</p>
+    <div class="notice">
+      <h4>Workaround until calendar is wired</h4>
+      <p>Paste your day's blocks into the next prompt (e.g. "10:00 markets call, 14:00 case-study session, 19:00 study DCF chapter") and I'll fold them into tomorrow's brief with prep notes per block.</p>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <!-- 03 MACRO -->
+  <section id="macro">
+    <div class="kicker">Section 03</div>
+    <h2>🌐 Macro — what equity research has to price this week</h2>
+    <p class="lede">Three macro vectors set the discount rate and demand backdrop for every name you'd pitch. Track these — not headlines about them — because they move multiples directly.</p>
+
+    <h3>1. Real rates &amp; the Fed path</h3>
+    <p>The Fed funds rate sets the risk-free leg of your WACC. <strong>Mechanism</strong>: WACC = Cost of Equity × E/V + Cost of Debt × (1−t) × D/V; Cost of Equity ≈ Rf + β × ERP. A 25 bp move in the 10Y yield mechanically shifts a typical equity target ±2–4% via terminal-value discounting. <strong>Watch</strong>: next FOMC dot-plot, PCE inflation print, 2s10s spread (steepening = recession risk fading; inversion = trouble).</p>
+
+    <h3>2. Dollar (DXY) &amp; EM currencies</h3>
+    <p><strong>Mechanism for IDR</strong>: a stronger USD pulls capital out of Indonesia → BI defends rupiah → tightens liquidity → IHSG multiples compress. Conversely, a weaker DXY is rocket fuel for Indonesian banks and consumer names. <strong>Watch</strong>: DXY level, USD/IDR vs the 15,500–16,500 band, Bank Indonesia's BI Rate decision.</p>
+
+    <h3>3. Commodities (oil, coal, nickel, CPO)</h3>
+    <p>Indonesia is uniquely commodity-levered. <strong>Read-through</strong>: Coal price ↑ → ADRO / ITMG / PTBA earnings ↑. Nickel ↑ → INCO / ANTM / Harita. CPO ↑ → AALI / LSIP / SIMP. Brent ↑ → MEDC, but margin squeeze for AKR fuel-distribution and PTBA's diesel costs. Always model these as <em>sensitivity tables</em>, never point estimates.</p>
+
+    <div class="grid">
+      <div class="card">
+        <h4>Catalyst calendar — next 48h</h4>
+        <p>US: PCE inflation print, Univ. of Michigan sentiment final. EU: PMI flash readings. Asia: BoJ minutes, China LPR fix. Indonesia: BI rate decision (monthly), trade balance.</p>
+      </div>
+      <div class="card">
+        <h4>What to do with it</h4>
+        <p>Build a one-page "macro dashboard" tab in every pitch deck: Fed funds, 10Y, DXY, Brent, IDR, IHSG vs MSCI EM. Refresh weekly. This is what MDs ask in the first 30 seconds of any review.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 MARKETS -->
+  <section id="markets">
+    <div class="kicker">Section 04</div>
+    <h2>📈 Global markets — framework for the open</h2>
+    <p class="lede">Saturday — US, Europe, and most Asian cash markets are closed. Use the weekend to do the work that pays off Monday: revisit your thesis, refresh comps, and pre-write the Monday morning note.</p>
+
+    <h3>What moves at Monday open</h3>
+    <ul>
+      <li><strong>Gap risk</strong> — any weekend headline (geopolitics, M&amp;A, central-bank speak) is priced in the first 15 minutes. Identify the names with the most weekend "news beta" and have a view ready.</li>
+      <li><strong>Friday closing tape</strong> — re-read the SPX / NDX / STOXX600 closes and breadth (advance/decline). Narrow breadth + index near highs = fragile rally; wide breadth = healthier.</li>
+      <li><strong>VIX vs realized vol</strong> — if VIX trades at a premium to 30-day realized, options are overpriced (sell-vol bias). At a discount, the market is complacent (buy-protection bias).</li>
+    </ul>
+
+    <h3>Sector rotation watch</h3>
+    <p>In a "higher-for-longer" rate regime, the rotation pattern that has rewarded analysts is: <strong>quality + cash-generative</strong> (large-cap industrials, defensive consumer staples) over <strong>long-duration unprofitable growth</strong>. If rates start falling, flip the trade: small-cap, biotech, unprofitable tech outperform on duration. Position your stock pitch with explicit "if rates do X, my call still works because Y."</p>
+  </section>
+
+  <!-- 05 M&A / IPO -->
+  <section id="ma">
+    <div class="kicker">Section 05</div>
+    <h2>🤝 M&amp;A &amp; IPO — what to scan for</h2>
+    <p class="lede">Live deal tape was not retrievable this morning. Below is the structured grid you should populate from Mergermarket / S&amp;P CapIQ / DealStreetAsia when you're back at your terminal.</p>
+
+    <div class="grid">
+      <div class="card">
+        <h4><span class="chip">M&amp;A</span> What to track</h4>
+        <p>Announced deals: target, acquirer, EV, EV/EBITDA, premium to undisturbed price, financing mix, antitrust risk, expected close. Flag any cross-border or strategic-vs-financial sponsor deals — those move comparable multiples for the whole sector.</p>
+      </div>
+      <div class="card">
+        <h4><span class="chip">IPO</span> What to track</h4>
+        <p>New filings &amp; pricings: ticker, exchange, deal size, price range vs final, first-day pop, lead underwriters, lockup expiry. A hot IPO repriges the entire pre-IPO peer set; a busted one shuts the window for 4–8 weeks.</p>
+      </div>
+      <div class="card">
+        <h4><span class="chip amber">Indonesia M&amp;A</span></h4>
+        <p>Watchlist: telco consolidation (post-Indosat / XL discussions), banking (KB Bukopin, MNC group reshuffles), coal &amp; nickel downstreaming JV announcements, GoTo / Grab strategic moves, healthcare roll-ups (Mitra Keluarga, Siloam).</p>
+      </div>
+      <div class="card">
+        <h4><span class="chip amber">IDX IPO pipeline</span></h4>
+        <p>Track new IDX prospectuses on idx.co.id → "Prospectus" tab. Indonesia's 2026 IPO theme has been mid-cap consumer + commodity downstream. Greenshoe and price-band moves are your first signal of demand strength.</p>
+      </div>
+    </div>
+
+    <h3>Quick mechanism — why M&amp;A premium matters for your pitch</h3>
+    <p>When you write "trading at 8.5× EV/EBITDA vs peer median 11×," the immediate counter is "why doesn't it close the gap?" The answer is often <em>strategic optionality</em> — i.e., who could acquire it, at what premium. A clean stock pitch lists 2–3 plausible acquirers and a back-of-envelope take-out price: <strong>Take-out EV ≈ Standalone EV + Synergy NPV × (1 − sponsor share)</strong>. Even if you don't bank on the deal, the floor it implies tightens your downside.</p>
+  </section>
+
+  <!-- 06 GEOPOLITICS -->
+  <section id="geo">
+    <div class="kicker">Section 06</div>
+    <h2>🌍 Geopolitics — how to translate headlines into a discount rate</h2>
+    <p class="lede">Most analysts read geopolitics for color. Good analysts price it. Three transmission channels:</p>
+    <ul>
+      <li><strong>Energy supply</strong> — Middle East, Russia/Ukraine, Strait of Hormuz, Red Sea shipping. Direct hit on Brent → input cost for ~40% of S&amp;P sectors, plus airline / chemicals margin.</li>
+      <li><strong>Trade &amp; tariffs</strong> — US–China decoupling, EU CBAM, Indonesia nickel export rules. Affects semis, autos, batteries, and Indonesian downstream metals.</li>
+      <li><strong>Election &amp; policy risk</strong> — fiscal policy shifts → bond yields → equity multiples. Track US election cycle, ASEAN summits, BI / OJK policy speeches.</li>
+    </ul>
+    <p>The formula MDs respect: <em>"Headline X widens the equity risk premium by ~25–50 bp; my fair value moves from Rp Y to Rp Z; I am still a Buy because Z is still &gt; current price by N%."</em> Don't say "uncertain"; quantify.</p>
+  </section>
+
+  <!-- 07 INDONESIA -->
+  <section id="idx">
+    <div class="kicker">Section 07</div>
+    <h2>🇮🇩 Indonesia — IHSG playbook</h2>
+    <p class="lede">Saturday — IDX closed. Use today to set Monday's watchlist. The IHSG's structural backdrop in 2026 is dominated by three threads:</p>
+    <ul>
+      <li><strong>BI rate path</strong> — every 25 bp BI cut compresses 10Y INDOGB yield ~15–20 bp, lifts banking P/BV (BBCA, BBRI, BMRI, BBNI) and rate-sensitive consumer (UNVR, ICBP, INDF).</li>
+      <li><strong>Nickel downstream</strong> — government's mandatory smelter / battery push keeps INCO, ANTM, MBMA, Harita Nickel (NCKL) in the spotlight. Read every smelter MoU as a multi-year earnings revision, not a one-quarter event.</li>
+      <li><strong>Tech / new economy</strong> — GoTo, Bukalapak path to profitability. Track contribution margin, take-rate, GMV/active-user — not headline GMV.</li>
+    </ul>
+
+    <h3>Sector cheat sheet — names every Indonesia pitch references</h3>
+    <div class="grid">
+      <div class="card">
+        <h4>Big-4 Banks</h4>
+        <p>BBCA, BBRI, BMRI, BBNI. Compare on ROE, NIM, CIR, NPL, CoF. BBCA = quality (premium P/BV); BBRI = micro &amp; rural; BMRI = corporate; BBNI = SOE-linked.</p>
+      </div>
+      <div class="card">
+        <h4>Consumer Staples</h4>
+        <p>UNVR (challenged FMCG), ICBP (Indomie pricing power), MYOR (export optionality), INDF (holding co discount).</p>
+      </div>
+      <div class="card">
+        <h4>Coal &amp; Energy</h4>
+        <p>ADRO, ITMG, PTBA, BUMI. Sensitivity to Newcastle coal price &amp; export quotas (DMO).</p>
+      </div>
+      <div class="card">
+        <h4>Telco</h4>
+        <p>TLKM, ISAT, EXCL. ARPU trends &amp; data monetization. Tower co: TBIG, TOWR, MTEL.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 ANALYST CALLS -->
+  <section id="calls">
+    <div class="kicker">Section 08</div>
+    <h2>🎯 Analyst calls worth tracking</h2>
+    <p class="lede">Live calls weren't retrievable this morning. The desks &amp; analysts <em>I would always read first</em> when prepping equity research:</p>
+    <div class="grid">
+      <div class="card">
+        <h4>Global / US</h4>
+        <p>Mike Wilson (Morgan Stanley — strategy), Marko Kolanovic / Dubravko Lakos (JPM), Savita Subramanian (BofA quant), Tom Lee (Fundstrat). Read for index targets &amp; sector rotation.</p>
+      </div>
+      <div class="card">
+        <h4>EM / Asia</h4>
+        <p>Jonathan Garner (Morgan Stanley Asia), Tim Moe (Goldman Asia), Chetan Ahya (Morgan Stanley econ). Read for EM allocation &amp; China-vs-India-vs-ASEAN.</p>
+      </div>
+      <div class="card">
+        <h4>Indonesia desks</h4>
+        <p>Mandiri Sekuritas, BRI Danareksa, Indo Premier (IPS), CGS-CIMB, Maybank Indonesia, Bahana, Macquarie Indonesia, JP Morgan Indonesia. Their morning notes set the tone for the cash desk.</p>
+      </div>
+      <div class="card">
+        <h4>Macro voices</h4>
+        <p>Mohamed El-Erian (allocator's view), Howard Marks memos (cycle &amp; risk), Stan Druckenmiller interviews (top-down), Bridgewater's Daily Observations (paradigm shifts).</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <!-- 09 BOOK -->
+  <section id="book">
+    <div class="kicker">Section 09</div>
+    <h2>📚 Book of the day — read 15 minutes daily</h2>
+    <p class="lede">If you only have time for one book to live in your bag through internship season, this is it. Why: it teaches you the language of valuation, the workflow of an analyst, and the structure of a pitch in one volume — the same book taught in JP Morgan, MS, and GS associate training.</p>
+
+    <div class="book">
+      <div class="cover">Investment Banking — Rosenbaum &amp; Pearl</div>
+      <div>
+        <h3 style="margin-top:0">Investment Banking: Valuation, LBOs, M&amp;A, and IPOs</h3>
+        <p><em>Joshua Rosenbaum &amp; Joshua Pearl — Wiley Finance, 3rd edition.</em></p>
+        <p>Why this book first: it walks you through the four pillars of IB work — <strong>Comparable Companies</strong>, <strong>Precedent Transactions</strong>, <strong>DCF</strong>, and <strong>LBO</strong> — in exactly the order MDs expect you to think. Each chapter has the full worked example (Valor Acquisition Corp. case), templates, and football-field output. Spend 15 minutes a day, and in 6 weeks you'll be functionally fluent.</p>
+        <h3>15-minute daily reading plan (6 weeks)</h3>
+        <ul>
+          <li>Week 1: Chapter 1 — Comparable Companies Analysis. Build one comps table by hand.</li>
+          <li>Week 2: Chapter 2 — Precedent Transactions. Pull 5 deals from CapIQ &amp; replicate.</li>
+          <li>Week 3: Chapter 3 — DCF, part 1 (forecasting revenue, EBIT, FCF).</li>
+          <li>Week 4: Chapter 3 — DCF, part 2 (WACC, terminal value, sensitivities).</li>
+          <li>Week 5: Chapter 4 — LBO, part 1 (sources &amp; uses, debt schedule).</li>
+          <li>Week 6: Chapter 4–5 — LBO returns &amp; full M&amp;A process.</li>
+        </ul>
+        <h3>Once you've read it, rotate into:</h3>
+        <ul>
+          <li><strong>Damodaran on Valuation</strong> — for the <em>theory</em> behind the practice.</li>
+          <li><strong>Barbarians at the Gate</strong> (Burrough &amp; Helyar) — the canonical PE / LBO story; required cultural reading.</li>
+          <li><strong>The Intelligent Investor</strong> (Graham) — for the equity-pitch mindset (margin of safety).</li>
+          <li><strong>Margin of Safety</strong> (Klarman) — out-of-print but PDFs circulate; pure value-investing logic.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 KNOWLEDGE FEED -->
+  <section id="learn">
+    <div class="kicker">Section 10</div>
+    <h2>🧠 Knowledge feed — one concept, fully explained</h2>
+    <p class="lede">Each brief teaches one concept end-to-end. Today: the single most-tested concept in IB interviews and the spine of every pitch.</p>
+
+    <div class="know">
+      <div class="term">Enterprise Value (EV) and why it isn't market cap</div>
+      <div class="pron">noun · /ˈentərˌprīz ˈvalyo͞o/ · "the price tag of the business"</div>
+
+      <h3>The formula</h3>
+      <p><strong>EV = Equity value + Debt − Cash + Preferred + Minority Interest</strong></p>
+
+      <h3>Why it exists</h3>
+      <p>Imagine two identical pizzerias making the same Rp 10 bn EBITDA. Pizzeria A has Rp 0 debt and Rp 5 bn cash. Pizzeria B has Rp 5 bn debt and Rp 0 cash. If both have a Rp 100 bn market cap, are they equally expensive?</p>
+      <p>No. If you bought all the equity of A, you'd inherit Rp 5 bn cash — your <em>real</em> outlay is Rp 95 bn. Buy B and you inherit Rp 5 bn of debt — your real outlay is Rp 105 bn. <strong>That real outlay is Enterprise Value.</strong> It's what you'd pay to own the whole business free of its capital structure.</p>
+
+      <h3>Why analysts pair EV with EBITDA (not P/E)</h3>
+      <p>EBITDA sits <em>above</em> interest expense, so it's also capital-structure-neutral. Matching EV / EBITDA gives you an apples-to-apples multiple across firms with different debt loads. P/E is contaminated by leverage — a highly levered firm shows a lower P/E that has nothing to do with operational quality.</p>
+
+      <h3>The interview trick they love</h3>
+      <p>"A company has $1 bn market cap, $200 m debt, $100 m cash. What's EV?" → $1.1 bn. Then: "If it issues $300 m of new debt and holds the cash, what happens to EV?" → <em>Nothing</em>. Cash up $300 m, debt up $300 m, they cancel. EV is invariant to capital-structure changes. <strong>That's the whole point of EV.</strong></p>
+
+      <h3>Where this shows up in your stock pitch</h3>
+      <p>Every football-field chart in every pitch deck is in EV / EBITDA or EV / Revenue. When you say "the market is mispricing this by 25%," you mean the implied EV. Equity-value-per-share is the <em>output</em>; EV is the <em>input</em>. Master EV → equity bridge and you're 80% of the way to looking like an analyst, not a student.</p>
+    </div>
+
+    <h3>Tomorrow's concept (preview)</h3>
+    <p>WACC — why a single discount rate is both the most powerful number in a DCF and the most abused. We'll build it from scratch and stress-test what happens when you nudge β by 0.2.</p>
+  </section>
+
+  <!-- 11 Q&A -->
+  <section id="qa">
+    <div class="kicker">Section 11</div>
+    <h2>❓ Questions for you — answer in the next reply</h2>
+    <p class="lede">Your answers tune tomorrow's brief.</p>
+
+    <div class="qcard">
+      <p class="q">1. Coverage focus: which sector should I anchor the Indonesia section on?</p>
+      <p class="why">Banks · Coal &amp; Energy · Nickel / Metals · Consumer Staples · Telco · Tech (GoTo/Buka) · Healthcare. Pick one to go deeper.</p>
+    </div>
+    <div class="qcard">
+      <p class="q">2. Stock pitch target: do you have a specific name you're working on?</p>
+      <p class="why">If yes (e.g. "I'm pitching BBRI long"), I'll structure tomorrow's brief around your thesis &amp; counter-arguments.</p>
+    </div>
+    <div class="qcard">
+      <p class="q">3. Internship status: where in the funnel are you?</p>
+      <p class="why">Networking · Applied · 1st round · Final round · Offer in hand. This changes whether I should weight interview prep vs. on-the-job content.</p>
+    </div>
+    <div class="qcard">
+      <p class="q">4. Time budget: 15 min is the cap — should I cut anything?</p>
+      <p class="why">If macro feels too long or knowledge too short, say so. The brief is yours.</p>
+    </div>
+    <div class="qcard">
+      <p class="q">5. Can I get outbound news-API access (Finnhub / Polygon / Alpha Vantage / NewsAPI)?</p>
+      <p class="why">Without it, the M&amp;A / Markets sections will keep being framework-only. With it, you get real tape every morning.</p>
+    </div>
+    <div class="qcard">
+      <p class="q">6. Should I connect the Google Calendar MCP next session?</p>
+      <p class="why">Same channel as Gmail. Five-minute setup. Then the Agenda section becomes real.</p>
+    </div>
+  </section>
+
+  <!-- DISCLOSURES -->
+  <section id="disc">
+    <div class="kicker">Section 12</div>
+    <h2>Disclosures &amp; method</h2>
+    <p>Live market data &amp; news access was not available in this session's sandbox (Reuters, Bloomberg, CNBC, Yahoo, MarketWatch, IDX, Fed.gov all returned HTTP 403; WebSearch tool was offline). Sections marked as <em>framework</em> deliberately contain no fabricated numbers — equity research depends on traceable sources. Gmail data is real, pulled via the Gmail MCP this morning. Educational content (book recommendation &amp; knowledge feed) is original and not generated against a live source.</p>
+    <p><strong>Not investment advice.</strong> This brief is a study &amp; preparation aid for an aspiring analyst. Do your own diligence before any trade or pitch.</p>
+  </section>
+
+  <footer>
+    <span>The Morning Brief · Ed. 001</span>
+    <span>20.06.2026</span>
+  </footer>
+
+</div>
+</body>
+</html>
