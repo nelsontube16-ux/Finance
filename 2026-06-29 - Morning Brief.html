@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Morning Brief — June 29, 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #fafaf7;
+    --surface: #ffffff;
+    --ink: #111111;
+    --ink-soft: #3a3a3a;
+    --muted: #6b6b6b;
+    --line: #ececec;
+    --line-strong: #d6d6d6;
+    --accent: #1a1a1a;
+    --green: #0b7d4f;
+    --red:   #b8341c;
+    --amber: #b1781b;
+    --blue:  #1f4a8f;
+    --tag-bg: #f3f1ec;
+    --hi:    #fff7d6;
+    --hi-line: #f0d977;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--bg); color: var(--ink); font-family: 'Inter', system-ui, -apple-system, sans-serif; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; border-bottom: 1px dashed var(--line-strong); }
+  a:hover { border-bottom-color: var(--ink); }
+
+  /* Layout */
+  .wrap { max-width: 880px; margin: 0 auto; padding: 56px 28px 120px; }
+
+  /* Masthead */
+  .mast { border-bottom: 1px solid var(--line-strong); padding-bottom: 24px; margin-bottom: 40px; }
+  .mast .row { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .mast .kicker { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.18em; color: var(--muted); text-transform: uppercase; }
+  .mast h1 { font-family: 'Fraunces', Georgia, serif; font-weight: 600; font-size: 48px; line-height: 1.05; letter-spacing: -0.02em; margin-top: 8px; }
+  .mast .sub { color: var(--muted); margin-top: 12px; font-size: 14px; max-width: 620px; }
+  .mast .meta { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); letter-spacing: 0.06em; }
+  .mast .meta .dot { display:inline-block; width:6px;height:6px;background:var(--green);border-radius:50%;margin:0 6px 1px 0;}
+
+  /* TOC */
+  .toc { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px 22px; margin-bottom: 56px; padding: 18px 22px; background: var(--surface); border: 1px solid var(--line); border-radius: 4px; }
+  .toc a { font-size: 13px; border: none; color: var(--ink-soft); display: flex; justify-content: space-between; padding: 3px 0; }
+  .toc a:hover { color: var(--ink); }
+  .toc a .n { font-family: 'JetBrains Mono', monospace; color: var(--muted); font-size: 11px; }
+
+  /* Section */
+  section { margin-bottom: 60px; scroll-margin-top: 20px; }
+  .sh { display: flex; align-items: baseline; gap: 14px; padding-bottom: 10px; margin-bottom: 22px; border-bottom: 1px solid var(--line); }
+  .sh .num { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); letter-spacing: 0.1em; }
+  .sh h2 { font-family: 'Fraunces', Georgia, serif; font-weight: 600; font-size: 26px; letter-spacing: -0.01em; }
+  .sh .read { margin-left: auto; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 0.08em; }
+
+  /* Cards */
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 18px 20px; margin-bottom: 12px; }
+  .card .head { display: flex; gap: 10px; align-items: center; margin-bottom: 8px; flex-wrap: wrap; }
+  .card .title { font-weight: 600; font-size: 15px; }
+  .card .desc { color: var(--ink-soft); font-size: 14px; }
+  .card .why { background: var(--hi); border-left: 3px solid var(--hi-line); padding: 10px 14px; margin-top: 10px; font-size: 13px; color: #5b4905; border-radius: 0 4px 4px 0; }
+  .card.compact { padding: 12px 16px; }
+
+  /* Tags */
+  .tag { font-family: 'JetBrains Mono', monospace; font-size: 10px; padding: 3px 8px; background: var(--tag-bg); color: var(--ink-soft); border-radius: 999px; letter-spacing: 0.06em; text-transform: uppercase; }
+  .tag.green { background: #e8f3ee; color: var(--green); }
+  .tag.red   { background: #fbeae6; color: var(--red); }
+  .tag.amber { background: #fbf2e0; color: var(--amber); }
+  .tag.blue  { background: #e7eef9; color: var(--blue); }
+
+  /* KPI grid */
+  .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 20px; }
+  .kpi { background: var(--surface); border: 1px solid var(--line); padding: 14px 14px; border-radius: 4px; }
+  .kpi .l { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
+  .kpi .v { font-family: 'Fraunces', serif; font-weight: 600; font-size: 22px; margin-top: 4px; letter-spacing: -0.01em; }
+  .kpi .d { font-family: 'JetBrains Mono', monospace; font-size: 11px; margin-top: 2px; }
+  .kpi .d.up { color: var(--green); }
+  .kpi .d.down { color: var(--red); }
+  @media (max-width: 720px) { .kpis { grid-template-columns: repeat(2, 1fr); } .toc { grid-template-columns: 1fr; } .mast h1 { font-size: 36px; } }
+
+  /* Drop cap intro */
+  .lede { font-family: 'Fraunces', serif; font-size: 19px; line-height: 1.5; color: var(--ink); margin-bottom: 22px; padding: 0 4px; }
+  .lede::first-letter { font-size: 56px; font-weight: 600; float: left; line-height: 0.9; padding: 4px 10px 0 0; color: var(--ink); }
+
+  /* Email rows */
+  .email-row { display: grid; grid-template-columns: 18px 1fr auto; gap: 10px; padding: 12px 0; border-bottom: 1px dashed var(--line); align-items: start; }
+  .email-row:last-child { border: none; }
+  .email-row .mark { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); padding-top: 1px; }
+  .email-row .body .from { font-size: 12px; color: var(--muted); }
+  .email-row .body .subj { font-weight: 500; font-size: 14px; margin-top: 1px; }
+  .email-row .body .snip { font-size: 13px; color: var(--ink-soft); margin-top: 2px; }
+  .email-row .pill { font-family: 'JetBrains Mono', monospace; font-size: 10px; padding: 3px 7px; background: var(--tag-bg); border-radius: 999px; color: var(--ink-soft); white-space: nowrap; }
+  .email-row .pill.act { background: #fbeae6; color: var(--red); }
+
+  /* Education block */
+  .lex { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .lex .term { background: var(--surface); border: 1px solid var(--line); padding: 16px 18px; border-radius: 4px; }
+  .lex .term h4 { font-family: 'Fraunces', serif; font-weight: 600; font-size: 17px; margin-bottom: 6px; letter-spacing: -0.01em; }
+  .lex .term .pron { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px; }
+  .lex .term p { font-size: 13.5px; color: var(--ink-soft); }
+  .lex .term .eg { font-size: 13px; color: var(--muted); margin-top: 8px; padding-top: 8px; border-top: 1px dashed var(--line); }
+  .lex .term .eg b { color: var(--ink-soft); font-weight: 600; }
+  @media (max-width: 720px) { .lex { grid-template-columns: 1fr; } }
+
+  /* Q box */
+  .qbox { background: #f6f3eb; border: 1px solid #e7e0cc; border-radius: 4px; padding: 22px 24px; }
+  .qbox h3 { font-family: 'Fraunces', serif; font-weight: 600; font-size: 19px; margin-bottom: 12px; }
+  .qbox ol { padding-left: 20px; }
+  .qbox li { font-size: 14px; color: var(--ink-soft); margin-bottom: 8px; }
+  .qbox li b { color: var(--ink); font-weight: 600; }
+
+  /* Book */
+  .book { display: grid; grid-template-columns: 110px 1fr; gap: 22px; background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 22px; align-items: start; }
+  .book .cover { background: linear-gradient(135deg, #2a2a2a 0%, #4a3829 100%); aspect-ratio: 2/3; border-radius: 2px; display: flex; flex-direction: column; justify-content: space-between; padding: 14px 12px; color: #f0e6d2; font-family: 'Fraunces', serif; box-shadow: 0 6px 18px rgba(0,0,0,0.12); }
+  .book .cover .t { font-size: 13px; line-height: 1.1; font-weight: 600; }
+  .book .cover .a { font-size: 9px; opacity: 0.7; letter-spacing: 0.1em; text-transform: uppercase; }
+  .book .body h4 { font-family: 'Fraunces', serif; font-weight: 600; font-size: 22px; letter-spacing: -0.01em; margin-bottom: 4px; }
+  .book .body .author { font-size: 13px; color: var(--muted); margin-bottom: 12px; }
+  .book .body p { font-size: 13.5px; color: var(--ink-soft); margin-bottom: 10px; }
+  .book .body .why { background: var(--hi); border-left: 3px solid var(--hi-line); padding: 10px 14px; font-size: 13px; color: #5b4905; border-radius: 0 4px 4px 0; }
+  @media (max-width: 720px) { .book { grid-template-columns: 1fr; } .book .cover { width: 110px; } }
+
+  /* Correlations callout */
+  .corr { background: #eef3ee; border: 1px solid #d4e0d4; border-radius: 4px; padding: 18px 22px; margin-bottom: 16px; }
+  .corr .lab { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--green); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 6px; }
+  .corr p { font-size: 13.5px; color: var(--ink-soft); }
+  .corr p + p { margin-top: 6px; }
+
+  /* Footer */
+  footer { border-top: 1px solid var(--line); padding-top: 22px; margin-top: 60px; font-size: 11px; color: var(--muted); font-family: 'JetBrains Mono', monospace; letter-spacing: 0.05em; line-height: 1.7; }
+  footer .src a { font-family: 'Inter', sans-serif; font-size: 12px; color: var(--ink-soft); margin-right: 14px; }
+
+  /* Number circles for big items */
+  .grade { display: inline-flex; width: 22px; height: 22px; border-radius: 50%; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; }
+  .grade.A { background: #0b7d4f; color: #fff; }
+  .grade.B { background: #b1781b; color: #fff; }
+  .grade.C { background: #b8341c; color: #fff; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- Masthead -->
+  <header class="mast">
+    <div class="row">
+      <span class="kicker">Morning Brief · Vol. II · No. 1</span>
+      <span class="meta"><span class="dot"></span>LIVE · MON 29 JUN 2026 · 06:00 WIB</span>
+    </div>
+    <h1>The Fed dug in, OpenAI flinched, and Indonesia took its second hike in three weeks.</h1>
+    <p class="sub">A 15-minute desk-read for an analyst writing equity research before the open. Prepared for <b>Nelson Susanto</b>. Sources tagged; what to act on is highlighted.</p>
+  </header>
+
+  <!-- TOC -->
+  <nav class="toc">
+    <a href="#email"><span>Email · what's unread that matters</span><span class="n">01</span></a>
+    <a href="#agenda"><span>Agenda · today's schedule</span><span class="n">02</span></a>
+    <a href="#tape"><span>The Tape · global &amp; Indonesia</span><span class="n">03</span></a>
+    <a href="#macro"><span>Macro &amp; Geopolitics</span><span class="n">04</span></a>
+    <a href="#ma"><span>M&amp;A &amp; IPO Watch</span><span class="n">05</span></a>
+    <a href="#indo"><span>Indonesia Deep Dive</span><span class="n">06</span></a>
+    <a href="#analyst"><span>Analyst Calls</span><span class="n">07</span></a>
+    <a href="#corr"><span>vs. Previous Brief (Apr 26)</span><span class="n">08</span></a>
+    <a href="#learn"><span>Today's Lesson (Finance 101)</span><span class="n">09</span></a>
+    <a href="#book"><span>Book of the Day</span><span class="n">10</span></a>
+    <a href="#q"><span>Questions for You</span><span class="n">11</span></a>
+  </nav>
+
+  <!-- LEDE -->
+  <p class="lede">Three things move price this morning. The Fed's dot-plot quietly flipped from cuts to <b>possible hikes</b>, and the bond desk is repricing duration. Reports landed Friday night that <b>OpenAI is pushing its IPO to 2027</b>, which is dragging the entire AI complex — chips opened pre-market with AMD &minus;3.5%, ARM &minus;4%, Marvell &minus;4%, Intel &minus;3%. And in Jakarta, <b>Bank Indonesia delivered its second 25 bp hike in nine days</b>, taking the BI-Rate to 5.75% to defend the rupiah. The week ahead is short — US closes Friday for July 4 — but it is loaded: ITG and Sinda price Tuesday night, ID-CPI for June hits this week, and the Middle East energy supply story refuses to fade.</p>
+
+  <!-- 01 EMAIL -->
+  <section id="email">
+    <div class="sh"><span class="num">01</span><h2>📧 Email Digest</h2><span class="read">~1 min</span></div>
+
+    <div class="card">
+      <p class="desc" style="margin-bottom:14px;">Scanned 26 threads from the last 48 hours. Five worth your eyes; the rest are job alerts and noise.</p>
+
+      <div class="email-row">
+        <div class="mark">①</div>
+        <div class="body">
+          <div class="from">LinkedIn Newsletter · 29 Jun, 17:08</div>
+          <div class="subj">Midyear 2026 outlook: The concentration paradox</div>
+          <div class="snip">Why fewer market drivers (mega-cap concentration) demand a broader portfolio perspective. Useful framing material if you're pitching diversification.</div>
+        </div>
+        <span class="pill">READ</span>
+      </div>
+
+      <div class="email-row">
+        <div class="mark">②</div>
+        <div class="body">
+          <div class="from">WallStreetOasis · 29 Jun, 14:04</div>
+          <div class="subj">Next Cohort Coming Up | WSO Academy</div>
+          <div class="snip">Booking link for chat with an Admissions Officer — relevant for your IB recruiting prep. <b>Decision needed</b> if you want this cohort.</div>
+        </div>
+        <span class="pill act">REPLY</span>
+      </div>
+
+      <div class="email-row">
+        <div class="mark">③</div>
+        <div class="body">
+          <div class="from">LinkedIn (PwC Indonesia) · 29 Jun, 12:41</div>
+          <div class="subj">PwC Indonesia Talent Acquisition Senior Associate recently posted</div>
+          <div class="snip">A PwC ID recruiter is actively posting. Worth a soft connection request even if not applying immediately.</div>
+        </div>
+        <span class="pill">SOFT</span>
+      </div>
+
+      <div class="email-row">
+        <div class="mark">④</div>
+        <div class="body">
+          <div class="from">Morning Brew · 29 Jun, 09:19</div>
+          <div class="subj">☕ Accelerated braking — China's AI catching up</div>
+          <div class="snip">Headline link to today's AI fragility story (see Section 03). Skim it; it pairs with OpenAI's IPO delay.</div>
+        </div>
+        <span class="pill">SKIM</span>
+      </div>
+
+      <div class="email-row">
+        <div class="mark">⑤</div>
+        <div class="body">
+          <div class="from">Indeed / Glassdoor · 28-29 Jun</div>
+          <div class="subj">~12 finance/analyst intern alerts (Jakarta &amp; Singapore)</div>
+          <div class="snip">Recurring senders: Reolink, JTA Consultancy, TOD'S, Doctor Anywhere, PT Jaya Makmur, Indofood CBP. Archive or set a Saturday review block.</div>
+        </div>
+        <span class="pill">BATCH</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 AGENDA -->
+  <section id="agenda">
+    <div class="sh"><span class="num">02</span><h2>📅 Today's Agenda</h2><span class="read">~30 sec</span></div>
+    <div class="card">
+      <p class="desc"><b>No Google Calendar connection is wired into this session</b> (only Gmail, Drive, Canva, and GitHub MCP servers are available). If you'd like the agenda block to populate automatically tomorrow, connect Google Calendar via the integrations panel — I'll then pull <span style="font-family:'JetBrains Mono',monospace;font-size:12px;">list_events</span> for the day.</p>
+      <p class="desc" style="margin-top:10px;"><em>Tidak ada agenda terjadwal yang dapat saya akses hari ini.</em></p>
+      <div class="why" style="margin-top:14px;">
+        <b>Suggested manual block for today</b> based on what's in the brief: (1) 07:00–07:15 read this brief; (2) 09:30 Asia open — watch IHSG reaction to BI hike pass-through; (3) 21:30 WIB US open — chip basket (AMD, ARM, INTC, MRVL) for OpenAI IPO-delay fallout; (4) overnight set alert: ITG &amp; Sinda IPO pricing.
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 TAPE -->
+  <section id="tape">
+    <div class="sh"><span class="num">03</span><h2>📈 The Tape · Where Markets Closed</h2><span class="read">~1 min</span></div>
+
+    <div class="kpis">
+      <div class="kpi"><div class="l">S&amp;P 500</div><div class="v">7,354.02</div><div class="d down">−1.97% wk</div></div>
+      <div class="kpi"><div class="l">Nasdaq</div><div class="v">25,297.62</div><div class="d down">−4.60% wk</div></div>
+      <div class="kpi"><div class="l">Dow Jones</div><div class="v">51,876.11</div><div class="d up">+0.60% wk</div></div>
+      <div class="kpi"><div class="l">IHSG (JKSE)</div><div class="v">5,918</div><div class="d down">−3.80% wk</div></div>
+      <div class="kpi"><div class="l">Brent (JPM est.)</div><div class="v">~$60</div><div class="d up">Energy +40% YTD</div></div>
+      <div class="kpi"><div class="l">Fed Funds</div><div class="v">3.50–3.75</div><div class="d">held, dot-plot hawkish</div></div>
+      <div class="kpi"><div class="l">BI Rate</div><div class="v">5.75%</div><div class="d down">+25 bp 18 Jun</div></div>
+      <div class="kpi"><div class="l">ID CPI (May)</div><div class="v">3.08% y/y</div><div class="d down">vs 2.42% in Apr</div></div>
+    </div>
+
+    <div class="card">
+      <div class="head"><span class="tag red">RISK-OFF</span><span class="title">A clean rotation: tech sold, defensives bid</span></div>
+      <p class="desc">Nasdaq just printed five consecutive losing sessions. The driver is no longer macro — it's a <b>narrative crack in AI capex</b>. Friday's catalyst was a NYT report that OpenAI is pushing its IPO to 2027 because SpaceX (priced $135, opened $150, peaked $225+, now ~$153) signaled the public-market appetite for trillion-dollar valuations is gone. AMD, ARM, Marvell, and Intel each opened pre-market down 3–4%. The Dow's +0.6% week tells you the rotation is into industrials, healthcare, and energy — anything with cash flows you can model.</p>
+      <div class="why"><b>Why this matters for your pitch:</b> if you're writing a long-AI thesis, you now have to defend the multiple against <em>two</em> shocks — Fed hawkishness on the discount rate <em>and</em> a peer-valuation reset. The cleaner trade idea this week is a <b>pair</b>: long a defensive cash-flow compounder, short a high-multiple AI infra name.</div>
+    </div>
+  </section>
+
+  <!-- 04 MACRO -->
+  <section id="macro">
+    <div class="sh"><span class="num">04</span><h2>🌍 Macro &amp; Geopolitics</h2><span class="read">~2 min</span></div>
+
+    <div class="card">
+      <div class="head"><span class="tag amber">FED</span><span class="title">FOMC held at 3.50–3.75%, but the dot plot flipped from cut → hike</span></div>
+      <p class="desc">Fourth straight hold on June 17. The body of the statement is unchanged, but the <b>SEP (Summary of Economic Projections)</b> is the news: PCE inflation revised up to <b>3.6%</b> (from 2.7%), 2027 PCE to 3.3% (from 2.7%), 2026 GDP cut to 2.2% (from 2.4%). The median dot no longer shows a 2026 cut; 9 of 19 officials now see at least one <em>hike</em>, 6 see two.</p>
+      <div class="why"><b>Mechanism for a beginner:</b> the &quot;dot plot&quot; is a chart where each FOMC voter anonymously plots where they think rates will be at year-end. It's not a vote on policy — it's a survey of forecasts. When the median dot moves up, traders re-price the front end of the yield curve, the dollar strengthens, and growth equity (long-duration cash flows) gets penalized. That's the chain of causality you're watching.</div>
+    </div>
+
+    <div class="card">
+      <div class="head"><span class="tag red">ENERGY</span><span class="title">Qatar LNG damage — 25% of global capacity offline</span></div>
+      <p class="desc">Ras Laffan (Qatar) accounted for ~20% of global LNG output; two of its 14 trains are damaged. The IEEFA &amp; IEA both flag a <b>delayed LNG supply wave</b>. JPM still calls Brent ~$60 base case for 2026, but the energy sector is <b>+40% YTD</b> — by far the leading sector. ECB notes that geopolitical oil-supply shocks transmit to US risk assets via inflation expectations and corporate margins (transport, chemicals, airlines).</p>
+      <div class="why"><b>What to look for:</b> Indonesian names with LNG export exposure (PGAS, Medco MEDC) and the upstream coal complex (ADRO, ITMG, PTBA) — they tend to re-rate as a basket when Qatar headlines hit.</div>
+    </div>
+  </section>
+
+  <!-- 05 M&A / IPO -->
+  <section id="ma">
+    <div class="sh"><span class="num">05</span><h2>🤝 M&amp;A &amp; IPO Watch</h2><span class="read">~1.5 min</span></div>
+
+    <div class="card">
+      <div class="head"><span class="tag blue">M&amp;A</span><span class="title">Bridgepoint to acquire Kayne Anderson Real Estate — $1.39 B</span></div>
+      <p class="desc">Announced 29 Jun. Private-credit and private real-estate consolidation continues; Bridgepoint adds US real-estate origination muscle. Read-across: <b>alternative asset managers</b> (BX, ARES, APO, KKR) are bidders, not targets, in this cycle.</p>
+    </div>
+
+    <div class="card">
+      <div class="head"><span class="tag blue">M&amp;A</span><span class="title">Safran / Exail Technologies — €2.19 B</span></div>
+      <p class="desc">Announced 27 Jun. Safran pays a premium for <b>autonomous naval systems and inertial navigation IP</b>. Aligns with the European defense capex super-cycle. Comp implications for Thales, Leonardo, BAE.</p>
+    </div>
+
+    <div class="card">
+      <div class="head"><span class="tag amber">IPO</span><span class="title">This week: ITG (~$400 M) and Sinda ($617 M) — price Tuesday night</span></div>
+      <p class="desc">5 IPOs price Monday, 6 Tuesday, 4 Wednesday — quiet Thursday/Friday into the July 4 holiday. <b>ITG</b>: 19.51 M shares at $19–22 range, raising $399.95 M at the $20.50 midpoint. <b>Sinda Ltd.</b>: $617.4 M raise. Both list Wednesday.</p>
+      <div class="why"><b>Tradable angle:</b> SpaceX broke the post-IPO momentum trade. Watch the <b>first-day pop and the day-5 close</b> on ITG &amp; Sinda — if both break issue within a week, the IPO window for Q3 is effectively shut, and OpenAI's 2027 punt looks prescient.</div>
+    </div>
+
+    <div class="card">
+      <div class="head"><span class="tag red">IPO DELAY</span><span class="title">OpenAI pushes IPO to 2027 — the dominoes</span></div>
+      <p class="desc">SpaceX's IPO was the test case: priced $135 → peaked $225 → now ~$153. Altman is holding the $1 T valuation target but his bankers want air cover. Q1 2026 net loss of <b>−$21.3 B</b> on training/inference capex is the elephant in the room. SoftBank −6% on the news; chips re-rated lower across the board.</p>
+      <div class="why"><b>Equity research hook:</b> the &quot;AI capex thesis&quot; (long picks &amp; shovels — chips, networking, power) only works if the application layer monetizes. OpenAI's delay is the application layer admitting it can't yet. Expect a slow leak in Nvidia/Broadcom multiples even if EPS holds.</div>
+    </div>
+  </section>
+
+  <!-- 06 INDONESIA -->
+  <section id="indo">
+    <div class="sh"><span class="num">06</span><h2>🇮🇩 Indonesia Deep Dive</h2><span class="read">~2 min</span></div>
+
+    <div class="card">
+      <div class="head"><span class="tag red">BI</span><span class="title">Second hike in nine days — BI-Rate at 5.75%, +100 bp since May</span></div>
+      <p class="desc">Bank Indonesia delivered an <b>off-cycle 25 bp hike on 9 June</b>, then another 25 bp at the regular meeting <b>18 June</b>. Cumulative tightening since May: <b>+100 bp</b>, the highest policy rate since April 2025. The trigger is two-fold: rupiah depreciation (driven by foreign portfolio outflows and onshore FX demand) <em>and</em> inflation drifting to <b>3.08% in May</b> from 2.42% in April — closing in on the upper bound of the 1.5–3.5% target. GDP growth forecast maintained at 4.9–5.7% for 2026.</p>
+      <div class="why"><b>Beginner mechanism:</b> when domestic rates rise faster than US rates, the carry on holding IDR improves — that <em>should</em> stem outflows and stabilize the rupiah. But the bank channel pays the bill: BBRI, BMRI, BBCA's NIMs (net interest margins) get squeezed because deposit costs rise faster than they can re-price loans. This is why ID banks were in the selling Friday.</div>
+    </div>
+
+    <div class="card">
+      <div class="head"><span class="tag red">IHSG</span><span class="title">−3.8% on the week to ~5,918 — MSCI frontier-downgrade tail risk</span></div>
+      <p class="desc">First weekly loss in three. Broad-based selling Friday hit all major sectors. The structural overhang is the <b>MSCI review</b>: a potential frontier-market downgrade was delayed to November but not removed. Foreign positioning is light, which is both a relief (less to dump) and a risk (less buying power).</p>
+      <div class="why"><b>Watchlist for the open:</b> banks (BBRI, BMRI, BBCA, BBNI) for the NIM trade; consumer staples (INDF, ICBP, UNVR) as defensives if the rupiah stabilizes; energy (MEDC, PGAS, ADRO) on the Qatar LNG read-across; and Telkom (TLKM) as a yield proxy if foreign flows return.</div>
+    </div>
+  </section>
+
+  <!-- 07 ANALYST -->
+  <section id="analyst">
+    <div class="sh"><span class="num">07</span><h2>🎯 Analyst Calls Worth Citing</h2><span class="read">~45 sec</span></div>
+
+    <div class="card compact"><div class="head"><span class="grade B">EW</span><span class="title">Morgan Stanley raises Goldman Sachs (GS) PT to $1,099 (from $1,021)</span><span class="tag">26 JUN</span></div><p class="desc">Equal-Weight maintained. Cite when you need a sell-side anchor on diversified IB valuations.</p></div>
+
+    <div class="card compact"><div class="head"><span class="grade A">BUY</span><span class="title">Goldman Sachs initiates Liftoff Mobile — Buy, PT $40</span><span class="tag">JUN</span></div><p class="desc">Morgan Stanley initiates Liftoff at Equal-Weight, PT $30. Useful contrast in your write-up showing sell-side dispersion.</p></div>
+
+    <div class="card compact"><div class="head"><span class="grade A">2026 PICKS</span><span class="title">MS: Amazon, Nvidia + others · GS: Applied Industrial Technologies, TE Connectivity</span><span class="tag">YEAR-AHEAD</span></div><p class="desc">Theme on the street: AI narrative shifting from <b>pure capex</b> → <b>applications &amp; monetization</b>. Consistent with the OpenAI IPO-delay read.</p></div>
+
+    <div class="card compact"><div class="head"><span class="grade B">FED CALL</span><span class="title">JPM Global Research: Brent ~$60 base case 2026, supply disruption unlikely to be protracted</span><span class="tag">17 JUN</span></div><p class="desc">If you're pitching an energy long, cite JPM's <em>conservative</em> Brent deck — your upside case looks more credible when the bear case still works.</p></div>
+  </section>
+
+  <!-- 08 CORRELATIONS -->
+  <section id="corr">
+    <div class="sh"><span class="num">08</span><h2>🔁 vs. Your Last Brief (April 26)</h2><span class="read">~45 sec</span></div>
+    <div class="corr">
+      <div class="lab">CONTINUITY · 2 months later</div>
+      <p><b>What's the same:</b> Middle East tension is still the dominant geopolitical input — back in April it was a tail risk, now Qatar LNG damage has hard-coded it into the energy curve. Fed is still on hold.</p>
+      <p><b>What's changed:</b> in April the AI trade was unquestioned. Today the question is when, not if, the multiple compresses. SpaceX's IPO became the test case; OpenAI flinched. <b>This is the single biggest narrative shift since your last brief.</b></p>
+      <p><b>What to re-check from April:</b> any long-tech ideas you parked from the April brief need a price-target haircut and a re-stress of the WACC. If your DCF assumed a 2026 Fed cut, that assumption is dead.</p>
+    </div>
+  </section>
+
+  <!-- 09 LEARN -->
+  <section id="learn">
+    <div class="sh"><span class="num">09</span><h2>🎓 Today's Lesson · Finance 101</h2><span class="read">~3 min</span></div>
+    <p class="desc" style="margin-bottom:14px;">Three concepts that come up <em>every day</em> on an IB / PE / M&amp;A desk. Learn them, and you will follow 80% of the conversation in your first month.</p>
+
+    <div class="lex">
+      <div class="term">
+        <h4>Net Interest Margin (NIM)</h4>
+        <div class="pron">N-I-M · banks</div>
+        <p>The spread between what a bank <b>earns on its loans</b> and what it <b>pays on its deposits</b>, expressed as a % of average earning assets. It is the single most important profitability metric for a commercial bank — like gross margin is for a manufacturer.</p>
+        <div class="eg"><b>Today's link:</b> Bank Indonesia's +100 bp hike since May squeezes BBRI/BMRI NIM because their deposit costs reset faster than their loan books. This is exactly why ID banks led Friday's sell-off — analysts are cutting FY26 NIM forecasts by 10–20 bps.</div>
+      </div>
+
+      <div class="term">
+        <h4>EV / EBITDA</h4>
+        <div class="pron">E-V-EBITDA · the universal comp</div>
+        <p>Enterprise Value (market cap + debt − cash) divided by EBITDA. Used in M&amp;A because it is <b>capital-structure-neutral</b> — you compare two businesses regardless of how they're financed. P/E doesn't work for that because it's after interest &amp; tax.</p>
+        <div class="eg"><b>Today's link:</b> Safran is reportedly paying ~12–13× EV/EBITDA for Exail — rich for defense, but justified by the autonomous-naval IP. When you read about a deal, the <em>first</em> number to look up is the EV/EBITDA multiple paid vs. the sector median.</div>
+      </div>
+
+      <div class="term">
+        <h4>The Dot Plot</h4>
+        <div class="pron">F-O-M-C · the Fed's tea leaves</div>
+        <p>Each FOMC voting member anonymously marks where they think the federal funds rate <em>should</em> be at the end of each future year. The chart of those dots = the dot plot. The <b>median dot</b> is the headline number traders react to.</p>
+        <div class="eg"><b>Today's link:</b> Friday's dot plot moved the median from a 2026 <em>cut</em> to no cut, with 9/19 members penciling in a <em>hike</em>. That's why the 2-year Treasury sold off and the dollar firmed. Long-duration assets (growth tech) pay for it via a higher discount rate.</div>
+      </div>
+
+      <div class="term">
+        <h4>The IPO &quot;Window&quot;</h4>
+        <div class="pron">I-P-O · syndication shorthand</div>
+        <p>When market conditions are favorable enough that issuers can price deals at full valuation, bankers say &quot;the window is open.&quot; A window closes when 2–3 recent IPOs break issue price in their first 5–10 trading days — buyers refuse to participate, and pipeline gets pushed.</p>
+        <div class="eg"><b>Today's link:</b> SpaceX broke issue inside 10 days. OpenAI just punted to 2027. If ITG and Sinda break issue this week, the Q3 window is functionally shut and your IB deal-pipeline conversations next quarter will sound very different.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 BOOK -->
+  <section id="book">
+    <div class="sh"><span class="num">10</span><h2>📚 Book of the Day · Daily 20-min Read</h2><span class="read">~1 min</span></div>
+    <div class="book">
+      <div class="cover">
+        <div class="t">Investment<br/>Banking</div>
+        <div class="a">Rosenbaum &amp; Pearl</div>
+      </div>
+      <div class="body">
+        <h4>Investment Banking: Valuation, LBOs, M&amp;A, and IPOs</h4>
+        <p class="author">Joshua Rosenbaum &amp; Joshua Pearl · 3rd Ed.</p>
+        <p>This is the <b>industry-standard textbook</b> that first-year IB analysts at Goldman, Morgan Stanley, and JP Morgan are handed on day one. It is the only book that walks you end-to-end through the four pillars of the job: <b>(1)</b> comparable company analysis, <b>(2)</b> precedent transactions, <b>(3)</b> DCF, and <b>(4)</b> LBO modeling — with the same templates you'll build in Excel at work.</p>
+        <p>For a finance student with limited time, the protocol is: <b>15–20 pages every morning, 4 days a week</b>. The chapters are self-contained, so you can stop after one mechanism (e.g., &quot;calculating LTM EBITDA&quot;) and apply it the same day to a real ticker.</p>
+        <div class="why"><b>Why this and not something else?</b> Other books (Damodaran, Greenblatt, Lewis) are excellent for theory, narrative, or buy-side intuition. Rosenbaum &amp; Pearl is the only one whose chapter structure mirrors the deliverables in an IB internship. Read it now, and the first 6 weeks of your internship will feel like review.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 QUESTIONS -->
+  <section id="q">
+    <div class="sh"><span class="num">11</span><h2>❓ Questions for You</h2><span class="read">~30 sec</span></div>
+    <div class="qbox">
+      <h3>To make tomorrow's brief sharper, tell me:</h3>
+      <ol>
+        <li><b>Pitch focus.</b> Is the equity research pitch you're working on long, short, or pair-trade? And what sector — I'll filter tomorrow's news through that lens.</li>
+        <li><b>Indonesia vs. global weighting.</b> Should I keep the 50/50 split, or weight more toward IDX names (BBRI, BMRI, ASII, TLKM, GoTo, ANTM, MEDC, etc.)?</li>
+        <li><b>Calendar access.</b> Want me to walk you through connecting Google Calendar so I can pull <em>list_events</em> for Section 02 automatically?</li>
+        <li><b>Briefing cadence.</b> Daily 06:00 WIB, or daily + a 16:00 WIB pre-US-open update?</li>
+        <li><b>Today's WSO Academy email</b> is flagged for reply — do you want me to draft a response for you to review?</li>
+      </ol>
+    </div>
+  </section>
+
+  <footer>
+    <div class="src" style="margin-bottom:10px;">
+      <b style="color:var(--ink-soft);font-family:Inter,sans-serif;font-size:12px;letter-spacing:0;">Sources</b><br/>
+      <a href="https://www.federalreserve.gov/newsevents/pressreleases/monetary20260617a.htm">FOMC Statement 17 Jun 2026</a>
+      <a href="https://www.cnbc.com/2026/06/17/fed-interest-rate-decision-june-2026.html">CNBC · Fed Decision</a>
+      <a href="https://www.stocktitan.net/articles/fed-rate-decision-june-17-2026">Dot Plot flip</a>
+      <a href="https://www.bi.go.id/en/publikasi/ruang-media/news-release/Pages/sp_2810726.aspx">Bank Indonesia · Press Release</a>
+      <a href="https://www.theasianbanker.com/press-releases/bank-indonesia-raises-bi-rate-to-5-50-to-stabilise-rupiah-amid-global-turmoil">Asian Banker · BI 5.50</a>
+      <a href="https://www.fxstreet.com/news/bi-increases-rates-by-25-basis-points-in-june-202606180734">FXStreet · BI 18 Jun</a>
+      <a href="https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-june-26-2026">TheStreet · US Close 26 Jun</a>
+      <a href="https://www.cnbc.com/2026/06/25/stock-market-today-live-updates.html">CNBC · Nasdaq 5th Loss</a>
+      <a href="https://tradingeconomics.com/indonesia/stock-market">Trading Economics · IHSG</a>
+      <a href="https://www.iposcoop.com/the-ipo-buzz-itg-sinda-launch-ipos-to-price-next-week-ahead-of-july-4th-holiday/">IPOScoop · ITG &amp; Sinda</a>
+      <a href="https://intellizence.com/insights/merger-and-acquisition/largest-merger-acquisition-deals/">Intellizence · M&amp;A</a>
+      <a href="https://ieefa.org/impact-middle-east-crisis-global-energy-markets">IEEFA · Qatar LNG</a>
+      <a href="https://www.jpmorgan.com/insights/global-research/commodities/oil-prices">JPM · Brent 2026</a>
+      <a href="https://www.tradingkey.com/analysis/stocks/us-stocks/261994310-spacex-post-ipo-slump-cools-sentiment-openai-delays-ipo-2027-masayoshi-son-ai-dream-dashed-tradingkey">TradingKey · OpenAI Delay</a>
+      <a href="https://www.marketbeat.com/ratings/by-issuer/goldman-sachs-group-stock-recommendations/">MarketBeat · GS Ratings</a>
+    </div>
+    Prepared 29 Jun 2026 · for Nelson Susanto · est. 15 min read · all figures sourced from public market data. Not investment advice.
+  </footer>
+
+</div>
+</body>
+</html>
