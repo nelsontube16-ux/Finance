@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-07-03 — Morning Brief</title>
+<style>
+  :root{
+    --bg:#ffffff; --panel:#fafafa; --ink:#0b0b0f; --ink-soft:#4a4a55;
+    --line:#ececee; --line-soft:#f4f4f6;
+    --accent:#0f2340;         /* deep navy — IB house color */
+    --green:#0f9d58; --red:#d93025; --amber:#c58a00; --violet:#5b3ad1; --teal:#00838f;
+    --tag-bg:#f2f4f8;
+    --shadow:0 1px 2px rgba(15,35,64,0.04), 0 8px 24px rgba(15,35,64,0.05);
+    --mono:"SFMono-Regular",ui-monospace,Menlo,Consolas,monospace;
+    --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    --serif:"Playfair Display",Georgia,"Times New Roman",serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:var(--sans);
+    font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased;letter-spacing:-0.005em;}
+  .wrap{max-width:1080px;margin:0 auto;padding:44px 40px 80px;}
+  header.brief{display:flex;align-items:flex-end;justify-content:space-between;
+    padding-bottom:22px;border-bottom:1px solid var(--line);margin-bottom:34px;}
+  .brand{display:flex;align-items:baseline;gap:14px}
+  .mark{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,#0f2340,#3d5a80);
+    display:inline-flex;align-items:center;justify-content:center;color:#fff;font-family:var(--serif);
+    font-weight:700;font-size:18px;letter-spacing:-1px;}
+  .title{font-family:var(--serif);font-size:28px;font-weight:700;letter-spacing:-0.02em;line-height:1;}
+  .sub{font-family:var(--mono);font-size:11px;color:var(--ink-soft);text-transform:uppercase;
+    letter-spacing:0.14em;margin-top:6px;}
+  .meta{text-align:right;font-family:var(--mono);font-size:11px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:0.14em;}
+  .meta b{color:var(--ink);font-weight:600;display:block;font-size:14px;letter-spacing:0}
+  .toc{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:38px}
+  .toc a{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:0.12em;
+    color:var(--accent);text-decoration:none;padding:6px 12px;border:1px solid var(--line);
+    border-radius:999px;background:#fff;transition:all .15s ease}
+  .toc a:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+  section{margin-bottom:48px;scroll-margin-top:20px}
+  h2.section-title{font-family:var(--serif);font-size:22px;font-weight:700;
+    letter-spacing:-0.015em;margin:0 0 4px;display:flex;align-items:center;gap:10px}
+  h2.section-title .num{font-family:var(--mono);font-size:11px;color:var(--ink-soft);
+    background:var(--tag-bg);padding:3px 8px;border-radius:4px;letter-spacing:0.1em;font-weight:600}
+  .section-sub{font-size:13px;color:var(--ink-soft);margin:0 0 20px;padding-bottom:14px;border-bottom:1px solid var(--line-soft)}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:10px;
+    padding:18px 20px;margin-bottom:12px;transition:box-shadow .15s ease}
+  .card:hover{box-shadow:var(--shadow)}
+  .card-h{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:6px}
+  .card-title{font-weight:600;font-size:15px;letter-spacing:-0.01em;color:var(--ink);flex:1}
+  .card-body{font-size:14px;color:var(--ink-soft);line-height:1.55}
+  .card-body strong{color:var(--ink);font-weight:600}
+  .tag{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:0.1em;
+    padding:3px 8px;border-radius:4px;font-weight:600;white-space:nowrap;background:var(--tag-bg);color:var(--ink-soft)}
+  .tag.red{background:#fdecea;color:var(--red)}
+  .tag.green{background:#e6f4ea;color:var(--green)}
+  .tag.amber{background:#fff4dc;color:var(--amber)}
+  .tag.violet{background:#eee9ff;color:var(--violet)}
+  .tag.teal{background:#dff5f6;color:var(--teal)}
+  .tag.navy{background:#e3ebf7;color:var(--accent)}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  @media(max-width:800px){.grid-2,.grid-3{grid-template-columns:1fr}}
+  .stat{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+  .stat .l{font-family:var(--mono);font-size:10px;letter-spacing:0.14em;color:var(--ink-soft);text-transform:uppercase}
+  .stat .v{font-family:var(--serif);font-size:22px;font-weight:700;margin-top:4px;letter-spacing:-0.02em}
+  .stat .d{font-size:12px;margin-top:2px;font-weight:600}
+  .up{color:var(--green)} .dn{color:var(--red)} .flat{color:var(--ink-soft)}
+  .email-row{display:grid;grid-template-columns:16px 1fr auto;gap:12px;padding:12px 0;border-bottom:1px solid var(--line-soft)}
+  .email-row:last-child{border-bottom:none}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--ink-soft);margin-top:8px}
+  .dot.imp{background:var(--red)}
+  .dot.unread{background:var(--accent)}
+  .email-from{font-size:12px;color:var(--ink-soft);font-family:var(--mono);text-transform:uppercase;letter-spacing:0.06em}
+  .email-subj{font-weight:600;font-size:14px;margin:1px 0 3px;color:var(--ink)}
+  .email-snip{font-size:13px;color:var(--ink-soft)}
+  .email-time{font-size:11px;color:var(--ink-soft);font-family:var(--mono);white-space:nowrap}
+  ul.plain{margin:0;padding-left:18px} ul.plain li{margin-bottom:6px}
+  .kicker{font-family:var(--mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:6px}
+  blockquote{margin:0;padding:14px 18px;border-left:3px solid var(--accent);background:var(--panel);border-radius:0 8px 8px 0;font-style:italic;color:var(--ink);font-size:14px}
+  .mech{background:#f7f9fc;border:1px dashed #cfd8e5;border-radius:8px;padding:12px 14px;margin:10px 0;font-size:13.5px;color:var(--ink-soft)}
+  .mech b{color:var(--accent);display:block;font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:0.14em;margin-bottom:4px}
+  .book{display:grid;grid-template-columns:110px 1fr;gap:22px;background:linear-gradient(135deg,#fafafc,#f2f4f8);
+    border:1px solid var(--line);border-radius:12px;padding:22px 24px;}
+  .book .cover{width:110px;height:160px;background:linear-gradient(160deg,#0f2340,#294677);border-radius:6px;
+    box-shadow:0 8px 20px rgba(15,35,64,.25);color:#fff;padding:14px 12px;font-family:var(--serif);
+    display:flex;flex-direction:column;justify-content:space-between}
+  .book .cover .top{font-size:11px;letter-spacing:0.2em;text-transform:uppercase;opacity:.75}
+  .book .cover .tl{font-size:15px;font-weight:700;line-height:1.15}
+  .book .cover .bt{font-size:10px;opacity:.7;font-family:var(--mono);letter-spacing:0.1em;text-transform:uppercase}
+  .book .body h3{margin:0 0 4px;font-family:var(--serif);font-size:20px;letter-spacing:-0.01em}
+  .book .body .auth{font-size:12px;color:var(--ink-soft);margin-bottom:10px;font-family:var(--mono);text-transform:uppercase;letter-spacing:0.12em}
+  .footer{margin-top:60px;padding-top:22px;border-top:1px solid var(--line);
+    font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:0.14em;color:var(--ink-soft);text-align:center}
+  .q{background:#0f2340;color:#fff;border-radius:12px;padding:22px 26px;margin-bottom:12px}
+  .q .kicker{color:#8fa4c9}
+  .q h4{margin:0 0 6px;font-family:var(--serif);font-size:17px}
+  .q p{margin:0;font-size:13.5px;color:#c8d3e5}
+  .corr{display:grid;grid-template-columns:120px 1fr;gap:14px;padding:10px 0;border-bottom:1px dashed var(--line)}
+  .corr:last-child{border-bottom:none}
+  .corr .date{font-family:var(--mono);font-size:11px;color:var(--ink-soft);letter-spacing:0.1em;text-transform:uppercase;padding-top:2px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="brief">
+  <div class="brand">
+    <div class="mark">N</div>
+    <div>
+      <div class="title">Morning Brief</div>
+      <div class="sub">Nelson · Equity Research Desk · Vol. II</div>
+    </div>
+  </div>
+  <div class="meta">
+    <b>Friday · 03 Jul 2026</b>
+    <span>US half-day · JKT open · 15-min read</span>
+  </div>
+</header>
+
+<nav class="toc">
+  <a href="#emails">01 Email</a>
+  <a href="#agenda">02 Agenda</a>
+  <a href="#tape">03 The Tape</a>
+  <a href="#macro">04 Macro</a>
+  <a href="#geo">05 Geopolitics</a>
+  <a href="#ma">06 M&amp;A</a>
+  <a href="#ipo">07 IPO</a>
+  <a href="#idx">08 Indonesia</a>
+  <a href="#calls">09 Analyst Calls</a>
+  <a href="#corr">10 Correlations</a>
+  <a href="#learn">11 Learn</a>
+  <a href="#book">12 Book</a>
+  <a href="#ask">13 For You</a>
+</nav>
+
+<!-- ===================== 01 EMAILS ===================== -->
+<section id="emails">
+  <h2 class="section-title"><span class="num">01</span> Email Digest</h2>
+  <p class="section-sub">Inbox last 24h · 34 unread threads · nothing requires an urgent reply, but two are worth 30 seconds each.</p>
+
+  <div class="card">
+    <div class="email-row">
+      <div class="dot imp"></div>
+      <div>
+        <div class="email-from">hao.yang@rxglobal.com · 10:32 WIB</div>
+        <div class="email-subj">📌 7月2日周会会议纪要 (RX Global weekly minutes)</div>
+        <div class="email-snip">Weekly minutes covering agent operations, VIP outreach, staffing, other-country markets & visa issues. You are cc'd with the team. <strong>Action:</strong> skim the "后续行动计划" (follow-up actions) section — flag if anything is assigned to you.</div>
+      </div>
+      <div class="email-time">REPLY IF TAGGED</div>
+    </div>
+    <div class="email-row">
+      <div class="dot imp"></div>
+      <div>
+        <div class="email-from">crew@morningbrew.com · 09:20 WIB</div>
+        <div class="email-subj">☕ Morning Brew — "US jobs report disappoints"</div>
+        <div class="email-snip">Confirms the soft June NFP print that drove yesterday's Dow record. Use as sanity-check against your Bloomberg feed before writing the macro paragraph of any pitch.</div>
+      </div>
+      <div class="email-time">READ</div>
+    </div>
+    <div class="email-row">
+      <div class="dot unread"></div>
+      <div>
+        <div class="email-from">Glassdoor / Indeed / LinkedIn Jobs · multiple</div>
+        <div class="email-subj">Finance Intern / Budget Analyst / Paid Accounting Intern openings</div>
+        <div class="email-snip">10+ job-alert emails (Barclays, Marriott, HII, JTA, PT Thomas Internasional, Astra Graphia). Batch-archive; if you want, I can filter next brief to <b>only</b> IB / ER / PE roles.</div>
+      </div>
+      <div class="email-time">LOW-PRIO</div>
+    </div>
+    <div class="email-row">
+      <div class="dot"></div>
+      <div>
+        <div class="email-from">no-reply@canva.com · 07:22 WIB</div>
+        <div class="email-subj">Your Canva invoice</div>
+        <div class="email-snip">Receipt only. File for reimbursement / personal accounting.</div>
+      </div>
+      <div class="email-time">FILE</div>
+    </div>
+    <div class="email-row">
+      <div class="dot"></div>
+      <div>
+        <div class="email-from">Trip.com / LinkedIn social · low priority</div>
+        <div class="email-subj">Promo & social updates</div>
+        <div class="email-snip">Bank Mega Syariah travel promo + a LinkedIn connection graduation post. Nothing actionable.</div>
+      </div>
+      <div class="email-time">SKIP</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 02 AGENDA ===================== -->
+<section id="agenda">
+  <h2 class="section-title"><span class="num">02</span> Today's Agenda</h2>
+  <p class="section-sub">Friday, 3 July 2026 · Independence Day eve — US half-day.</p>
+
+  <div class="card" style="border-left:3px solid var(--amber)">
+    <div class="card-h">
+      <div class="card-title">Google Calendar connector not linked to this session</div>
+      <span class="tag amber">Note</span>
+    </div>
+    <div class="card-body">
+      Your active connectors are Gmail, Google Drive, Canva, and GitHub — no Calendar. Two ways to fix so I can pull events tomorrow morning:
+      <ul class="plain" style="margin-top:8px">
+        <li>Add the Google Calendar MCP connector in claude.ai → Settings → Connectors.</li>
+        <li>Or forward-invite <b>nelsontube16@gmail.com</b> to today's events and I'll parse them from Gmail.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="kicker">Market-driven agenda (auto-inferred)</div>
+    <div class="grid-2">
+      <div>
+        <div class="card-title">🇺🇸 US half-day close 13:00 ET</div>
+        <div class="card-body">NYSE / Nasdaq close early ahead of July 4 holiday. Thin volume → outsized moves; don't trade off any Friday afternoon tape.</div>
+      </div>
+      <div>
+        <div class="card-title">🇮🇩 IDX regular session</div>
+        <div class="card-body">Full trading day. Watch commodity names after Prabowo's B50 biodiesel signal + LNG price cut.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 03 TAPE ===================== -->
+<section id="tape">
+  <h2 class="section-title"><span class="num">03</span> The Tape — Last 24h</h2>
+  <p class="section-sub">Yesterday's close (2 Jul) · one screen you can quote in any pitch cold-open.</p>
+
+  <div class="grid-3">
+    <div class="stat"><div class="l">Dow Jones</div><div class="v">52,900</div><div class="d up">▲ +1.14% · new ATH</div></div>
+    <div class="stat"><div class="l">S&amp;P 500</div><div class="v">flat</div><div class="d flat">≈ unchanged</div></div>
+    <div class="stat"><div class="l">Nasdaq 100</div><div class="v">−1.61%</div><div class="d dn">▼ mega-caps hit</div></div>
+    <div class="stat"><div class="l">IDX Composite</div><div class="v">5,703</div><div class="d up">▲ +1.1% (Wed close)</div></div>
+    <div class="stat"><div class="l">Fed Funds</div><div class="v">3.50–3.75%</div><div class="d flat">Held · Jun 17</div></div>
+    <div class="stat"><div class="l">BI-Rate</div><div class="v">5.75%</div><div class="d dn">▲ +100 bps YTD</div></div>
+  </div>
+
+  <div class="card" style="margin-top:14px">
+    <div class="kicker">The one-paragraph read</div>
+    <div class="card-body">
+      A <strong>soft June US jobs print</strong> (fewer jobs, prior months revised down) drove a classic <strong>rotation trade</strong>: money left mega-cap tech (Meta −3.8%, Tesla −6.4%, semis lower) and rotated into defensives (health care, staples, utilities) plus cyclicals under the Dow. The Dow printed a new all-time high while the Nasdaq slid — this is a <strong>breadth story</strong>, not a bull-market top signal. Underneath: 354 of the 500 S&amp;P names advanced. <em>Read as: the market is broadening, not weakening.</em>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 04 MACRO ===================== -->
+<section id="macro">
+  <h2 class="section-title"><span class="num">04</span> Macro — What Moved Rates</h2>
+  <p class="section-sub">Only the data points you can defend in a rate-strategy paragraph.</p>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-h"><div class="card-title">Fed on hold at 3.50–3.75%</div><span class="tag navy">US</span></div>
+      <div class="card-body">June 17 FOMC held. Dot plot revised <strong>PCE inflation up to 3.6%</strong> (from 2.7%) and cut 2026 GDP to 2.2% (from 2.4%). The market had been pricing 1–2 cuts; it is now pricing zero cuts and a small probability of a <em>hike</em> if oil stays bid.</div>
+    </div>
+    <div class="card">
+      <div class="card-h"><div class="card-title">May CPI: 4.2% headline / 2.9% core</div><span class="tag red">Sticky</span></div>
+      <div class="card-body">The gap between headline and core = energy pass-through from the Iran crisis. Core is coming down; headline isn't. Any pitch involving margins needs to acknowledge this <b>cost-input squeeze</b>.</div>
+    </div>
+    <div class="card">
+      <div class="card-h"><div class="card-title">June US jobs disappoint</div><span class="tag amber">New</span></div>
+      <div class="card-body">Fewer jobs than consensus + prior-month downward revisions. Bond yields fell, rate-cut odds for Sep ticked up — but Fed can't cut into 4%+ headline CPI. This is why the tape rotated instead of rallying broadly.</div>
+    </div>
+    <div class="card">
+      <div class="card-h"><div class="card-title">🇮🇩 BI at 5.75% after emergency hike</div><span class="tag red">Hawkish</span></div>
+      <div class="card-body">100 bps of hikes since May, including an <b>off-schedule</b> +25 on Jun 9 — that's rare and means BI was defending the rupiah. IDR still near 16,200/USD. EIU sees 2 more +25 hikes in Q3 → terminal 6.00%.</div>
+    </div>
+  </div>
+
+  <div class="mech">
+    <b>Mechanism you must know — Why an off-schedule hike matters</b>
+    Central banks meet on a published calendar so markets can price expectations. When a bank hikes <em>outside</em> that calendar, it is signaling: "we cannot wait." Usually it's currency defense — a sliding currency imports inflation via import prices, and if capital is fleeing, higher rates make holding local bonds more attractive. The signal itself (regardless of the +25 bps size) tells you the bank saw disorderly conditions. This is bearish for local equities in the short term (rates ↑ → discount rate ↑ → P/E multiples compress) but stabilizing medium-term.
+  </div>
+</section>
+
+<!-- ===================== 05 GEO ===================== -->
+<section id="geo">
+  <h2 class="section-title"><span class="num">05</span> Geopolitics</h2>
+  <p class="section-sub">Only what actually moves an equity model.</p>
+
+  <div class="card">
+    <div class="card-h"><div class="card-title">🛢️ Iran / Strait of Hormuz — still the #1 macro risk</div><span class="tag red">Escalated</span></div>
+    <div class="card-body">
+      Iran conflict now framed as "a global event." Strait of Hormuz carries ~<strong>20M barrels/day</strong> — ~20% of global oil. Tehran is testing ballistic missiles and enriching near-weapons-grade uranium; the risk of a preemptive Israeli or US-led strike is at a decade high. <br><br>
+      <strong>Portfolio read:</strong> tail-hedge with energy names (long XOM/CVX and Indonesian coal / oil-adjacent MEDC), stay short duration in Asian FX, and keep an inflation-linked bond overlay. Airlines, chemicals, and marine-freight consumers are most exposed on the short side.
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-h"><div class="card-title">🇺🇦 Ukraine — same shape, no de-escalation</div><span class="tag amber">Chronic</span></div>
+      <div class="card-body">Attacks on energy + critical infra continue. Base case is <b>no durable peace in 2026</b>. Priced in — but repeat pipeline hits still spike TTF gas.</div>
+    </div>
+    <div class="card">
+      <div class="card-h"><div class="card-title">🇨🇳 China / Taiwan — grey-zone, not kinetic</div><span class="tag navy">Watch</span></div>
+      <div class="card-body">Post Trump-Xi summit, kinetic risk is <em>lower</em> than pre-summit. But cyber, blockade drills, and airspace incursions are increasing. Semi-fab supply chain remains the sensitivity.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 06 M&A ===================== -->
+<section id="ma">
+  <h2 class="section-title"><span class="num">06</span> M&amp;A — Deals You Should Know</h2>
+  <p class="section-sub">Only deals with a pitchable thesis.</p>
+
+  <div class="card">
+    <div class="card-h"><div class="card-title">Kroger to acquire Giant Eagle — $1.65B</div><span class="tag green">Consumer Staples</span></div>
+    <div class="card-body">
+      After the Albertsons deal blew up on antitrust, Kroger goes for a smaller, cleaner tuck-in. <strong>Thesis:</strong> regional density in PA/OH/WV — synergy math is CoGS scale + private-label penetration. Watch WMT/COST peer multiple compression on the read-through.
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-h"><div class="card-title">Lockheed frontrunner for Ultra Maritime — $3.5B</div><span class="tag violet">Defense</span></div>
+      <div class="card-body">UK anti-sub warfare business. Fits the ongoing defense consolidation narrative post-Ukraine + AUKUS. If confirmed, LMT re-rating catalyst; also lifts UK defense comps.</div>
+    </div>
+    <div class="card">
+      <div class="card-h"><div class="card-title">Biotech pop: SEER +30%, CLRO +52% AH</div><span class="tag teal">Biotech</span></div>
+      <div class="card-body">SEER: unsolicited buyout offer. CLRO: Vivani merger. Signal: <b>biotech M&amp;A is heating up</b> — cash-rich pharma buying pipeline as clinical valuations compressed. Screen for XBI names trading &lt;1x cash.</div>
+    </div>
+  </div>
+
+  <div class="mech">
+    <b>Mechanism — Why acquirers "pay a premium"</b>
+    A control premium (typically 20–40% over unaffected share price) compensates target shareholders for giving up (a) future upside independent of the deal and (b) their diversification. The acquirer justifies it via <em>synergies</em>: cost synergies (removing duplicate HQ, IT, procurement scale) that are usually credible, and revenue synergies (cross-sell) that usually are <em>not</em>. In a pitch, always separate the two — juniors get in trouble by summing both at face value.
+  </div>
+</section>
+
+<!-- ===================== 07 IPO ===================== -->
+<section id="ipo">
+  <h2 class="section-title"><span class="num">07</span> IPO Window</h2>
+  <p class="section-sub">Pipeline this week + one big deferral.</p>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-h"><div class="card-title">LIME (Neutron Holdings) priced $25.00</div><span class="tag green">Priced</span></div>
+      <div class="card-body">Mid-point of $24–$26 range. 6.96M shares · $174M raised (30 Jun). Micro-mobility name — read as "small-cap risk appetite returning."</div>
+    </div>
+    <div class="card">
+      <div class="card-h"><div class="card-title">Anker Innovations · HKEX H-share</div><span class="tag navy">HK</span></div>
+      <div class="card-body">Listed 2 Jul at HKD 99.32 · ~$591M raised. First major China-tech cross-listing of H2. Watch tape reception → gates Shein/other HK dual-listings.</div>
+    </div>
+    <div class="card">
+      <div class="card-h"><div class="card-title">Week of 28 Jun–4 Jul: 31 pricings</div><span class="tag green">Hot</span></div>
+      <div class="card-body">5 Mon · 6 Tue · 10 Wed · 10 Thu. The IPO window is <b>wide open</b> — you can pitch equity-issuance strategy without hedging the language.</div>
+    </div>
+    <div class="card">
+      <div class="card-h"><div class="card-title">OpenAI likely delays IPO to 2027</div><span class="tag amber">Delayed</span></div>
+      <div class="card-body">Polymarket: 73% now bet Dec 2026 or later; only 3% by end-Jul. If confirmed, mild positive for private AI comps (Anthropic, xAI valuation marks hold longer).</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 08 IDX ===================== -->
+<section id="idx">
+  <h2 class="section-title"><span class="num">08</span> Indonesia — IDX &amp; Domestic</h2>
+  <p class="section-sub">Composite +1.1% Wed, snapping 3-day losing streak.</p>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-h"><div class="card-title">Top movers · 2 Jul</div><span class="tag green">Long side</span></div>
+      <div class="card-body">
+        <ul class="plain">
+          <li><b>Petrindo Jaya Kreasi (CUAN)</b> +13.2%</li>
+          <li><b>Merdeka Battery Materials (MBMA)</b> +6.5%</li>
+          <li><b>Vale Indonesia (INCO)</b> +6.1%</li>
+          <li><b>Medco Energi (MEDC)</b> +3.9%</li>
+        </ul>
+        <strong>Read:</strong> commodities + battery-metals leadership. Nickel &amp; coal names catch a bid on B50 biodiesel signal + LNG price cut.
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-h"><div class="card-title">Policy catalysts</div><span class="tag navy">Structural</span></div>
+      <div class="card-body">
+        <ul class="plain">
+          <li>Industrial LNG price cut → margin tailwind for downstream</li>
+          <li>Prabowo readying B50 biodiesel mandate → CPO demand ↑</li>
+          <li>Ongoing food-security &amp; capital-markets reform push</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-h"><div class="card-title">The tension you must acknowledge in any Indonesia pitch</div><span class="tag red">Watch</span></div>
+    <div class="card-body">
+      May trade balance flipped to <strong>deficit</strong> — first gap since Apr 2020 (exports ↓, imports ↑). Jun inflation hit a 3-month high on food. This is precisely why BI is hiking. Any long-Indonesia pitch has to show why <em>your</em> name benefits <b>despite</b> tighter domestic liquidity (typically: USD-earners, commodity exporters, defensive consumer).
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 09 ANALYST CALLS ===================== -->
+<section id="calls">
+  <h2 class="section-title"><span class="num">09</span> Analyst Calls Worth Reading</h2>
+  <p class="section-sub">Not every note — only the ones a partner would quote.</p>
+
+  <div class="grid-2">
+    <div class="card" style="border-left:3px solid var(--red)">
+      <div class="kicker">Downgrade</div>
+      <div class="card-title">Oppenheimer cuts Goldman Sachs (GS) & Morgan Stanley (MS) → Underperform</div>
+      <div class="card-body">Also trimmed BAC, C to Perform. Call: banking-cycle turn; alt asset managers (BX, KKR, APO) preferred vs traditional bulge brackets. Contrarian value setup if the cycle read is wrong.</div>
+    </div>
+    <div class="card" style="border-left:3px solid var(--green)">
+      <div class="kicker">Upgrade</div>
+      <div class="card-title">Goldman: Tradeweb (TW) → Buy · PT $146</div>
+      <div class="card-body">Rates-vol tailwind for electronic fixed-income venues. Pair-trade idea: long TW / short CBOE if you want to fade equity-vol dominance.</div>
+    </div>
+    <div class="card" style="border-left:3px solid var(--green)">
+      <div class="kicker">Upgrade</div>
+      <div class="card-title">JPMorgan: Qualys (QLYS) → Neutral · PT $139 (from $87)</div>
+      <div class="card-body">Two-notch effective re-rating. Cybersecurity re-acceleration story. Sanity-check vs peers (CRWD, S, TENB).</div>
+    </div>
+    <div class="card" style="border-left:3px solid var(--red)">
+      <div class="kicker">Downgrade</div>
+      <div class="card-title">Goldman: SkyWest (SKYW) → Neutral · PT $115</div>
+      <div class="card-body">Regional airline exposure into rising fuel + softer travel. Airline-space negative read-through.</div>
+    </div>
+  </div>
+
+  <blockquote>
+    <b>Legend watch — Buffett &amp; Marks:</b> Berkshire ended Q1 2026 with a record <strong>$397.4B in cash</strong>. Buffett publicly called the current market "a casino" and said current wobbles are "nothing." Marks (Oaktree) is skeptical of the AI narrative and worried about optimism. The subtext: two of the most respected value voices are <em>defensively positioned</em>. That doesn't mean sell — it means don't chase.
+  </blockquote>
+</section>
+
+<!-- ===================== 10 CORRELATIONS ===================== -->
+<section id="corr">
+  <h2 class="section-title"><span class="num">10</span> Correlations vs Prior Briefs</h2>
+  <p class="section-sub">Threading today's story back through what we watched.</p>
+
+  <div class="card">
+    <div class="corr">
+      <div class="date">26 Apr 2026</div>
+      <div>
+        <strong>Strait of Hormuz standoff · Oil at $106 · Brent +55% YTD.</strong><br>
+        <span style="color:var(--ink-soft)">Today: the same energy shock is now visible <em>inside the CPI print</em> (headline 4.2% vs core 2.9%). The macro thesis has traveled from "geopolitical risk premium" into "sticky headline inflation" — which is why the Fed cannot cut and BI has been forced to hike 100 bps. <b>The tail-risk trade of April has become the base case of July.</b></span>
+      </div>
+    </div>
+    <div class="corr">
+      <div class="date">26 Apr 2026</div>
+      <div>
+        <strong>Mega-cap tech leadership + narrow breadth.</strong><br>
+        <span style="color:var(--ink-soft)">Today: the reverse setup — Nasdaq −1.6%, Dow +1.14% ATH, breadth positive (354/500 advancing). <b>The rotation you wanted to see in April is here.</b> Question is whether it lasts more than a week.</span>
+      </div>
+    </div>
+    <div class="corr">
+      <div class="date">26 Apr 2026</div>
+      <div>
+        <strong>Indonesia GPU-adjacent / commodity plays.</strong><br>
+        <span style="color:var(--ink-soft)">Today: still the winning shelf (INCO, MBMA, MEDC, CUAN leading). Battery-metals thesis intact. What's <em>new</em>: policy tailwinds (LNG cut, B50) are adding an operating-margin leg to the price-of-nickel leg.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 11 LEARN ===================== -->
+<section id="learn">
+  <h2 class="section-title"><span class="num">11</span> Learn — Concepts For Your Internship</h2>
+  <p class="section-sub">Two concepts today. Small dose, high frequency.</p>
+
+  <div class="card">
+    <div class="kicker">Concept #1 — Discount rate & why rate cuts move equities</div>
+    <div class="card-title">Why "Fed on hold" is a headwind for growth stocks</div>
+    <div class="card-body">
+      Every stock's price is (in theory) the present value of its future cash flows, discounted at some rate <em>r</em>. <br><br>
+      <span class="mono" style="font-family:var(--mono);background:#f2f4f8;padding:2px 6px;border-radius:4px">Price = Σ CF<sub>t</sub> / (1+r)<sup>t</sup></span><br><br>
+      When <em>r</em> rises: near-term cash flows barely change, but far-in-the-future cash flows shrink dramatically (compounding works backwards). <strong>Growth stocks</strong> — companies whose cash flows are heavily back-loaded — get hit hardest. <strong>Value stocks</strong> (steady near-term CF) barely notice. <br><br>
+      This is the entire reason yesterday looked the way it did: mega-cap tech (long duration) got sold; utilities, staples, industrials (short duration) rallied. <b>Whenever you hear "rate expectations changed," translate it into "duration got repriced."</b>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="kicker">Concept #2 — EV / EBITDA in one page</div>
+    <div class="card-title">Why bankers quote EV/EBITDA, not P/E</div>
+    <div class="card-body">
+      <b>EV (Enterprise Value)</b> = Market Cap + Debt − Cash. It's what you'd pay to buy the whole business, debt included, net of the cash you'd inherit.<br>
+      <b>EBITDA</b> = earnings before interest, taxes, D&amp;A. Approximation for operating cash flow, before capital structure choices.<br><br>
+      Ratio <b>EV/EBITDA</b> answers: "for every dollar of operating cash the business throws off, how much am I paying for the entire capital stack?" <br><br>
+      <strong>Why bankers prefer it to P/E:</strong>
+      <ul class="plain">
+        <li><b>Capital-structure-neutral</b> — companies with different debt levels are still comparable (P/E gets distorted by interest expense).</li>
+        <li><b>Tax-neutral</b> — cross-border comps work.</li>
+        <li><b>D&amp;A-neutral</b> — accounting choices on depreciation don't skew the comp.</li>
+      </ul>
+      <b>Where it fails:</b> capital-intensive businesses (telecom, airlines) — EBITDA overstates true cash flow because it ignores maintenance capex. For them, use EV/(EBITDA − Capex).
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 12 BOOK ===================== -->
+<section id="book">
+  <h2 class="section-title"><span class="num">12</span> Book of the Day</h2>
+  <p class="section-sub">One book. 30 pages/day = done in a fortnight.</p>
+
+  <div class="book">
+    <div class="cover">
+      <div class="top">Wiley Finance</div>
+      <div class="tl">Investment<br>Banking</div>
+      <div class="bt">Rosenbaum · Pearl</div>
+    </div>
+    <div class="body">
+      <h3>Investment Banking: Valuation, LBOs, M&amp;A, and IPOs</h3>
+      <div class="auth">Joshua Rosenbaum &amp; Joshua Pearl · 3rd ed.</div>
+      <p style="margin:0 0 8px">Considered the <strong>de-facto standard</strong> handed to first-year analysts at every bulge bracket and elite boutique. It is not "reading" — it is a <em>working manual</em>. Read the DCF chapter, then build a DCF; read the LBO chapter, then build an LBO. That's how the material sticks.</p>
+      <p style="margin:0 0 8px"><b>Daily protocol (25–30 min):</b></p>
+      <ul class="plain" style="margin:0">
+        <li>Mon–Wed: 15 pages of the current chapter.</li>
+        <li>Thu: rebuild that chapter's key template in Excel from memory.</li>
+        <li>Fri: 1 quick comparable-company screen using what you learned.</li>
+      </ul>
+      <p style="margin-top:10px"><b>If you finish it:</b> follow with <em>The Little Book of Valuation</em> (Damodaran) → <em>Barbarians at the Gate</em> (narrative, for the PE mindset).</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 13 FOR YOU ===================== -->
+<section id="ask">
+  <h2 class="section-title"><span class="num">13</span> For You — Questions</h2>
+  <p class="section-sub">Pick any one. Answering shapes tomorrow's brief.</p>
+
+  <div class="q">
+    <div class="kicker">Q1 · Pitch focus</div>
+    <h4>Do you want tomorrow's brief tilted toward <em>a single sector for a stock pitch</em>, or kept broad?</h4>
+    <p>If you name a sector (e.g. Indonesian battery-metals, US regional banks, defense M&amp;A), I'll go deeper — comps table, 2-year price action, key catalysts, and a straw-man pitch outline.</p>
+  </div>
+  <div class="q">
+    <div class="kicker">Q2 · Style calibration</div>
+    <h4>Is this length right, or do you want the brief in ~50% the space?</h4>
+    <p>I optimized today for "you have zero background on macro/M&amp;A/IPO mechanics." Once the mechanics stop being new, we can compress to bullets-only.</p>
+  </div>
+  <div class="q">
+    <div class="kicker">Q3 · Inbox filter</div>
+    <h4>Should I auto-hide job-alert emails (Glassdoor / Indeed / LinkedIn) from Email Digest?</h4>
+    <p>Yesterday they were 8 of 15 unread threads. Filtering means only <em>work / people / market</em> emails show up.</p>
+  </div>
+  <div class="q">
+    <div class="kicker">Q4 · Calendar</div>
+    <h4>Connect Google Calendar so Section 02 works?</h4>
+    <p>Two-click: claude.ai → Settings → Connectors → Google Calendar. Or send me an .ics file and I'll parse from Drive.</p>
+  </div>
+  <div class="q">
+    <div class="kicker">Q5 · Learn track</div>
+    <h4>Any concept from today you want me to go one level deeper on tomorrow?</h4>
+    <p>Options open: WACC construction, LBO returns algebra, working-capital in a DCF, IRR vs MOIC, precedent-transactions vs trading-comps.</p>
+  </div>
+</section>
+
+<div class="footer">
+  Prepared 03 Jul 2026 · Not investment advice · Sources: TheStreet · CNBC · Trading Economics · Bank Indonesia · Federal Reserve · Bloomberg · Reuters · Yahoo Finance · Morning Brew · IPOScoop · Wall Street Horizon
+</div>
+
+</div>
+</body>
+</html>
