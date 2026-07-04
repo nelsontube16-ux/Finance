@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Morning Brief — 4 July 2026</title>
+<style>
+  :root{
+    --ink:#0a0a0a;
+    --ink-2:#3a3a3a;
+    --muted:#6b6b6b;
+    --line:#e7e7e7;
+    --line-2:#f0f0f0;
+    --bg:#ffffff;
+    --card:#fafafa;
+    --up:#0f7a3d;
+    --down:#b3261e;
+    --hi:#f8f4ea;
+    --accent:#1a1a1a;
+    --tag:#eef1f5;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{background:var(--bg);color:var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    -webkit-font-smoothing:antialiased;
+    line-height:1.55;
+  }
+  .wrap{max-width:960px;margin:0 auto;padding:56px 28px 88px;}
+  header.top{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    border-bottom:1px solid var(--ink);padding-bottom:22px;margin-bottom:36px;
+  }
+  .brand{font-size:12px;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);}
+  h1{font-size:44px;line-height:1.05;font-weight:700;letter-spacing:-0.02em;margin-top:10px;}
+  .date{text-align:right;font-size:13px;color:var(--muted);}
+  .date strong{display:block;color:var(--ink);font-size:15px;font-weight:600;letter-spacing:0.4px;}
+  .kicker{
+    display:inline-block;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;
+    color:var(--muted);border:1px solid var(--line);border-radius:2px;padding:4px 8px;margin-bottom:16px;
+  }
+  section{margin-bottom:56px;}
+  h2{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:20px;font-weight:600;}
+  h3{font-size:19px;font-weight:600;letter-spacing:-0.01em;margin-bottom:8px;color:var(--ink);}
+  h4{font-size:14px;font-weight:600;margin-bottom:6px;color:var(--ink);}
+  p{color:var(--ink-2);font-size:15px;margin-bottom:10px;}
+  ul{padding-left:18px;margin-bottom:12px;}
+  ul li{color:var(--ink-2);font-size:14.5px;margin-bottom:6px;}
+  .tldr{
+    background:var(--hi);border-left:3px solid var(--ink);padding:22px 26px;margin-bottom:44px;
+  }
+  .tldr h2{border:none;padding:0;margin-bottom:12px;}
+  .tldr ol{padding-left:20px;}
+  .tldr li{font-size:15px;color:var(--ink);margin-bottom:8px;font-weight:500;}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+  .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+  @media (max-width:720px){
+    h1{font-size:32px;}
+    .grid-2,.grid-3,.grid-4{grid-template-columns:1fr;}
+    header.top{flex-direction:column;align-items:flex-start;gap:14px;}
+    .date{text-align:left;}
+  }
+  .card{
+    border:1px solid var(--line);border-radius:6px;padding:18px 20px;background:#fff;
+  }
+  .card.tight{padding:14px 16px;}
+  .stat{
+    border:1px solid var(--line);border-radius:6px;padding:14px 16px;background:#fff;
+  }
+  .stat .lbl{font-size:10.5px;letter-spacing:1.8px;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+  .stat .val{font-size:22px;font-weight:700;letter-spacing:-0.01em;color:var(--ink);}
+  .stat .delta{font-size:12px;color:var(--muted);margin-top:2px;}
+  .up{color:var(--up);}
+  .down{color:var(--down);}
+  .tag{
+    display:inline-block;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;
+    background:var(--tag);color:var(--ink);padding:3px 8px;border-radius:2px;margin-right:6px;font-weight:600;
+  }
+  .tag.red{background:#fce8e6;color:#8b1a13;}
+  .tag.green{background:#e6f4ea;color:#0f5c2e;}
+  .tag.amber{background:#fef3d6;color:#7a5000;}
+  .row{display:flex;justify-content:space-between;align-items:baseline;
+    padding:10px 0;border-bottom:1px solid var(--line-2);}
+  .row:last-child{border-bottom:none;}
+  .row .name{font-size:14.5px;font-weight:500;color:var(--ink);}
+  .row .meta{font-size:12.5px;color:var(--muted);}
+  .email-item{
+    padding:12px 0;border-bottom:1px solid var(--line-2);
+  }
+  .email-item:last-child{border-bottom:none;}
+  .email-item .from{font-size:11.5px;letter-spacing:0.5px;color:var(--muted);text-transform:uppercase;}
+  .email-item .subj{font-size:14.5px;font-weight:600;color:var(--ink);margin:3px 0 4px;}
+  .email-item .snip{font-size:13px;color:var(--ink-2);}
+  .flag-urgent{color:var(--down);font-weight:600;font-size:11px;margin-left:6px;text-transform:uppercase;letter-spacing:1px;}
+  .callout{
+    border:1px dashed var(--line);border-radius:6px;padding:16px 20px;background:var(--card);
+    font-size:13.5px;color:var(--ink-2);
+  }
+  .divider{border:0;border-top:1px solid var(--line);margin:36px 0;}
+  .footer{
+    margin-top:60px;padding-top:24px;border-top:1px solid var(--line);
+    font-size:12px;color:var(--muted);
+  }
+  .book{
+    display:grid;grid-template-columns:120px 1fr;gap:22px;align-items:start;
+    border:1px solid var(--line);border-radius:6px;padding:22px;background:#fff;
+  }
+  .book .cover{
+    width:120px;height:170px;background:#111;color:#f5f5f5;
+    display:flex;flex-direction:column;justify-content:space-between;
+    padding:14px 12px;border-radius:3px;
+    font-size:11px;line-height:1.3;
+  }
+  .book .cover .title{font-size:13px;font-weight:700;line-height:1.2;letter-spacing:-0.01em;}
+  .book .cover .auth{font-size:9.5px;letter-spacing:1.2px;text-transform:uppercase;opacity:0.75;}
+  @media (max-width:720px){
+    .book{grid-template-columns:1fr;justify-items:start;}
+  }
+  .learn{
+    border:1px solid var(--line);border-radius:6px;padding:24px 26px;background:#fff;
+  }
+  .learn .step{margin-bottom:14px;padding-left:22px;position:relative;}
+  .learn .step:before{
+    content:"";position:absolute;left:0;top:8px;width:8px;height:8px;
+    border:2px solid var(--ink);border-radius:50%;
+  }
+  .qa{
+    background:var(--card);border-radius:6px;padding:20px 24px;
+  }
+  .qa .q{font-size:14.5px;font-weight:600;color:var(--ink);margin-bottom:4px;}
+  .qa .q:before{content:"Q.";color:var(--muted);margin-right:8px;font-weight:700;}
+  .qa .hint{font-size:12.5px;color:var(--muted);margin-bottom:14px;padding-left:22px;}
+  .corr-item{
+    padding:12px 0;border-bottom:1px dashed var(--line);
+  }
+  .corr-item:last-child{border:none;}
+  .corr-item .then{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;}
+  .corr-item .now{font-size:14px;color:var(--ink);margin-top:4px;font-weight:500;}
+  .corr-item .impl{font-size:13px;color:var(--ink-2);margin-top:4px;font-style:italic;}
+  a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--line);}
+  a:hover{text-decoration-color:var(--ink);}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;background:var(--card);padding:1px 6px;border-radius:3px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div>
+      <div class="brand">Morning Brief · Vol. II</div>
+      <h1>Fixed income woke up.<br/>Equities took a nap.</h1>
+    </div>
+    <div class="date">
+      <strong>Saturday, 4 July 2026</strong>
+      Independence Day · US mkts closed<br/>
+      Prepared 07:00 WIB · 15-min read
+    </div>
+  </header>
+
+  <!-- TL;DR -->
+  <div class="tldr">
+    <h2>TL;DR — What matters this weekend</h2>
+    <ol>
+      <li><strong>June NFP disappointed:</strong> only +57k jobs (vs +113k expected). Unemployment fell to 4.2%. Two-way signal — softer hiring, but no recession. July Fed hold odds now ~68%.</li>
+      <li><strong>Dow hit ATH (52,844)</strong> before the holiday close. Nasdaq lagged. Bond yields dropped hard on the weak jobs number — the "bad news = good news" reflex is back.</li>
+      <li><strong>Indonesia is the outlier:</strong> IHSG stuck near 5,744 (well below April's ~7,300). BI hiked to 5.75% defending rupiah (~Rp17,700/USD). Six IPOs listing next Monday (7 Jul) — first real pipeline since the Iran shock.</li>
+    </ol>
+  </div>
+
+  <!-- BAGIAN 1: EMAIL SUMMARY -->
+  <section>
+    <div class="kicker">Bagian 1</div>
+    <h2>📧 Email Summary — Last 24h</h2>
+    <div class="card">
+      <p style="font-size:13.5px;color:var(--muted);margin-bottom:14px;">
+        Scanned 15 unread threads (last 48h). <strong>None require an urgent reply</strong> — 100% are automated job alerts (Glassdoor, Indeed, LinkedIn). Two flagged "Important" by Gmail are still just job listings.
+      </p>
+
+      <div class="email-item">
+        <div class="from">Indeed · 04 Jul, 11:49 · <span class="flag-urgent">Match</span></div>
+        <div class="subj">Paid Internship — Accounting @ PT Thomas Internasional Indonesia</div>
+        <div class="snip">Rp 3.85–5.8jt/month. Indeed flagged this as a background-match. Worth a look given your Finance major.</div>
+      </div>
+      <div class="email-item">
+        <div class="from">Glassdoor · 04 Jul, 11:45 · <span style="color:var(--up);font-weight:600;">Important</span></div>
+        <div class="subj">Entry Level — Wealth Management @ Equitable Advisors</div>
+        <div class="snip">Flagged as "great fit." Wealth-mgmt entry roles are often the on-ramp to private banking / advisory tracks.</div>
+      </div>
+      <div class="email-item">
+        <div class="from">LinkedIn · 04 Jul, 02:41</div>
+        <div class="subj">Executive — Data Analyst, Platforms @ Macquarie Group</div>
+        <div class="snip">Macquarie is a top-tier IB in APAC. Even if analyst is junior, worth reviewing for later.</div>
+      </div>
+      <div class="email-item">
+        <div class="from">Glassdoor · 04 Jul, 11:35</div>
+        <div class="subj">Finance Intern @ Reolink + 5 more in Singapore</div>
+        <div class="snip">SG postings; Barclays also appearing in the same batch.</div>
+      </div>
+      <div class="email-item">
+        <div class="from">Glassdoor · 04 Jul, 05:24 · <span style="color:var(--up);font-weight:600;">Important</span></div>
+        <div class="subj">Aqua Expeditions + others hiring in Singapore</div>
+        <div class="snip">Generic aggregator digest. Skim if free.</div>
+      </div>
+
+      <p style="font-size:12.5px;color:var(--muted);margin-top:14px;margin-bottom:0;">
+        <strong>Action:</strong> No email needs a reply today. Two internship leads (PT Thomas, Equitable) are the only ones worth clicking through this weekend.
+      </p>
+    </div>
+  </section>
+
+  <!-- BAGIAN 2: AGENDA -->
+  <section>
+    <div class="kicker">Bagian 2</div>
+    <h2>📅 Today's Agenda</h2>
+    <div class="callout">
+      <strong>Google Calendar is not connected to this session.</strong> I couldn't pull <code>list_events</code> — no Calendar MCP is available in the current environment (only Gmail, Drive, GitHub, Canva). To include calendar in future briefs, please connect the Google Calendar connector from your claude.ai settings.<br/><br/>
+      <em>Manual note:</em> US markets closed today (Independence Day observed). IDX / SGX open normally Monday 7 Jul.
+    </div>
+  </section>
+
+  <hr class="divider"/>
+
+  <!-- GLOBAL MARKET SNAPSHOT -->
+  <section>
+    <h2>🌍 Global Market Snapshot · Close of 2 July 2026</h2>
+    <div class="grid-4">
+      <div class="stat">
+        <div class="lbl">Dow Jones</div>
+        <div class="val">52,844</div>
+        <div class="delta up">+539 · +1.03% · ATH</div>
+      </div>
+      <div class="stat">
+        <div class="lbl">S&amp;P 500</div>
+        <div class="val">flat</div>
+        <div class="delta">~0.0% · rotation into cyclicals</div>
+      </div>
+      <div class="stat">
+        <div class="lbl">Nasdaq 100</div>
+        <div class="val">−0.8%</div>
+        <div class="delta down">Mega-cap tech sold off</div>
+      </div>
+      <div class="stat">
+        <div class="lbl">IHSG (JCI)</div>
+        <div class="val">5,744</div>
+        <div class="delta up">+0.87% · still bearish YTD</div>
+      </div>
+    </div>
+    <p style="margin-top:14px;font-size:13.5px;color:var(--ink-2);">
+      <strong>Read:</strong> Classic <em>rotation day</em> — a weak jobs report pushed money out of AI/tech (which needed strong data to justify multiples) and into cyclicals + rate-sensitive names (banks, homebuilders, small-caps) that benefit from lower yields. This is what a "goldilocks weakness" tape looks like.
+    </p>
+  </section>
+
+  <!-- MACRO -->
+  <section>
+    <h2>📊 Macroeconomics — The Fed &amp; The Data</h2>
+    <div class="grid-2">
+      <div class="card">
+        <span class="tag amber">Macro · US</span>
+        <h3>June NFP: +57k vs +113k expected</h3>
+        <p>Nonfarm payrolls added only 57,000 jobs in June (released 2 July). Unemployment ticked <em>down</em> to 4.2% — a strange combo. Professional services + healthcare are still hiring; leisure/hospitality is shedding jobs (post-inflation demand fatigue).</p>
+        <p style="font-size:13px;"><strong>Why it matters:</strong> A softer labor market gives the Fed cover to <strong>hold</strong> in July instead of hiking despite sticky 4.2% CPI. Bond market cheered — 10Y yields dropped ~10bps intraday.</p>
+      </div>
+      <div class="card">
+        <span class="tag amber">Macro · US</span>
+        <h3>Fed Rate: 3.50–3.75% · July 28–29 decision</h3>
+        <p>CME FedWatch: <strong>~68% hold</strong>, ~32% +25bps hike. Chair Kevin Warsh's June language stayed hawkish ("delivering price stability remains the Fed's primary objective") but the jobs miss dilutes that.</p>
+        <p style="font-size:13px;"><strong>Watch:</strong> Core PCE (26 July) + Q2 GDP advance (30 July) — both drop the week of the FOMC. If either surprises hot, the hike-odds double overnight.</p>
+      </div>
+      <div class="card">
+        <span class="tag red">Macro · US</span>
+        <h3>Inflation still elevated</h3>
+        <p>May CPI printed <strong>4.2% YoY</strong> — fastest in 3 years, driven by the Iran-war energy spike. PCE forecast for 2026 revised up to 3.6% (from 2.7%) and 3.3% for 2027.</p>
+        <p style="font-size:13px;"><strong>Read:</strong> Even with Iran ceasefire, the second-round effects (services inflation) are stubborn. Real rates are still too low to break sticky prices — this is the Fed's dilemma.</p>
+      </div>
+      <div class="card">
+        <span class="tag red">Macro · Indonesia</span>
+        <h3>BI Rate hiked to 5.75% (17–18 Jun)</h3>
+        <p>Bank Indonesia raised +25bps to 5.75% (DF 4.75% · LF 6.50%) after an off-schedule +50bps move on 9 Jun. Cumulative +125bps YTD.</p>
+        <p style="font-size:13px;"><strong>Why:</strong> Defending the rupiah (~Rp17,700/USD, −2.2% MoM) against capital outflows. Trade balance flipped to deficit in May — first since April 2020. This is a classic EM stress signal.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- GEOPOLITICS -->
+  <section>
+    <h2>🌐 Geopolitics — Iran Update</h2>
+    <div class="card">
+      <span class="tag green">De-escalation</span>
+      <h3>US-Iran ceasefire holding (barely)</h3>
+      <p>Recap of the arc: the "2026 Iran War" ran 28 Feb → 5 May (US Operation Epic Fury with Israel). Ceasefire memorandum signed 17 June (Trump at Versailles, Pezeshkian in Tehran). Despite intermittent skirmishes, both sides confirmed on <strong>28 June</strong> they'll stop the exchange.</p>
+      <ul>
+        <li><strong>Strait of Hormuz:</strong> Reopened. Shipping is normalizing, but insurance premiums remain elevated (~3× pre-war).</li>
+        <li><strong>Cost:</strong> ~$113B to US taxpayers so far (as of 16 Jun).</li>
+        <li><strong>Regional:</strong> UAE + Saudi backed the truce hard — they had $100Bs of data-center and financial-services investment at risk.</li>
+      </ul>
+      <p style="font-size:13px;margin-top:8px;"><strong>Market implication:</strong> Oil retreated but stays structurally $10–15 above pre-war baseline (energy-inflation floor). Defense stocks giving back gains. EM currencies still under pressure because the Fed's forced-hawkish stance hasn't unwound.</p>
+    </div>
+  </section>
+
+  <!-- M&A + IPO -->
+  <section>
+    <h2>🤝 M&amp;A + IPO Activity</h2>
+
+    <h4 style="margin-bottom:10px;color:var(--muted);font-size:11px;letter-spacing:2px;text-transform:uppercase;">Recent Deals (last 7 days)</h4>
+    <div class="card">
+      <div class="row">
+        <div>
+          <div class="name">Bridgepoint → Kayne Anderson Real Estate</div>
+          <div class="meta">PE alt-asset consolidation · US real-estate credit platform</div>
+        </div>
+        <div style="text-align:right;"><strong>$1.39B</strong><br/><span class="meta">29 Jun</span></div>
+      </div>
+      <div class="row">
+        <div>
+          <div class="name">Safran → Exail Technologies</div>
+          <div class="meta">Defense/autonomous naval &amp; navigation — post-Iran defense build-up</div>
+        </div>
+        <div style="text-align:right;"><strong>€2.19B</strong><br/><span class="meta">27 Jun</span></div>
+      </div>
+      <div class="row">
+        <div>
+          <div class="name">Qualcomm → Modular</div>
+          <div class="meta">AI infra push (Modular = AI-compute stack, Chris Lattner's co)</div>
+        </div>
+        <div style="text-align:right;"><strong>~$4.0B</strong><br/><span class="meta">26 Jun</span></div>
+      </div>
+      <div class="row">
+        <div>
+          <div class="name">Adobe → Topaz Labs</div>
+          <div class="meta">Creative-AI tooling · vertical fill-in for Photoshop/PS AI</div>
+        </div>
+        <div style="text-align:right;"><strong>N/D</strong><br/><span class="meta">25 Jun</span></div>
+      </div>
+    </div>
+    <p style="font-size:13px;color:var(--ink-2);margin-top:10px;">
+      <strong>Big picture:</strong> US M&amp;A value hit <strong>$1.2T in the first 5 months of 2026</strong> — nearly 2× the $603B in the same period of 2025 — even as deal <em>volume</em> dropped 4%. Translation: fewer but bigger deals. Sponsors are back after the Iran shock froze Q1, and AI + defense are the two megathemes.
+    </p>
+
+    <h4 style="margin:24px 0 10px;color:var(--muted);font-size:11px;letter-spacing:2px;text-transform:uppercase;">IPO Pipeline — Live This Week</h4>
+    <div class="grid-2">
+      <div class="card tight">
+        <div class="name" style="font-size:15px;font-weight:600;">Lime (NASDAQ)</div>
+        <div class="meta" style="font-size:12.5px;">Micromobility · priced 30 Jun · listed 1 Jul<br/>~$174M raised · $24–$26/sh range · 6.96M shares</div>
+      </div>
+      <div class="card tight">
+        <div class="name" style="font-size:15px;font-weight:600;">Bending Spoons (NASDAQ)</div>
+        <div class="meta" style="font-size:12.5px;">Italian app-portfolio operator (Evernote, Meetup)<br/>~$1.6B raised · $26–$28 range · biggest EU tech IPO of 2026</div>
+      </div>
+      <div class="card tight">
+        <div class="name" style="font-size:15px;font-weight:600;">Anker Innovations (HKEX)</div>
+        <div class="meta" style="font-size:12.5px;">Consumer electronics H-share listing · 2 Jul<br/>~$591M raised · HKD 99.32/sh</div>
+      </div>
+      <div class="card tight">
+        <div class="name" style="font-size:15px;font-weight:600;">Alebund (HKEX)</div>
+        <div class="meta" style="font-size:12.5px;">Biotech · listed 29 Jun<br/>~$164M raised · HKD 22.60/sh</div>
+      </div>
+    </div>
+    <p style="font-size:13px;color:var(--ink-2);margin-top:10px;">
+      <strong>Signal:</strong> 31 IPOs priced the week of 28 Jun–4 Jul (5+6+10+10). This is the <strong>strongest IPO week since Nov 2024</strong>. Windows are opening. If Lime and Bending Spoons trade well, expect the calendar to snowball into Q3.
+    </p>
+  </section>
+
+  <!-- INDONESIA -->
+  <section>
+    <h2>🇮🇩 Indonesia Focus</h2>
+    <div class="grid-2">
+      <div class="card">
+        <span class="tag green">IPO</span>
+        <h3>Six IPOs land Monday 7 Jul</h3>
+        <p><strong>RANS · JECX · PRDL · JELI · BACH · EMMI</strong> — book-build ran 1–3 Jul, listing Monday. First real multi-name IPO week in Indonesia since the Iran-shock freeze in Q1.</p>
+        <p style="font-size:13px;"><strong>Ask yourself:</strong> Do fresh Indonesian retail investors have appetite after a losing YTD tape? Historically, IHSG IPOs launched into weak beta trade poorly on day 1 but reward patient holders 6–9 months out (e.g., 2022 batch).</p>
+      </div>
+      <div class="card">
+        <span class="tag amber">Policy</span>
+        <h3>Prabowo energy playbook</h3>
+        <p>Two moves easing corporate cost pressure: (1) government cut <strong>industrial LNG prices</strong> — direct margin lift for smelters, ceramics, chemicals. (2) <strong>B50 biodiesel</strong> mandate launching soon — bullish for CPO producers (AALI, LSIP, DSNG) but adds cost to auto/logistics.</p>
+        <p style="font-size:13px;"><strong>Rotation trade:</strong> Long CPO + industrials (LNG beneficiaries), short discretionary/auto.</p>
+      </div>
+      <div class="card">
+        <span class="tag red">Macro</span>
+        <h3>Trade deficit + food inflation</h3>
+        <p>May trade balance flipped to <strong>deficit</strong> — first in 5 years. Exports fell, imports surged. June CPI hit a <strong>3-month high</strong> on food (rice, chili, chicken).</p>
+        <p style="font-size:13px;"><strong>Watch:</strong> A second deficit month in June (data drops ~15 Jul) would spike credit-default-swap spreads and pressure the rupiah below Rp18,000. That's the level where offshore panic sells IDR govt bonds.</p>
+      </div>
+      <div class="card">
+        <span class="tag">FX</span>
+        <h3>Rupiah at ~Rp17,700/USD</h3>
+        <p>BI defending via FX intervention + rate hikes + SRBI (Sekuritas Rupiah Bank Indonesia) attracting foreign flows. Cost: burning FX reserves (~$140B and shrinking).</p>
+        <p style="font-size:13px;"><strong>If US 10Y yields keep falling</strong> on soft data, rupiah gets breathing room — this is the single most important cross-asset link for IDX right now.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ANALYST CALLS -->
+  <section>
+    <h2>🎯 Notable Analyst Calls (30 Jun – 2 Jul)</h2>
+    <div class="card">
+      <div class="row">
+        <div>
+          <div class="name">Goldman Sachs (GS) — <span class="down">DOWNGRADE to Underperform</span></div>
+          <div class="meta">Oppenheimer · Chris Kotowski · 30 Jun · Cut GS from Perform</div>
+        </div>
+        <div class="meta" style="text-align:right;">"Peak IB earnings"<br/>~thesis: overearning</div>
+      </div>
+      <div class="row">
+        <div>
+          <div class="name">Morgan Stanley (MS) — <span class="down">DOWNGRADE</span></div>
+          <div class="meta">Oppenheimer · Kotowski · same day, same thesis</div>
+        </div>
+        <div class="meta" style="text-align:right;">Wealth-mgmt fee<br/>compression risk</div>
+      </div>
+      <div class="row">
+        <div>
+          <div class="name">Tradeweb Markets (TW) — <span class="up">UPGRADE to Buy</span></div>
+          <div class="meta">Goldman Sachs · PT $146 (from $128)</div>
+        </div>
+        <div class="meta" style="text-align:right;">Electronic-trading<br/>volume tailwind</div>
+      </div>
+      <div class="row">
+        <div>
+          <div class="name">Honeywell (HON) — <span class="up">UPGRADE to Outperform</span></div>
+          <div class="meta">Daiwa · PT $255</div>
+        </div>
+        <div class="meta" style="text-align:right;">Aerospace + defense<br/>demand tailwind</div>
+      </div>
+      <div class="row">
+        <div>
+          <div class="name">Qualys (QLYS) — <span class="up">UPGRADE to Neutral</span></div>
+          <div class="meta">JPMorgan · PT $139 (from $87) — +60% target lift</div>
+        </div>
+        <div class="meta" style="text-align:right;">Cybersecurity spend<br/>bottoming</div>
+      </div>
+      <div class="row">
+        <div>
+          <div class="name">SkyWest (SKYW) — <span class="down">DOWNGRADE to Neutral</span></div>
+          <div class="meta">Goldman Sachs · PT $115</div>
+        </div>
+        <div class="meta" style="text-align:right;">Regional-air fuel-cost<br/>squeeze</div>
+      </div>
+    </div>
+    <p style="font-size:13px;color:var(--ink-2);margin-top:12px;">
+      <strong>Meta-signal:</strong> A respected sell-side vet flipping bearish on GS + MS is the <em>first sell-side crack</em> in the "banks are back" narrative. Watch this — if two more banks-analysts turn, it becomes a sector call.
+    </p>
+  </section>
+
+  <!-- CORRELATIONS WITH PRIOR RESEARCH -->
+  <section>
+    <h2>🔗 Correlations With Previous Research (26 Apr 2026 brief)</h2>
+    <div class="card">
+      <div class="corr-item">
+        <div class="then">Then (26 Apr)</div>
+        <div class="now">Iran controlled the Strait of Hormuz, whipsawing oil. Called "single biggest risk variable."</div>
+        <div class="impl">→ <strong>Resolved.</strong> Ceasefire holding. Oil de-risked but energy inflation lingers. Thesis: correct.</div>
+      </div>
+      <div class="corr-item">
+        <div class="then">Then (26 Apr)</div>
+        <div class="now">Fed rate 3.00–3.25%, cuts paused, "worst macro backdrop since 2022."</div>
+        <div class="impl">→ <strong>Fed hiked +50bps</strong> to 3.50–3.75%. Backdrop marginally worse (CPI 4.2%, sticky). Confirms the direction call.</div>
+      </div>
+      <div class="corr-item">
+        <div class="then">Then (26 Apr)</div>
+        <div class="now">IHSG at ~7,307, "recovery arc mid-month before stalling."</div>
+        <div class="impl">→ <strong>Broke down hard.</strong> Now 5,744 (−21% since April). The stall we flagged turned into a breakdown; Indonesia is now decoupling <em>negatively</em> from global equities.</div>
+      </div>
+      <div class="corr-item">
+        <div class="then">Then (26 Apr)</div>
+        <div class="now">"IPO drought — zero listings in early 2026, pipeline frozen."</div>
+        <div class="impl">→ <strong>Pipeline unfroze.</strong> 6 IDX listings next Monday; global calendar red-hot. Called the freeze correctly; watch for FOMO now.</div>
+      </div>
+      <div class="corr-item">
+        <div class="then">Then (26 Apr)</div>
+        <div class="now">"Fed Paralysis → EM Vulnerability → Indonesia Exposed."</div>
+        <div class="impl">→ <strong>Playing out to the letter.</strong> BI forced into 125bps of hikes, rupiah at 17,700, trade deficit. The transmission chain we mapped is now the base case.</div>
+      </div>
+    </div>
+    <p style="font-size:13px;color:var(--ink-2);margin-top:10px;">
+      <strong>Framework score:</strong> 4 of 5 April theses played out. The miss = we called IHSG "stalling" but understated the downside. Lesson: when EM is fighting both Fed AND local trade deficit, add a downside scenario 15–20% below "stall" case.
+    </p>
+  </section>
+
+  <hr class="divider"/>
+
+  <!-- DAILY BOOK RECOMMENDATION -->
+  <section>
+    <h2>📚 Daily Book Recommendation</h2>
+    <div class="book">
+      <div class="cover">
+        <div>
+          <div class="auth">Rosenbaum &amp; Pearl</div>
+        </div>
+        <div>
+          <div class="title">Investment Banking: Valuation, LBOs, M&amp;A, and IPOs</div>
+          <div style="font-size:9px;opacity:0.6;margin-top:6px;">3rd Edition · Wiley</div>
+        </div>
+      </div>
+      <div>
+        <h3 style="margin-bottom:8px;">The one book you should read every day (30 min chunks)</h3>
+        <p style="font-size:14.5px;color:var(--ink-2);">This is the <strong>industry standard bible</strong>. Every summer analyst at Goldman, JPM, Morgan Stanley, and any bulge bracket in Jakarta (Mandiri Sekuritas, BCA Sekuritas, CIMB) is expected to have this on their desk. It's practitioner-written, not academic.</p>
+        <p style="font-size:14px;color:var(--ink-2);margin-top:8px;"><strong>Daily reading plan (60 days total):</strong></p>
+        <ul>
+          <li><strong>Week 1–2:</strong> Chapter 1 (Comparable Companies Analysis) — the "trading comps" you'll use in every pitch.</li>
+          <li><strong>Week 3–4:</strong> Chapter 2 (Precedent Transactions) — historical M&amp;A multiples for control premiums.</li>
+          <li><strong>Week 5–6:</strong> Chapter 3 (DCF) — do <em>every worked example</em> in Excel by hand.</li>
+          <li><strong>Week 7–8:</strong> Chapters 4–5 (LBO Analysis) — the PE brain.</li>
+          <li><strong>Week 9+:</strong> M&amp;A sale process, buy-side, IPO chapters.</li>
+        </ul>
+        <p style="font-size:13px;color:var(--muted);margin-top:8px;"><em>Read 30 minutes with Excel open. Reading it passively is a waste — the whole value is that every chapter has a live model to build. Do the model, don't just read it.</em></p>
+        <p style="font-size:13px;color:var(--ink-2);margin-top:8px;"><strong>Runner-ups when you finish it:</strong> "Barbarians at the Gate" (Burrough &amp; Helyar) for M&amp;A storytelling; "Damodaran on Valuation" for advanced DCF; "The Intelligent Investor" (Graham) for equity philosophy.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINANCE STUDENT KNOWLEDGE FEED -->
+  <section>
+    <h2>🎓 Finance Student Knowledge Feed — Concept of the Day</h2>
+    <div class="learn">
+      <h3>What is a Discounted Cash Flow (DCF), and why does every IB analyst live inside one?</h3>
+      <p style="font-size:14.5px;color:var(--ink-2);margin-top:6px;">A DCF is the tool bankers use to answer <strong>"what is this company actually worth today?"</strong> — not what the market says, but what the future cash it generates is worth <em>right now</em>. It's the foundation of every pitch, every fairness opinion, every M&amp;A decision. Skipping DCF fluency = not making it past first-round intern interviews.</p>
+
+      <h4 style="margin-top:18px;">The core intuition (in one sentence)</h4>
+      <p style="font-size:14.5px;">Money in the future is worth <em>less</em> than money today, because (a) you could invest today's money and earn a return, and (b) the future is uncertain. So we <strong>discount</strong> future cash flows back to a "present value."</p>
+
+      <h4 style="margin-top:18px;">The 5 steps every DCF has</h4>
+      <div class="step"><strong>1. Project Free Cash Flow (FCF)</strong> for 5–10 years. FCF = EBIT × (1 − tax rate) + D&amp;A − CapEx − ΔWorking Capital. This is the cash the business generates <em>after</em> paying to keep itself alive.</div>
+      <div class="step"><strong>2. Estimate a Terminal Value (TV)</strong> — what the business is worth at the end of the projection period. Two methods: Gordon Growth (assume FCF grows forever at ~2–3%) or Exit Multiple (assume it's sold for X× EBITDA).</div>
+      <div class="step"><strong>3. Calculate WACC</strong> (Weighted Average Cost of Capital) — the blended rate at which we discount. WACC = (E/V × Re) + (D/V × Rd × (1−T)). This is the "opportunity cost" — what investors expect to earn given the risk.</div>
+      <div class="step"><strong>4. Discount everything back:</strong> PV = FCF ÷ (1 + WACC)^n. Add up all present values of FCFs + present value of TV = <strong>Enterprise Value</strong>.</div>
+      <div class="step"><strong>5. Bridge EV → Equity Value:</strong> Equity Value = EV − Net Debt − Minority Interest + Cash. Divide by shares outstanding = <strong>intrinsic price per share</strong>. Compare vs. market price → buy / hold / sell.</div>
+
+      <h4 style="margin-top:18px;">Where interns get destroyed in DCF interviews</h4>
+      <ul>
+        <li><strong>"Why do we use WACC, not just cost of equity?"</strong> → Because we're valuing the entire enterprise (debt + equity), not just the shareholders' slice. FCF is pre-financing.</li>
+        <li><strong>"What's the sensitivity of your DCF?"</strong> → 90% of the value in a typical DCF is in the <em>Terminal Value</em>. A 0.5% change in WACC or perpetuity growth swings valuation by 15–25%. This is why DCF gets called "garbage in, gospel out."</li>
+        <li><strong>"When is DCF the wrong tool?"</strong> → Early-stage / negative-FCF companies (pre-2020 tech), banks (use P/TBV instead), REITs (use FFO). DCF loves <em>stable, predictable</em> cash generators.</li>
+      </ul>
+
+      <h4 style="margin-top:18px;">Tomorrow's concept (preview)</h4>
+      <p style="font-size:13.5px;color:var(--muted);">Trading comps vs. precedent transactions — why the same company can have two "right" valuations, and what the <em>control premium</em> means when you're buying vs. investing.</p>
+    </div>
+  </section>
+
+  <!-- QUESTIONS FOR YOU -->
+  <section>
+    <h2>❓ Questions for You (help me sharpen tomorrow's brief)</h2>
+    <div class="qa">
+      <div class="q">Which sector do you want to write your first Equity Research pitch on — Indonesian banks, Indonesian consumer, global tech, or something else?</div>
+      <div class="hint">→ Pick one and I'll build a 3-day deep-dive: comps, DCF template, catalysts, key risks.</div>
+
+      <div class="q">Do you want the daily brief in Bahasa Indonesia or English going forward?</div>
+      <div class="hint">→ Right now it's mixed — happy to lock it either way.</div>
+
+      <div class="q">Are you preparing for a specific internship (bulge bracket SG, local Indonesian sekuritas, or PE)?</div>
+      <div class="hint">→ Content weighting will change — e.g., PE means more LBO / fund structures; IB means more comps / M&amp;A mechanics.</div>
+
+      <div class="q">Should I connect Google Calendar so tomorrow's Bagian 2 actually works?</div>
+      <div class="hint">→ Go to claude.ai settings → connectors → enable Google Calendar. I can walk you through if useful.</div>
+
+      <div class="q">What time daily do you want this? 07:00 WIB feels right for a market-open read — confirm or shift.</div>
+      <div class="hint">→ I can set a recurring schedule.</div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    Sources: TheStreet, CNBC, Yahoo Finance, Trading Economics, Federal Reserve, BLS, Bank Indonesia, IDNFinancials, Renaissance Capital, IPOScoop, Britannica, Oxford Economics, Brookings, Businesswire.<br/>
+    Compiled for personal use · Not investment advice · Verify prices before trading.<br/>
+    <br/>
+    <em>Filed: 04 Jul 2026 · Vol II · Next brief: Monday 07 Jul (post-IDX open)</em>
+  </footer>
+
+</div>
+</body>
+</html>
