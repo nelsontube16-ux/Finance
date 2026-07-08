@@ -35,7 +35,11 @@ Financial spine:
 - M&A wire: last 24-48h announced deals ≥ $500m
 - IPO pipeline: this week's pricings, next week's launches
 - Sell-side calls: notable upgrades/downgrades, PT changes
-- Indonesian-specific names: BBRI, BBCA, BMRI, TLKM, ASII, ICBP, MYOR, ANTM, MDKA, GOTO (default watchlist — user can override)
+- Default watchlist (locked by user 08 Jul 2026):
+  - Indonesia: BBRI, BBCA, BMRI, TLKM, ASII, ICBP, MYOR, ANTM, MDKA, GOTO, BRMS
+  - Global: GOOGL
+  (Any name may be added ad-hoc but this is the standing set the routine must cover.)
+- **Coverage weight (locked by user 08 Jul 2026):** 60% global / 40% Indonesia. If the day's Indo news is thin, do not pad the Indo section — reallocate the slot to global.
 
 Broader digest (from the folded-in Daily News Digest routine, kept **headlines-only**):
 - Top 3 world/geopolitics headlines not already covered above
@@ -76,6 +80,7 @@ Two artifacts, both required each run:
 9. **World & Tech Beyond Finance** _(digest folded-in)_ — 3 world + 2 tech + 1 Indonesian-domestic headlines, one line each. Purely informational; no commentary.
 10. **Learn Today** — one crucial finance/IB/PE/M&A concept explained from zero. Rotate: valuation multiples → DCF mechanics → LBO structure → merger consequences (accretion/dilution) → deal process → capital structure → working capital → NWC adjustments → precedent transactions → comparable companies → WACC → terminal value → LBO returns bridge → covenants → PIK/mezz → earnouts → escrow / R&W insurance. Anchor the concept to a real event in today's tape whenever possible.
 11. **Book of the Day** — micro-reading plan. Default rotation:
+    - **Start point (locked by user 08 Jul 2026): Week 1, Section 1 — Trading Comparables (Introduction).** User has not previously read Rosenbaum & Pearl. Increment by one sub-section per day.
     - Weeks 1-9: _Investment Banking_ (Rosenbaum & Pearl) — one sub-section per day.
     - Then _Barbarians at the Gate_ (Burrough & Helyar) — 20 pages/day.
     - Then _Dealmakers_ (Cassidy) or _King of Capital_ (Carey & Morris).
@@ -87,13 +92,14 @@ Two artifacts, both required each run:
 15. **For You** — 3-5 questions to sharpen tomorrow's brief. Rotate: sector focus, watchlist adjustments, macro overlay, delivery format, calendar events.
 16. **Sources** — every claim linked. Grouped by category.
 
-### D. Delivery
+### D. Delivery — three destinations (locked by user 08 Jul 2026)
 
-1. Save HTML to `output/(DATE) - Morning Brief.html`.
-2. Create Gmail draft via `mcp__Gmail__create_draft` with HTML body.
-3. `SendUserFile` the HTML back in-chat with `display: render`.
-4. Commit + push to `claude/zen-lamport-5xwsw9`.
-5. Notify user via `PushNotification` **only** if today's tape has a genuinely market-moving event (single-day index move > 3%, circuit breaker, macro surprise > 1σ, or a policy shift). Never notify on routine "all quiet" runs.
+1. **Local file:** Save HTML to `output/(DATE) - Morning Brief.html`. Format is HTML, not PDF — PDF requires an extra conversion step for no gain in content and higher token/file cost.
+2. **Google Drive:** Upload the same HTML to Drive folder "Morning Briefs" via `mcp__Google-Drive__create_file`. This is what actually lands on the user's Desktop — provided they have the Google Drive Desktop app installed with that folder synced. If the folder does not exist yet, create it. Filename identical to the local file.
+3. **Gmail draft:** Create via `mcp__Gmail__create_draft` with HTML body + 6-line TL;DR plaintext, to nelsontube16@gmail.com. Draft only — the MCP has no send verb.
+4. **In-chat:** `SendUserFile` the HTML back with `display: render` (fallback in case Drive fails or the user wants an immediate preview).
+5. **Git:** Commit + push to `claude/zen-lamport-5xwsw9`.
+6. **Push notification:** Only if today's tape has a genuinely market-moving event (single-day index move > 3%, circuit breaker, macro surprise > 1σ, or a policy shift). Never notify on routine "all quiet" runs. User confirmed this tolerance 08 Jul 2026.
 
 ---
 
