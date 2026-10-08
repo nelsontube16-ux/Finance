@@ -16,6 +16,9 @@ PORTFOLIO (hardcoded, update manually in this prompt if changed):
 - BRMS (IDX, Bumi Resources Minerals): avg Rp 1,000 · 101 lots (10,100 shares)
 - GOOGL (NASDAQ): avg $396.18 · 1 share
 - SLV (NYSE Arca, iShares Silver Trust): avg $94.99 · 0.30 share
+- DRY POWDER (uninvested cash): Rp 1,000,000 total
+
+SIZING RULE: Any BUY/ADD call must fit inside the dry powder. State the exact size and cost (e.g. "1 lot BBCA = 100 shares × Rp 6,050 = Rp 605,000"). If a name can't be bought within the dry powder (e.g. 1 GOOGL share > Rp 1jt), say so and suggest HOLD or a fundable alternative instead. Show dry powder as a line in the Book Summary.
 
 STEP 0 — DAY & SLOT CHECK
 Run: `TZ=Asia/Shanghai date '+%Y-%m-%d %A %H:%M'`
@@ -29,7 +32,7 @@ STEP 1 — DEDUP CHECK
 Gmail search_threads: `(in:sent OR in:draft) subject:"Morning Brief" after:YYYY/MM/DD` with today's date. If a brief for THIS slot (morning/midday/US) already sent, STOP and push notification "already sent, skipped". Otherwise proceed.
 
 STEP 2 — DATA GATHERING (parallel WebSearches)
-Prioritize credible sources: Bloomberg, Reuters, FT, WSJ, Nikkei, Caixin, CNBC Indonesia, Kontan, Bisnis Indonesia, investing.com, tradingeconomics.com, exchange sites. Pull most recent close/intraday for each. Tag "data as of [date]" where lag exists. If a specific number not findable, write "n/a" — never fabricate.
+Prioritize credible sources: Bloomberg, Reuters, FT, WSJ, Nikkei, Caixin, CNBC Indonesia, Kontan, Bisnis Indonesia, investing.com, tradingeconomics.com, exchange sites. Pull most recent close/intraday for each. Tag "data as of [date]" where lag exists. If a specific number not findable, write "n/a" — never fabricate. This applies to every cell, including YTD, 1M and daily-change columns: only fill them from a source you actually found, never estimate.
 
 **Markets (always):**
 - Equities: S&P 500, Nasdaq, Dow, Nikkei 225, Hang Seng, Shanghai Composite, IHSG, DAX
