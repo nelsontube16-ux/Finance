@@ -29,7 +29,7 @@ That is today's date, day-of-week, and time. Decide slot by hour:
 If Sunday AND slot is MORNING → also append WEEKLY REPORT at the bottom.
 
 STEP 1 — DEDUP CHECK
-Gmail search_threads: `(in:sent OR in:draft) subject:"Morning Brief" after:YYYY/MM/DD` with today's date. If a brief for THIS slot (morning/midday/US) already sent, STOP and push notification "already sent, skipped". Otherwise proceed.
+Gmail search_threads: `in:sent subject:("Morning Brief" OR "Midday Flash" OR "US Open Flash") after:YYYY/MM/DD` with today's date. Ignore any subject containing "Preview". If an email with THIS slot's exact subject (see STEP 5) was already sent today, STOP and push notification "already sent, skipped". Otherwise proceed.
 
 STEP 2 — DATA GATHERING (parallel WebSearches)
 Prioritize credible sources: Bloomberg, Reuters, FT, WSJ, Nikkei, Caixin, CNBC Indonesia, Kontan, Bisnis Indonesia, investing.com, tradingeconomics.com, exchange sites. Pull most recent close/intraday for each. Tag "data as of [date]" where lag exists. If a specific number not findable, write "n/a" — never fabricate. This applies to every cell, including YTD, 1M and daily-change columns: only fill them from a source you actually found, never estimate.
