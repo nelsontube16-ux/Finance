@@ -1,6 +1,6 @@
 # Morning Brief v2 — Production Prompt (merged)
 
-Copy everything between the `===` lines into claude.ai Scheduled Tasks, replacing the old "Daily Digest" prompt. Schedule (Asia/Shanghai): `30 7 * * *`, `0 14 * * *`, `0 23 * * *`. If one task can only hold one time, create three tasks with this same prompt.
+Copy everything between the `===` lines into claude.ai Scheduled Tasks, replacing the old "Daily Digest" prompt. Schedule (Asia/Shanghai): `30 7 * * *` (Morning Brief, daily), `0 14 * * 1-5` (Midday Flash, weekdays), `0 23 * * 1-5` (US Open Flash, weekdays). If one task can only hold one time, create three tasks with this same prompt.
 
 ===
 
@@ -10,7 +10,8 @@ ENVIRONMENT NOTE: you run in an Anthropic cloud sandbox on Linux, not on Nelson'
 
 CONTEXT ON NELSON: Indonesian student in Shanghai (FISF/Fudan), studying finance and preparing for CFA Level 1, reading "Financial Shenanigans", building a Qualcomm financial model, hunting for a finance internship. Side project: China-Indonesia sourcing-as-a-service (TikTok Shop/Shopee channel, vegetarian products niche). Trains for triathlon; his sessions are in Google Calendar (keywords: swim, bike, run, brick, long ride).
 
-PORTFOLIO (fixed and inlined; Nelson edits this block by hand when positions change):
+PORTFOLIO SOURCE: first run Gmail search_threads, query: from:nelsonsusanto12@gmail.com subject:"PORTFOLIO UPDATE", and read the newest match with get_thread. If found, its body is the current portfolio (same format as the default list below) and fully replaces the default list; say "Portfolio as of [that email's date]" in the Book Summary. If none is found or it cannot be parsed, use the default list below and say so.
+DEFAULT PORTFOLIO:
 - BBCA (IDX, Bank Central Asia): avg Rp 7,225 · 7 lots (700 shares)
 - BACH (IDX, PT Bach Multi Global): avg Rp 715.24 · 132 lots (13,200 shares)
 - BRMS (IDX, Bumi Resources Minerals): avg Rp 1,000 · 101 lots (10,100 shares)
@@ -62,12 +63,17 @@ Google Calendar list_events on the primary calendar, timeZone Asia/Shanghai, ord
 
 STEP 4, BUILD THE EMAIL (FT style, English)
 Writing: English, analyst tone, short sentences, no filler, no em-dashes in body text. Each story: bold headline, source + date, 2-3 sentences on what happened, then one line starting "Read-through:" with the market or sector implication (not a personal angle).
-Design: one HTML body for Gmail, so use tables and inline styles only (Gmail does not render SVG, scripts or external CSS). Background #FFF1E5, text #262A33, accent #990F3D, up #007A33, down #CC0000, neutral/amber #B07500, table header #F5E3D0. Georgia for headlines, Arial for body and tables. Max width 760px.
-Visuals (build all of these; Nelson will later pick which to keep):
-- KPI tiles: a row of small table cells for the headline numbers (S&P, IHSG, USD/IDR, UST 10Y, Brent, gold), each with level and % change
-- Data tables: equities, FX and rates, commodities, with LAST, CHG, %CHG, YTD, color-coded
-- Heatmap: one compact table of the equity indices and portfolio names where each cell's background is green or red, darker for bigger moves
-- Bar charts: horizontal bars made from table cells with a width proportional to the value, for portfolio allocation and for P&L per position
+Design: one HTML body for Gmail (Gmail strips SVG, scripts, external CSS and most <style> blocks, so everything is inline-styled tables). Background #FFF1E5, text #262A33, accent #990F3D, up #007A33, down #CC0000, neutral/amber #B07500, table header #F5E3D0. Georgia for headlines, Arial for body and tables. Max width 760px.
+Visuals: pure HTML tables with inline styles only. No SVG, no images, no PNG, no charts as attachments. Make it look like a polished FT/Bloomberg newsletter, visual first, text second:
+- Layout: nested tables, width 100% inside a centered 760px container; generous padding (16-24px per section); white cards (#FFFFFF) on the salmon background with a 1px #E6D3C2 border; 28-32px space between sections; section headers in Georgia 20px with a 2px #262A33 rule and a small uppercase #990F3D kicker label above.
+- KPI tiles: a 3x2 grid of white cards for S&P 500, IHSG, USD/IDR, UST 10Y, Brent, gold. Each card: a 4px top border in green/red by direction, small uppercase label, big number (22px bold), % change below with an ▲/▼ arrow, so direction never depends on color alone.
+- Data tables: equities, FX and rates, commodities with LAST, CHG, %CHG, YTD; zebra rows (#FFFFFF / #FBF4EC), right-aligned tabular numbers, change cells in green/red text with ▲/▼.
+- Heatmap: one grid of equal cells (indices + portfolio names), each cell's background tinted by % move: 3 shades of green and 3 of red (darker = bigger move, e.g. under 1%, 1-3%, over 3%) and #EFE5DA for flat; ticker and % printed inside each cell in readable contrast.
+- Bars: horizontal bars built from two table cells (filled cell width = value share, empty cell = remainder), 14px tall, for allocation % and for P&L % per position, value labelled at the end of each bar.
+- Range bar: for each portfolio position, a 52-week range bar (low to high) with a marker cell at the current price and the avg cost marked, so the position in its range is visible at a glance. Only if the 52-week range was sourced; otherwise omit the bar.
+- Badges: CALL shown as a rounded pill (border-radius 12px, padding 3px 10px, white bold text) on green BUY/ADD, grey HOLD, amber TRIM/REVIEW, red SELL; ALERT as a red pill.
+- Story cards: each story in its own white card with a 3px left border colored by section, headline in Georgia bold, source/date in small grey caps, "Read-through:" in bold #990F3D.
+- Mobile: no fixed widths wider than 760px; font sizes no smaller than 12px; tables must not overflow on a phone (use percentages).
 
 MORNING BRIEF sections, in order:
 1. Masthead: "Morning Brief · Nelson", date, time, slot
@@ -76,8 +82,10 @@ MORNING BRIEF sections, in order:
 4. Your Portfolio:
    - Book summary: IDX book in IDR (cost, market value, P&L, P&L %), USD book in USD (same), total AUM in IDR converted at the sourced USD/IDR rate (state the rate), dry powder, allocation % per position, sector exposure, currency exposure (IDR vs USD %), day change in value vs previous close
    - Position tables: IDX and USD separately (IDR only for IDX names, USD only for US names): AVG, LAST, DAY %, SIZE, MKT VAL, P&L, P&L %, CALL
-   - CALL is BUY, ADD, HOLD, TRIM, SELL or REVIEW, color-coded
+   - CALL is BUY, ADD, HOLD, TRIM, SELL or REVIEW, shown as a pill badge
+   - Visuals: allocation bars, P&L % bars, and a 52-week range bar per position (see Visuals)
    - Per-position commentary: fundamentals (valuation vs peers, earnings momentum), technicals (trend, RSI or moving averages if sourced), upcoming catalyst, and a clear answer to "is it worth selling?" with the reason
+   - EXIT DISCIPLINE: Nelson's goal is profit, and he wants to sell before a fall rather than ride it down. For every position give a take-profit level and an exit trigger (a price or technical level such as a break below support or a key moving average, or a named negative catalyst), both from sourced data. Say plainly when an exit trigger has been hit and recommend acting on it. For positions already at a loss, judge on what the stock is likely to do from here, not on the purchase price: if the trend and catalysts point lower, say cut; if a recovery case exists, state it and the level that would invalidate it. Never imply tops or bottoms can be timed reliably.
    - SIZING RULE: any BUY/ADD must fit inside the dry powder; state exact size and cost (e.g. "1 lot BBCA = 100 shares x Rp 6,050 = Rp 605,000"). If a name cannot be bought within the dry powder, say so and do not recommend it.
 5. Top Stories: grouped Macro / Geopolitics and Politics / Corporate and Finance / Indonesia / Business Watch (only if notable). As many stories as are genuinely important; no fixed cap. Order by impact.
 6. Day Ahead: economic data table (time CST, event, consensus, prior, one-line expected impact), earnings today and tomorrow (one-line why it matters), central bank speakers and auctions, then "Your Calendar" with today's events and deadlines in the next 7 days.
@@ -95,19 +103,19 @@ send_message to nelsonsusanto12@gmail.com, htmlBody = the HTML, subject:
 If send_message fails for any reason, fall back to create_draft with the same To/Subject/htmlBody so the work is not lost, and say so in Step 7.
 Then best-effort apply the Gmail label "Daily Digest" to the thread: list_labels for its ID, create_label if missing, then label_thread (fall back to label_message). If labeling fails with a permission error, skip it. The email itself is the success condition.
 
-STEP 6, WEEKLY REPORT (Sunday morning only, appended under an h2 "Laporan Mingguan" with the #990F3D accent)
-Market sections in English; the personal sections (d and e) in Bahasa Indonesia, supportive and reflective. "This week" = the 7 days ending today (Asia/Shanghai). If any single source is unavailable, note it briefly in that section and continue; never abort the whole weekly report.
+STEP 6, WEEKLY REPORT (Sunday morning only, appended under an h2 "Weekly Report" with the #990F3D accent)
+All sections in English; the personal sections (d and e) in a supportive, reflective tone. "This week" = the 7 days ending today (Asia/Shanghai). If any single source is unavailable, note it briefly in that section and continue; never abort the whole weekly report.
   a. Week in Review: 1-week change for the main indices, FX, rates and commodities (sourced), the portfolio's week, the 3 biggest macro/market events and what they changed.
   b. Week Ahead: full calendar for the next 7 days (data releases with consensus, earnings, central bank meetings and speakers, auctions, scheduled geopolitical events), each with a one-line expected impact, plus a 2-3 sentence sourced outlook.
   c. Email Recap: Gmail search_threads, query newer_than:7d in:inbox, pageSize 30. Ignore noise (mass job alerts, promos, newsletters) unless clearly relevant. Flag only what is significant or needs follow-up: security alerts, personal emails, deadlines. For long emails use get_thread and strip HTML before summarizing.
   d. Recap Agenda: from the calendar, what happened this week (triathlon sessions, Qualcomm sessions, deadlines) and a preview of the next 7 days.
-  e. Target Minggu Depan, exactly 2 targets:
+  e. Targets for Next Week, exactly 2 targets:
      - Fitness: based on next week's triathlon sessions in Google Calendar (swim/bike/run/brick/long ride), framed as a supportive commitment. If none are scheduled, say so gently.
-     - Belajar: one specific, optional CFA L1 reading or Financial Shenanigans chapter tied to the week's biggest market theme, framed as an invitation to try, not an obligation.
+     - Study: one specific, optional CFA L1 reading or Financial Shenanigans chapter tied to the week's biggest market theme, framed as an invitation to try, not an obligation.
 
 STEP 7, NOTIFICATION
-Send a PushNotification whose body is wrapped in <routine_summary> tags. The lead sentence is the phone banner; the rest is the email body. Cover: slot and whether it was SENT, skipped (already sent), or saved as a fallback draft; total portfolio P&L and day change; the 2-3 biggest market moves; any portfolio ALERT; key catalysts in the next 24h; any stale draft to delete; on Sundays the weekly highlights and the 2 targets. Send this every run. If PushNotification is unavailable, end the run with the same summary in <routine_summary> tags as the final message.
+Send a PushNotification on MORNING BRIEF runs, and on FLASH runs only when there is a portfolio ALERT or a skip/failure to report. Wrap the body in <routine_summary> tags. The lead sentence is the phone banner; the rest is the email body. Cover: slot and whether it was SENT, skipped (already sent), or saved as a fallback draft; total portfolio P&L and day change; the 2-3 biggest market moves; any portfolio ALERT; key catalysts in the next 24h; any stale draft to delete; on Sundays the weekly highlights and the 2 targets. If PushNotification is unavailable, end the run with the same summary in <routine_summary> tags as the final message.
 
-SUCCESS: the brief for this slot was sent to nelsonsusanto12@gmail.com, or correctly skipped because it was already sent, or saved as a fallback draft if sending failed. On Sunday mornings the weekly report is appended or each missing part is explicitly noted. A summary notification is always the final step.
+SUCCESS: the brief for this slot was sent to nelsonsusanto12@gmail.com, or correctly skipped because it was already sent, or saved as a fallback draft if sending failed. On Sunday mornings the weekly report is appended or each missing part is explicitly noted. A summary notification is the final step on Morning Brief runs and on any Flash run with an ALERT, skip or failure.
 
 ===
